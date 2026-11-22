@@ -1,11 +1,12 @@
-// ZELVIQO Luxury Skin Care - Complete Storefront, Moving Showcase & Member Profile System
+// ZELVIQO Luxury Skin Care - Arogga-Inspired Storefront Engine
 const categoryTitles = {
   all: "All Skincare Products",
   cleanser: "Face Wash & Gentle Cleansers",
   serum: "Targeted Face Serums",
   sunscreen: "Broad-Spectrum Sunscreens",
   moisturizer: "Hydrating Moisturizers & Gels",
-  combo: "Curated Value Combo Sets"
+  combo: "Curated Value Combo Sets",
+  wishlist: "My Saved Wishlist"
 };
 
 const products = [
@@ -14,9 +15,9 @@ const products = [
     name: "Dr. Rashel Vitamin C Brightening & Anti-Aging Face Serum",
     category: "serum",
     categoryLabel: "Face Serum",
+    concern: "brightening",
     volume: "50ml",
     skinType: "All Skin Types",
-    origin: "Authentic Import",
     regularPrice: 850,
     salePrice: 650,
     image: "product-1.jpg",
@@ -33,9 +34,9 @@ const products = [
     name: "Care & Repair UV Defense Sunscreen SPF 50+ PA+++",
     category: "sunscreen",
     categoryLabel: "Sunscreen",
+    concern: "sun",
     volume: "60ml",
     skinType: "Oily, Combination & Normal Skin",
-    origin: "Authentic Import",
     regularPrice: 950,
     salePrice: 740,
     image: "product-2.jpg",
@@ -52,9 +53,9 @@ const products = [
     name: "Niacinamide 10% + Zinc Pore Refining Glow Serum",
     category: "serum",
     categoryLabel: "Face Serum",
+    concern: "acne",
     volume: "30ml",
     skinType: "Oily & Acne-Prone Skin",
-    origin: "Authentic Import",
     regularPrice: 1100,
     salePrice: 890,
     image: "product-3.jpg",
@@ -71,9 +72,9 @@ const products = [
     name: "Ceramide & Hyaluronic Gentle Hydrating Face Cleanser",
     category: "cleanser",
     categoryLabel: "Face Wash & Cleanser",
+    concern: "hydration",
     volume: "150ml",
     skinType: "Dry, Sensitive & Normal Skin",
-    origin: "Authentic Import",
     regularPrice: 780,
     salePrice: 620,
     image: "product-4.jpg",
@@ -90,9 +91,9 @@ const products = [
     name: "24K Gold & Rosewater Barrier Repair Gel Moisturizer",
     category: "moisturizer",
     categoryLabel: "Moisturizer",
+    concern: "hydration",
     volume: "100g",
     skinType: "All Skin Types",
-    origin: "Authentic Import",
     regularPrice: 1250,
     salePrice: 980,
     image: "product-5.jpg",
@@ -109,9 +110,9 @@ const products = [
     name: "Ultra-Light Invisible Matte Aqua Sun Gel SPF 50+",
     category: "sunscreen",
     categoryLabel: "Sunscreen",
+    concern: "sun",
     volume: "50ml",
     skinType: "Oily & Sensitive Skin",
-    origin: "Authentic Import",
     regularPrice: 1050,
     salePrice: 850,
     image: "product-6.jpg",
@@ -128,9 +129,9 @@ const products = [
     name: "Alpha Arbutin Dark Spot Corrector Night Elixir",
     category: "serum",
     categoryLabel: "Face Serum",
+    concern: "darkspot",
     volume: "30ml",
     skinType: "All Skin Types",
-    origin: "Authentic Import",
     regularPrice: 1150,
     salePrice: 920,
     image: "product-7.jpg",
@@ -147,9 +148,9 @@ const products = [
     name: "ZELVIQO Complete Day-Glow Duo (Vitamin C + SPF 50+)",
     category: "combo",
     categoryLabel: "Combo Set",
+    concern: "brightening",
     volume: "50ml + 60ml Set",
     skinType: "All Skin Types",
-    origin: "Curated Bundle",
     regularPrice: 1800,
     salePrice: 1320,
     image: "product-8.jpg",
@@ -164,244 +165,154 @@ const products = [
 ];
 
 let cart = [];
+let wishlist = JSON.parse(localStorage.getItem("zelviqo_wishlist") || "[]");
 let activeCategory = "all";
+let activeConcern = "all";
 let searchQuery = "";
-let detailModalQty = 1;
+let sortBy = "featured";
+let appliedDiscountPercent = 0;
 
-// DOM References
+// DOM Elements
 const productGrid = document.getElementById("productGrid");
-const movingProductTrack = document.getElementById("movingProductTrack");
-const topNavMenu = document.getElementById("topNavMenu");
 const searchInput = document.getElementById("searchInput");
-const cartCount = document.getElementById("cartCount");
+const searchDropdown = document.getElementById("searchDropdown");
 const cartDrawer = document.getElementById("cartDrawer");
 const drawerBackdrop = document.getElementById("drawerBackdrop");
-const cartItemsContainer = document.getElementById("cartItemsContainer");
-const cartSubtotalEl = document.getElementById("cartSubtotal");
 const checkoutModal = document.getElementById("checkoutModal");
 const deliveryAreaSelect = document.getElementById("deliveryArea");
 const productDetailModal = document.getElementById("productDetailModal");
-const productDetailContent = document.getElementById("productDetailContent");
 const authModal = document.getElementById("authModal");
 
-// ================= MOVING SHOWCASE SLIDER =================
+// ================= MOVING SHOWCASE =================
 function renderMovingShowcase() {
-  // Duplicate items so the marquee loops seamlessly
-  const loopList = [...products, ...products];
-  movingProductTrack.innerHTML = loopList
+  const track = document.getElementById("movingProductTrack");
+  const loopItems = [...products, ...products];
+  track.innerHTML = loopItems
     .map(
-      (item) => `
-      <div class="marquee-card" onclick="openProductDetails(${item.id})">
-        <img src="${item.image}" alt="${item.name}" />
-        <div class="marquee-card-info">
-          <div class="marquee-card-title">${item.name}</div>
-          <div class="marquee-card-price">৳${item.salePrice} <span style="font-size:11px; color:#888; text-decoration:line-through;">৳${item.regularPrice}</span></div>
-          <div class="marquee-card-cta">Click for Details &rarr;</div>
-        </div>
+      (p) => `
+      <div class="marquee-chip" onclick="openProductDetails(${p.id})">
+        <img src="${p.image}" alt="${p.name}" />
+        <span>${p.name.split(" ").slice(0, 4).join(" ")}</span>
+        <strong>৳${p.salePrice}</strong>
       </div>
     `
     )
     .join("");
 }
 
-// ================= USER ACCOUNT & PROFILE SYSTEM =================
-function getUsers() {
-  return JSON.parse(localStorage.getItem("zelviqo_users") || "[]");
-}
-
-function saveUsers(users) {
-  localStorage.setItem("zelviqo_users", JSON.stringify(users));
-}
-
-function getCurrentUser() {
-  return JSON.parse(localStorage.getItem("zelviqo_current_user") || "null");
-}
-
-function setCurrentUser(user) {
-  if (user) {
-    localStorage.setItem("zelviqo_current_user", JSON.stringify(user));
+// ================= WISHLIST =================
+function toggleWishlist(productId, event) {
+  if (event) event.stopPropagation();
+  const idx = wishlist.indexOf(productId);
+  if (idx === -1) {
+    wishlist.push(productId);
   } else {
-    localStorage.removeItem("zelviqo_current_user");
+    wishlist.splice(idx, 1);
   }
-  updateHeaderAuthUI();
-}
-
-function updateHeaderAuthUI() {
-  const user = getCurrentUser();
-  const nameEl = document.getElementById("headerUserName");
-  const avatarEl = document.getElementById("headerUserAvatar");
-
-  if (user) {
-    const firstName = user.name.split(" ")[0];
-    nameEl.textContent = firstName;
-    avatarEl.textContent = firstName.charAt(0).toUpperCase();
-  } else {
-    nameEl.textContent = "Login / Sign Up";
-    avatarEl.textContent = "👤";
-  }
-}
-
-function switchAuthTab(mode) {
-  const isLogin = mode === "login";
-  document.getElementById("tabLoginBtn").classList.toggle("active", isLogin);
-  document.getElementById("tabRegisterBtn").classList.toggle("active", !isLogin);
-  document.getElementById("loginForm").style.display = isLogin ? "block" : "none";
-  document.getElementById("registerForm").style.display = isLogin ? "none" : "block";
-}
-
-function openAccountModal() {
-  const user = getCurrentUser();
-  const formsView = document.getElementById("authFormsView");
-  const profileView = document.getElementById("userProfileView");
-  const titleEl = document.getElementById("authModalTitle");
-
-  if (user) {
-    titleEl.textContent = "My ZELVIQO Profile";
-    formsView.style.display = "none";
-    profileView.style.display = "block";
-
-    document.getElementById("profileDisplayName").textContent = user.name;
-    document.getElementById("profileDisplayPhone").textContent = user.phone;
-    document.getElementById("profileBigAvatar").textContent = user.name.charAt(0).toUpperCase();
-    document.getElementById("profileEditAddress").value = user.address || "";
-
-    renderUserOrderHistory(user.phone);
-  } else {
-    titleEl.textContent = "Member Login / Create Profile";
-    formsView.style.display = "block";
-    profileView.style.display = "none";
-  }
-
-  authModal.classList.add("open");
-}
-
-function saveProfileAddress() {
-  const user = getCurrentUser();
-  if (!user) return;
-  const newAddress = document.getElementById("profileEditAddress").value.trim();
-  user.address = newAddress;
-  setCurrentUser(user);
-
-  const users = getUsers();
-  const idx = users.findIndex((u) => u.phone === user.phone);
-  if (idx !== -1) {
-    users[idx].address = newAddress;
-    saveUsers(users);
-  }
-  alert("Delivery address saved to your profile!");
-}
-
-function renderUserOrderHistory(phone) {
-  const allOrders = JSON.parse(localStorage.getItem("zelviqo_orders") || "[]");
-  const myOrders = allOrders.filter((o) => o.phone === phone);
-  const container = document.getElementById("userOrderHistoryList");
-
-  if (myOrders.length === 0) {
-    container.innerHTML = `<p class="empty-msg">No orders placed from this account yet.</p>`;
-    return;
-  }
-
-  container.innerHTML = myOrders
-    .map(
-      (ord) => `
-      <div class="history-item">
-        <div style="display:flex; justify-content:space-between; font-weight:700; color:#0f2e24;">
-          <span>Order #${ord.orderId}</span>
-          <span>৳${ord.total}</span>
-        </div>
-        <div style="color:#5e6963; margin-top:2px;">${ord.itemsSummary}</div>
-        <div style="font-size:11px; color:#888; margin-top:2px;">${ord.date} • Status: Confirmed (COD)</div>
-      </div>
-    `
-    )
-    .join("");
-}
-
-function logoutUser() {
-  setCurrentUser(null);
-  authModal.classList.remove("open");
-}
-
-// Register Submit
-document.getElementById("registerForm").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const name = document.getElementById("regName").value.trim();
-  const phone = document.getElementById("regPhone").value.trim();
-  const address = document.getElementById("regAddress").value.trim();
-  const password = document.getElementById("regPassword").value;
-
-  const users = getUsers();
-  if (users.some((u) => u.phone === phone)) {
-    alert("An account with this mobile number already exists. Please login.");
-    switchAuthTab("login");
-    return;
-  }
-
-  const newUser = { name, phone, address, password };
-  users.push(newUser);
-  saveUsers(users);
-  setCurrentUser(newUser);
-  e.target.reset();
-  openAccountModal();
-});
-
-// Login Submit
-document.getElementById("loginForm").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const phone = document.getElementById("loginPhone").value.trim();
-  const password = document.getElementById("loginPassword").value;
-
-  const users = getUsers();
-  const matched = users.find((u) => u.phone === phone && u.password === password);
-  if (!matched) {
-    alert("Invalid mobile number or password. Please try again or create a new account.");
-    return;
-  }
-
-  setCurrentUser(matched);
-  e.target.reset();
-  openAccountModal();
-});
-
-// ================= CATALOG & CATEGORY TABS =================
-function selectCategory(category) {
-  activeCategory = category;
-
-  document.querySelectorAll(".nav-tab").forEach((tab) => {
-    tab.classList.toggle("active", tab.dataset.category === category);
-  });
-
-  document.getElementById("catalogHeading").textContent = categoryTitles[category] || "Skincare Products";
-  document.getElementById("catalogKicker").textContent = category === "all" ? "ALL ESSENTIALS" : category.toUpperCase();
-
+  localStorage.setItem("zelviqo_wishlist", JSON.stringify(wishlist));
+  updateWishlistBadge();
   renderProducts();
 }
 
+function updateWishlistBadge() {
+  document.getElementById("wishlistCount").textContent = wishlist.length;
+}
+
+function toggleWishlistFilter() {
+  if (activeCategory === "wishlist") {
+    selectCategory("all");
+  } else {
+    activeCategory = "wishlist";
+    activeConcern = "all";
+    document.querySelectorAll(".side-link, .m-pill").forEach((el) => el.classList.remove("active"));
+    document.getElementById("catalogHeading").textContent = categoryTitles.wishlist;
+    renderProducts();
+    document.getElementById("catalogSection").scrollIntoView({ behavior: "smooth" });
+  }
+}
+
+// ================= FILTERING & SORTING =================
+function selectCategory(category) {
+  activeCategory = category;
+  document.querySelectorAll(".side-link").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.category === category);
+  });
+  document.querySelectorAll(".m-pill").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.category === category);
+  });
+  document.getElementById("catalogHeading").textContent = categoryTitles[category] || "Skincare Products";
+  renderProducts();
+}
+
+function selectConcern(concern) {
+  activeConcern = concern;
+  document.querySelectorAll(".concern-chip").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.concern === concern);
+  });
+  renderProducts();
+}
+
+function resetAllFilters() {
+  activeCategory = "all";
+  activeConcern = "all";
+  searchQuery = "";
+  searchInput.value = "";
+  selectCategory("all");
+  selectConcern("all");
+}
+
 function renderProducts() {
-  const filtered = products.filter((item) => {
-    const matchesCategory = activeCategory === "all" || item.category === activeCategory;
+  let filtered = products.filter((item) => {
+    if (activeCategory === "wishlist") {
+      return wishlist.includes(item.id);
+    }
+    const matchesCat = activeCategory === "all" || item.category === activeCategory;
+    const matchesConcern = activeConcern === "all" || item.concern === activeConcern;
     const matchesSearch =
       item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.categoryLabel.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
+    return matchesCat && matchesConcern && matchesSearch;
   });
 
-  document.getElementById("productCounter").textContent = `Showing ${filtered.length} product${filtered.length === 1 ? "" : "s"}`;
+  if (sortBy === "low-high") {
+    filtered.sort((a, b) => a.salePrice - b.salePrice);
+  } else if (sortBy === "high-low") {
+    filtered.sort((a, b) => b.salePrice - a.salePrice);
+  } else if (sortBy === "discount") {
+    filtered.sort(
+      (a, b) =>
+        (b.regularPrice - b.salePrice) / b.regularPrice -
+        (a.regularPrice - a.salePrice) / a.regularPrice
+    );
+  }
+
+  document.getElementById("productCounter").textContent = `Showing ${filtered.length} authentic product${filtered.length === 1 ? "" : "s"}`;
 
   if (filtered.length === 0) {
-    productGrid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; padding:40px; color:#5e6963;">No skincare products found matching your selection.</p>`;
+    productGrid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; padding:40px; background:#fff; border-radius:12px; color:#606b65;">No skincare products found matching this filter.</p>`;
     return;
   }
 
   productGrid.innerHTML = filtered
     .map((product) => {
       const discount = Math.round(((product.regularPrice - product.salePrice) / product.regularPrice) * 100);
+      const inCart = cart.find((c) => c.id === product.id);
+      const isWished = wishlist.includes(product.id);
+
+      const actionBtnHtml = inCart
+        ? `<div class="inline-stepper">
+            <button type="button" onclick="changeQty(${product.id}, -1)">-</button>
+            <span>${inCart.qty} in Bag</span>
+            <button type="button" onclick="changeQty(${product.id}, 1)">+</button>
+          </div>`
+        : `<button type="button" class="btn-add-full" onclick="addToCart(${product.id})">+ Add to Bag</button>`;
+
       return `
         <article class="product-card">
           <div class="card-media" onclick="openProductDetails(${product.id})">
-            ${discount > 0 ? `<span class="discount-tag">-${discount}% OFF</span>` : ""}
+            ${discount > 0 ? `<span class="discount-tag">${discount}% OFF</span>` : ""}
+            <button type="button" class="wish-heart-btn" onclick="toggleWishlist(${product.id}, event)" title="Save to Wishlist">${isWished ? "❤️" : "🤍"}</button>
             <img src="${product.image}" alt="${product.name}" loading="lazy" />
-            <span class="quick-view-hint">View Details</span>
           </div>
           <div class="card-body">
             <span class="card-cat">${product.categoryLabel}</span>
@@ -411,10 +322,7 @@ function renderProducts() {
               <span class="price-now">৳${product.salePrice}</span>
               <span class="price-old">৳${product.regularPrice}</span>
             </div>
-            <div class="card-actions">
-              <button type="button" class="btn-add" onclick="addToCart(${product.id}, 1, false)">Add to Bag</button>
-              <button type="button" class="btn-order" onclick="addToCart(${product.id}, 1, true)">Order Now</button>
-            </div>
+            ${actionBtnHtml}
           </div>
         </article>
       `;
@@ -422,96 +330,136 @@ function renderProducts() {
     .join("");
 }
 
-// ================= PRODUCT DETAIL VIEW =================
+// ================= LIVE SEARCH DROPDOWN =================
+searchInput.addEventListener("input", (e) => {
+  searchQuery = e.target.value.trim();
+  renderProducts();
+
+  if (!searchQuery) {
+    searchDropdown.classList.remove("open");
+    return;
+  }
+
+  const hits = products.filter((p) => p.name.toLowerCase().includes(searchQuery.toLowerCase())).slice(0, 5);
+  if (hits.length === 0) {
+    searchDropdown.innerHTML = `<div style="padding:12px; font-size:13px; color:#606b65;">No matching products found.</div>`;
+  } else {
+    searchDropdown.innerHTML = hits
+      .map(
+        (h) => `
+        <div class="search-hit" onclick="openProductDetails(${h.id}); searchDropdown.classList.remove('open');">
+          <img src="${h.image}" alt="${h.name}" />
+          <div>
+            <div style="font-size:13px; font-weight:600;">${h.name}</div>
+            <div style="font-size:12px; color:#0c2b21; font-weight:700;">৳${h.salePrice}</div>
+          </div>
+        </div>
+      `
+      )
+      .join("");
+  }
+  searchDropdown.classList.add("open");
+});
+
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".search-wrapper")) {
+    searchDropdown.classList.remove("open");
+  }
+});
+
+// ================= PRODUCT DETAIL MODAL + RELATED PRODUCTS =================
 function openProductDetails(productId) {
   const product = products.find((p) => p.id === productId);
   if (!product) return;
 
-  detailModalQty = 1;
   const discount = Math.round(((product.regularPrice - product.salePrice) / product.regularPrice) * 100);
+  const related = products.filter((p) => p.id !== product.id && (p.category === product.category || p.concern === product.concern)).slice(0, 3);
 
-  productDetailContent.innerHTML = `
-    <div class="detail-image-box">
-      <img src="${product.image}" alt="${product.name}" />
-    </div>
-    <div class="detail-info">
-      <span class="card-cat">${product.categoryLabel}</span>
-      <h2>${product.name}</h2>
-
-      <div class="detail-meta">
-        <span>Volume: <strong>${product.volume}</strong></span>
-        <span>Skin Type: <strong>${product.skinType}</strong></span>
-        <span>Status: <strong>In Stock (${product.origin})</strong></span>
+  document.getElementById("productDetailContent").innerHTML = `
+    <div class="detail-grid">
+      <div class="detail-image-box">
+        <img src="${product.image}" alt="${product.name}" />
       </div>
+      <div class="detail-info">
+        <span class="card-cat">${product.categoryLabel}</span>
+        <h2>${product.name}</h2>
 
-      <div class="detail-price-box">
-        <span class="detail-price-now">৳${product.salePrice}</span>
-        <span class="price-old">৳${product.regularPrice}</span>
-        ${discount > 0 ? `<span style="background:#b83b3b; color:#fff; font-size:11px; padding:3px 8px; border-radius:4px; font-weight:700;">SAVE ${discount}%</span>` : ""}
-      </div>
-
-      <div class="detail-section-block">
-        <h4>Product Description</h4>
-        <p>${product.description}</p>
-      </div>
-
-      <div class="detail-section-block">
-        <h4>Key Benefits</h4>
-        <ul class="detail-benefits-list">
-          ${product.benefits.map((b) => `<li>${b}</li>`).join("")}
-        </ul>
-      </div>
-
-      <div class="detail-section-block">
-        <h4>How to Use</h4>
-        <p>${product.howToUse}</p>
-      </div>
-
-      <div class="detail-purchase-row">
-        <div class="detail-qty-box">
-          <button type="button" onclick="updateDetailQty(-1)">-</button>
-          <span id="detailQtyValue">1</span>
-          <button type="button" onclick="updateDetailQty(1)">+</button>
+        <div class="detail-meta">
+          <span>Volume: <strong>${product.volume}</strong></span>
+          <span>Skin Type: <strong>${product.skinType}</strong></span>
+          <span>Status: <strong>In Stock</strong></span>
         </div>
-        <button type="button" class="btn-add" style="padding:12px 20px; font-size:13px;" onclick="addFromDetail(${product.id}, false)">Add to Bag</button>
-        <button type="button" class="btn-order" style="padding:12px 24px; font-size:13px;" onclick="addFromDetail(${product.id}, true)">Order Now (COD)</button>
+
+        <div class="detail-price-box">
+          <span class="detail-price-now">৳${product.salePrice}</span>
+          <span class="price-old">৳${product.regularPrice}</span>
+          ${discount > 0 ? `<span style="background:#c0392b; color:#fff; font-size:11px; padding:3px 8px; border-radius:4px; font-weight:700;">SAVE ${discount}%</span>` : ""}
+        </div>
+
+        <div class="detail-section-block">
+          <h4>Description</h4>
+          <p>${product.description}</p>
+        </div>
+
+        <div class="detail-section-block">
+          <h4>Key Benefits</h4>
+          <ul class="detail-benefits-list">
+            ${product.benefits.map((b) => `<li>${b}</li>`).join("")}
+          </ul>
+        </div>
+
+        <div class="detail-section-block">
+          <h4>How to Use</h4>
+          <p>${product.howToUse}</p>
+        </div>
+
+        <div style="display:flex; gap:10px; margin-top:16px;">
+          <button type="button" class="btn-add" onclick="addToCart(${product.id}); productDetailModal.classList.remove('open'); openCartDrawer();">+ Add to Bag</button>
+          <button type="button" class="btn-primary" onclick="addToCart(${product.id}); productDetailModal.classList.remove('open'); openCheckoutModal();">Order Now (COD)</button>
+        </div>
       </div>
     </div>
+
+    ${
+      related.length > 0
+        ? `<div class="related-section">
+            <h4>Recommended With This Product</h4>
+            <div class="related-grid">
+              ${related
+                .map(
+                  (r) => `
+                <div class="related-mini-card" onclick="openProductDetails(${r.id})">
+                  <img src="${r.image}" alt="${r.name}" />
+                  <div>
+                    <div style="font-size:12px; font-weight:600;">${r.name.split(" ").slice(0, 5).join(" ")}</div>
+                    <div style="font-size:12px; font-weight:700; color:#0c2b21;">৳${r.salePrice}</div>
+                  </div>
+                </div>
+              `
+                )
+                .join("")}
+            </div>
+          </div>`
+        : ""
+    }
   `;
 
   productDetailModal.classList.add("open");
 }
 
-function updateDetailQty(delta) {
-  detailModalQty = Math.max(1, detailModalQty + delta);
-  const el = document.getElementById("detailQtyValue");
-  if (el) el.textContent = detailModalQty;
-}
-
-function addFromDetail(productId, openCheckoutImmediately) {
-  productDetailModal.classList.remove("open");
-  addToCart(productId, detailModalQty, openCheckoutImmediately);
-}
-
-// ================= CART & CHECKOUT =================
-function addToCart(productId, quantity = 1, openCheckoutImmediately = false) {
+// ================= CART & FREE DELIVERY PROGRESS BAR =================
+function addToCart(productId) {
   const product = products.find((p) => p.id === productId);
   if (!product) return;
 
   const existing = cart.find((item) => item.id === productId);
   if (existing) {
-    existing.qty += quantity;
+    existing.qty += 1;
   } else {
-    cart.push({ ...product, qty: quantity });
+    cart.push({ ...product, qty: 1 });
   }
-
   updateCartUI();
-
-  if (openCheckoutImmediately) {
-    openCheckoutModal();
-  } else {
-    openCartDrawer();
-  }
+  renderProducts();
 }
 
 function changeQty(productId, delta) {
@@ -523,6 +471,7 @@ function changeQty(productId, delta) {
     cart.splice(index, 1);
   }
   updateCartUI();
+  renderProducts();
 }
 
 function getSubtotal() {
@@ -531,24 +480,38 @@ function getSubtotal() {
 
 function updateCartUI() {
   const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-  cartCount.textContent = totalItems;
-
   const subtotal = getSubtotal();
-  cartSubtotalEl.textContent = `৳${subtotal}`;
 
+  document.getElementById("cartCount").textContent = totalItems;
+  document.getElementById("headerBagTotal").textContent = `৳${subtotal}`;
+  document.getElementById("cartSubtotal").textContent = `৳${subtotal}`;
+
+  // Free Delivery Progress Bar (Target: 2000 BDT)
+  const target = 2000;
+  const pct = Math.min(100, Math.round((subtotal / target) * 100));
+  document.getElementById("freeShipProgress").style.width = `${pct}%`;
+  const freeShipText = document.getElementById("freeShipText");
+
+  if (subtotal >= target) {
+    freeShipText.innerHTML = `🎉 Congratulations! You unlocked <strong>FREE Home Delivery</strong>!`;
+  } else {
+    freeShipText.innerHTML = `Add <strong>৳${target - subtotal}</strong> more to unlock <strong>FREE Delivery</strong>!`;
+  }
+
+  const container = document.getElementById("cartItemsContainer");
   if (cart.length === 0) {
-    cartItemsContainer.innerHTML = `<p class="empty-msg">Your bag is currently empty.</p>`;
+    container.innerHTML = `<p class="empty-msg">Your bag is currently empty.</p>`;
     return;
   }
 
-  cartItemsContainer.innerHTML = cart
+  container.innerHTML = cart
     .map(
       (item) => `
       <div class="cart-item">
         <img src="${item.image}" alt="${item.name}" />
-        <div class="cart-item-info">
-          <div class="cart-item-title">${item.name}</div>
-          <div style="font-size:13px; color:#0f2e24; font-weight:700; margin-top:2px;">৳${item.salePrice} &times; ${item.qty}</div>
+        <div style="flex:1;">
+          <div style="font-size:13px; font-weight:600;">${item.name}</div>
+          <div style="font-size:13px; color:#0c2b21; font-weight:700;">৳${item.salePrice} &times; ${item.qty}</div>
           <div class="qty-controls">
             <button type="button" class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
             <span>${item.qty}</span>
@@ -571,14 +534,14 @@ function closeCartDrawer() {
   drawerBackdrop.classList.remove("open");
 }
 
+// ================= CHECKOUT & COUPON CODE =================
 function openCheckoutModal() {
   if (cart.length === 0) {
-    alert("Please add at least one skincare product to your bag first.");
+    alert("Please add at least one product to your bag first.");
     return;
   }
   closeCartDrawer();
 
-  // Auto-fill checkout fields if user is logged in
   const user = getCurrentUser();
   if (user) {
     document.getElementById("custName").value = user.name || "";
@@ -590,51 +553,203 @@ function openCheckoutModal() {
   checkoutModal.classList.add("open");
 }
 
-function closeCheckoutModal() {
-  checkoutModal.classList.remove("open");
+function applyCoupon() {
+  const code = document.getElementById("couponInput").value.trim().toUpperCase();
+  const msgEl = document.getElementById("couponStatusMsg");
+
+  if (code === "GLOW10" || code === "ZELVIQO10") {
+    appliedDiscountPercent = 10;
+    msgEl.textContent = "✓ Coupon applied! You received 10% extra discount.";
+    msgEl.style.color = "#157347";
+  } else {
+    appliedDiscountPercent = 0;
+    msgEl.textContent = "Invalid code. Try using GLOW10.";
+    msgEl.style.color = "#c0392b";
+  }
+  updateModalTotals();
 }
 
 function updateModalTotals() {
   const subtotal = getSubtotal();
-  const shipping = subtotal >= 2000 ? 0 : Number(deliveryAreaSelect.value);
+  const discountAmount = Math.round((subtotal * appliedDiscountPercent) / 100);
+  const afterDiscount = subtotal - discountAmount;
+  const shipping = afterDiscount >= 2000 ? 0 : Number(deliveryAreaSelect.value);
+
   document.getElementById("modalSubtotal").textContent = `৳${subtotal}`;
+  const discountRow = document.getElementById("discountSummaryRow");
+  if (discountAmount > 0) {
+    discountRow.style.display = "flex";
+    document.getElementById("modalDiscount").textContent = `-৳${discountAmount}`;
+  } else {
+    discountRow.style.display = "none";
+  }
+
   document.getElementById("modalShipping").textContent = shipping === 0 ? "FREE (৳0)" : `৳${shipping}`;
-  document.getElementById("modalGrandTotal").textContent = `৳${subtotal + shipping}`;
+  document.getElementById("modalGrandTotal").textContent = `৳${afterDiscount + shipping}`;
 }
 
-// Event Listeners
-topNavMenu.addEventListener("click", (e) => {
-  if (!e.target.classList.contains("nav-tab")) return;
-  selectCategory(e.target.dataset.category);
-  document.getElementById("catalog").scrollIntoView({ behavior: "smooth" });
+// ================= MEMBER PROFILE SYSTEM =================
+function getUsers() {
+  return JSON.parse(localStorage.getItem("zelviqo_users") || "[]");
+}
+
+function getCurrentUser() {
+  return JSON.parse(localStorage.getItem("zelviqo_current_user") || "null");
+}
+
+function setCurrentUser(user) {
+  if (user) {
+    localStorage.setItem("zelviqo_current_user", JSON.stringify(user));
+  } else {
+    localStorage.removeItem("zelviqo_current_user");
+  }
+  updateHeaderAuthUI();
+}
+
+function updateHeaderAuthUI() {
+  const user = getCurrentUser();
+  const nameEl = document.getElementById("headerUserName");
+  const avatarEl = document.getElementById("headerUserAvatar");
+  if (user) {
+    const first = user.name.split(" ")[0];
+    nameEl.textContent = first;
+    avatarEl.textContent = first.charAt(0).toUpperCase();
+  } else {
+    nameEl.textContent = "Login";
+    avatarEl.textContent = "👤";
+  }
+}
+
+function switchAuthTab(mode) {
+  const isLogin = mode === "login";
+  document.getElementById("tabLoginBtn").classList.toggle("active", isLogin);
+  document.getElementById("tabRegisterBtn").classList.toggle("active", !isLogin);
+  document.getElementById("loginForm").style.display = isLogin ? "block" : "none";
+  document.getElementById("registerForm").style.display = isLogin ? "none" : "block";
+}
+
+function openAccountModal() {
+  const user = getCurrentUser();
+  const formsView = document.getElementById("authFormsView");
+  const profileView = document.getElementById("userProfileView");
+  const titleEl = document.getElementById("authModalTitle");
+
+  if (user) {
+    titleEl.textContent = "My ZELVIQO Profile";
+    formsView.style.display = "none";
+    profileView.style.display = "block";
+    document.getElementById("profileDisplayName").textContent = user.name;
+    document.getElementById("profileDisplayPhone").textContent = user.phone;
+    document.getElementById("profileBigAvatar").textContent = user.name.charAt(0).toUpperCase();
+    document.getElementById("profileEditAddress").value = user.address || "";
+
+    const allOrders = JSON.parse(localStorage.getItem("zelviqo_orders") || "[]");
+    const myOrders = allOrders.filter((o) => o.phone === user.phone);
+    document.getElementById("userOrderHistoryList").innerHTML =
+      myOrders.length === 0
+        ? `<p style="font-size:12.5px; color:#606b65;">No orders placed yet.</p>`
+        : myOrders
+            .map(
+              (o) => `
+            <div class="history-item">
+              <strong>Order #${o.orderId} — ৳${o.total}</strong>
+              <div>${o.itemsSummary}</div>
+              <small style="color:#777;">${o.date} • Confirmed</small>
+            </div>
+          `
+            )
+            .join("");
+  } else {
+    titleEl.textContent = "Login / Create Account";
+    formsView.style.display = "block";
+    profileView.style.display = "none";
+  }
+  authModal.classList.add("open");
+}
+
+function saveProfileAddress() {
+  const user = getCurrentUser();
+  if (!user) return;
+  user.address = document.getElementById("profileEditAddress").value.trim();
+  setCurrentUser(user);
+  const users = getUsers();
+  const idx = users.findIndex((u) => u.phone === user.phone);
+  if (idx !== -1) {
+    users[idx].address = user.address;
+    localStorage.setItem("zelviqo_users", JSON.stringify(users));
+  }
+  alert("Address updated!");
+}
+
+function logoutUser() {
+  setCurrentUser(null);
+  authModal.classList.remove("open");
+}
+
+document.getElementById("registerForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const name = document.getElementById("regName").value.trim();
+  const phone = document.getElementById("regPhone").value.trim();
+  const address = document.getElementById("regAddress").value.trim();
+  const password = document.getElementById("regPassword").value;
+
+  const users = getUsers();
+  if (users.some((u) => u.phone === phone)) {
+    alert("Account already exists. Please login.");
+    switchAuthTab("login");
+    return;
+  }
+  const newUser = { name, phone, address, password };
+  users.push(newUser);
+  localStorage.setItem("zelviqo_users", JSON.stringify(users));
+  setCurrentUser(newUser);
+  e.target.reset();
+  openAccountModal();
 });
 
-searchInput.addEventListener("input", (e) => {
-  searchQuery = e.target.value;
+document.getElementById("loginForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const phone = document.getElementById("loginPhone").value.trim();
+  const password = document.getElementById("loginPassword").value;
+  const matched = getUsers().find((u) => u.phone === phone && u.password === password);
+  if (!matched) {
+    alert("Wrong phone number or password.");
+    return;
+  }
+  setCurrentUser(matched);
+  e.target.reset();
+  openAccountModal();
+});
+
+// ================= EVENT LISTENERS =================
+document.getElementById("categoryMenuList").addEventListener("click", (e) => {
+  const btn = e.target.closest(".side-link");
+  if (btn) selectCategory(btn.dataset.category);
+});
+
+document.getElementById("mobileCatBar").addEventListener("click", (e) => {
+  const btn = e.target.closest(".m-pill");
+  if (btn) selectCategory(btn.dataset.category);
+});
+
+document.getElementById("concernMenuList").addEventListener("click", (e) => {
+  const btn = e.target.closest(".concern-chip");
+  if (btn) selectConcern(btn.dataset.concern);
+});
+
+document.getElementById("sortSelect").addEventListener("change", (e) => {
+  sortBy = e.target.value;
   renderProducts();
 });
 
 document.getElementById("accountBtn").addEventListener("click", openAccountModal);
-document.getElementById("closeAuthModalBtn").addEventListener("click", () => {
-  authModal.classList.remove("open");
-});
-
-document.getElementById("closeDetailModalBtn").addEventListener("click", () => {
-  productDetailModal.classList.remove("open");
-});
-
-productDetailModal.addEventListener("click", (e) => {
-  if (e.target === productDetailModal) {
-    productDetailModal.classList.remove("open");
-  }
-});
-
+document.getElementById("closeAuthModalBtn").addEventListener("click", () => authModal.classList.remove("open"));
+document.getElementById("closeDetailModalBtn").addEventListener("click", () => productDetailModal.classList.remove("open"));
 document.getElementById("openCartBtn").addEventListener("click", openCartDrawer);
 document.getElementById("closeCartBtn").addEventListener("click", closeCartDrawer);
 drawerBackdrop.addEventListener("click", closeCartDrawer);
-
 document.getElementById("proceedCheckoutBtn").addEventListener("click", openCheckoutModal);
-document.getElementById("closeModalBtn").addEventListener("click", closeCheckoutModal);
+document.getElementById("closeModalBtn").addEventListener("click", () => checkoutModal.classList.remove("open"));
 deliveryAreaSelect.addEventListener("change", updateModalTotals);
 
 document.getElementById("codOrderForm").addEventListener("submit", (e) => {
@@ -642,10 +757,11 @@ document.getElementById("codOrderForm").addEventListener("submit", (e) => {
   const name = document.getElementById("custName").value.trim();
   const phone = document.getElementById("custPhone").value.trim();
   const subtotal = getSubtotal();
-  const shipping = subtotal >= 2000 ? 0 : Number(deliveryAreaSelect.value);
-  const total = subtotal + shipping;
+  const discountAmount = Math.round((subtotal * appliedDiscountPercent) / 100);
+  const afterDiscount = subtotal - discountAmount;
+  const shipping = afterDiscount >= 2000 ? 0 : Number(deliveryAreaSelect.value);
+  const total = afterDiscount + shipping;
 
-  // Save order history for member profile
   const allOrders = JSON.parse(localStorage.getItem("zelviqo_orders") || "[]");
   allOrders.unshift({
     orderId: Math.floor(100000 + Math.random() * 900000),
@@ -656,14 +772,17 @@ document.getElementById("codOrderForm").addEventListener("submit", (e) => {
   });
   localStorage.setItem("zelviqo_orders", JSON.stringify(allOrders));
 
-  alert(`Thank you, ${name}! Your ZELVIQO order has been received. We will call ${phone} shortly to confirm delivery.`);
+  alert(`Thank you, ${name}! Your ZELVIQO order (#${allOrders[0].orderId}) is confirmed. We will call ${phone} shortly.`);
   cart = [];
+  appliedDiscountPercent = 0;
   updateCartUI();
+  renderProducts();
   e.target.reset();
-  closeCheckoutModal();
+  checkoutModal.classList.remove("open");
 });
 
-// Initialize Everything
+// Initialize Storefront
 updateHeaderAuthUI();
+updateWishlistBadge();
 renderMovingShowcase();
 renderProducts();
