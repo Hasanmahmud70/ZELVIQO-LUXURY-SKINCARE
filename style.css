@@ -1,0 +1,67 @@
+/* ==========================================================================
+   ZELVIQO — Custom Stylesheet (style.css)
+   Edit colors, fonts, or animations here anytime without touching HTML or JS.
+   ========================================================================== */
+
+:root {
+  --color-ivory: #FAF8F5;
+  --color-sand: #F2EDE4;
+  --color-emerald: #1B4332;
+  --color-emerald-dark: #122E22;
+  --color-champagne: #C58F56;
+  --color-charcoal: #18181B;
+  --color-hairline: #E8E2D9;
+}
+
+body {
+  background-color: var(--color-ivory);
+  color: var(--color-charcoal);
+  font-family: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Hide scrollbars cleanly where needed */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Desktop hover dropdown animation */
+.nav-dropdown-group:hover .nav-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Smooth entrance animation for hero & modals */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeSlideUp 0.45s ease-out forwards;
+}
+
+/* Gentle pulse animation for video play buttons */
+@keyframes pulseSoft {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+.animate-pulse-soft {
+  animation: pulseSoft 2.4s infinite ease-in-out;
+}
