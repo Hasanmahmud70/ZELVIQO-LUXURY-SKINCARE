@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+ <link rel="manifest" href="manifest.json">
+
  <meta name="google-site-verification" content="uwxGdozwt0lrmTAM3ZJsZFtNhrdKVi43WJ7DOYgyABU" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -842,5 +844,11 @@
   </div>
 
   <script src="script.js"></script>
+ <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js');
+  }
+</script>
+
 </body>
 </html>
