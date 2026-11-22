@@ -1,5 +1,4 @@
 // ZELVIQO Luxury Skin Care - Product Catalog Data
-// Replace or add your product images inside the "images/" folder matching the exact filenames below.
 const products = [
   {
     id: 1,
@@ -8,7 +7,7 @@ const products = [
     volume: "50ml",
     regularPrice: 850,
     salePrice: 650,
-    image: "images/product-1.jpg"
+    image: "product-1.jpg"
   },
   {
     id: 2,
@@ -17,7 +16,7 @@ const products = [
     volume: "60ml",
     regularPrice: 950,
     salePrice: 740,
-    image: "images/product-2.jpg"
+    image: "product-2.jpg"
   },
   {
     id: 3,
@@ -26,7 +25,7 @@ const products = [
     volume: "30ml",
     regularPrice: 1100,
     salePrice: 890,
-    image: "images/product-3.jpg"
+    image: "product-3.jpg"
   },
   {
     id: 4,
@@ -35,7 +34,7 @@ const products = [
     volume: "150ml",
     regularPrice: 780,
     salePrice: 620,
-    image: "images/product-4.jpg"
+    image: "product-4.jpg"
   },
   {
     id: 5,
@@ -44,7 +43,7 @@ const products = [
     volume: "100g",
     regularPrice: 1250,
     salePrice: 980,
-    image: "images/product-5.jpg"
+    image: "product-5.jpg"
   },
   {
     id: 6,
@@ -53,7 +52,7 @@ const products = [
     volume: "50ml",
     regularPrice: 1050,
     salePrice: 850,
-    image: "images/product-6.jpg"
+    image: "product-6.jpg"
   },
   {
     id: 7,
@@ -62,7 +61,7 @@ const products = [
     volume: "30ml",
     regularPrice: 1150,
     salePrice: 920,
-    image: "images/product-7.jpg"
+    image: "product-7.jpg"
   },
   {
     id: 8,
@@ -71,7 +70,7 @@ const products = [
     volume: "2-Piece Set",
     regularPrice: 1800,
     salePrice: 1320,
-    image: "images/product-8.jpg"
+    image: "product-8.jpg"
   }
 ];
 
@@ -79,7 +78,6 @@ let cart = [];
 let activeCategory = "all";
 let searchQuery = "";
 
-// DOM Elements
 const productGrid = document.getElementById("productGrid");
 const categoryFilters = document.getElementById("categoryFilters");
 const searchInput = document.getElementById("searchInput");
@@ -91,7 +89,6 @@ const cartSubtotalEl = document.getElementById("cartSubtotal");
 const checkoutModal = document.getElementById("checkoutModal");
 const deliveryAreaSelect = document.getElementById("deliveryArea");
 
-// Render Product Cards
 function renderProducts() {
   const filtered = products.filter((item) => {
     const matchesCategory = activeCategory === "all" || item.category === activeCategory;
@@ -132,7 +129,14 @@ function renderProducts() {
     .join("");
 }
 
-// Add to Cart
+function filterCombos() {
+  document.querySelectorAll(".pill").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.category === "combo");
+  });
+  activeCategory = "combo";
+  renderProducts();
+}
+
 function addToCart(productId, openCheckoutImmediately = false) {
   const product = products.find((p) => p.id === productId);
   if (!product) return;
@@ -153,7 +157,6 @@ function addToCart(productId, openCheckoutImmediately = false) {
   }
 }
 
-// Update Quantity
 function changeQty(productId, delta) {
   const index = cart.findIndex((item) => item.id === productId);
   if (index === -1) return;
@@ -165,12 +168,10 @@ function changeQty(productId, delta) {
   updateCartUI();
 }
 
-// Calculate Subtotal
 function getSubtotal() {
   return cart.reduce((sum, item) => sum + item.salePrice * item.qty, 0);
 }
 
-// Update Cart UI
 function updateCartUI() {
   const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
   cartCount.textContent = totalItems;
@@ -203,7 +204,6 @@ function updateCartUI() {
     .join("");
 }
 
-// Drawer Controls
 function openCartDrawer() {
   cartDrawer.classList.add("open");
   drawerBackdrop.classList.add("open");
@@ -214,7 +214,6 @@ function closeCartDrawer() {
   drawerBackdrop.classList.remove("open");
 }
 
-// Checkout Modal Controls
 function openCheckoutModal() {
   if (cart.length === 0) {
     alert("Please add at least one skincare product to your bag first.");
@@ -237,7 +236,6 @@ function updateModalTotals() {
   document.getElementById("modalGrandTotal").textContent = `৳${subtotal + shipping}`;
 }
 
-// Event Listeners
 categoryFilters.addEventListener("click", (e) => {
   if (!e.target.classList.contains("pill")) return;
   document.querySelectorAll(".pill").forEach((btn) => btn.classList.remove("active"));
@@ -270,5 +268,4 @@ document.getElementById("codOrderForm").addEventListener("submit", (e) => {
   closeCheckoutModal();
 });
 
-// Initialize Store
 renderProducts();
