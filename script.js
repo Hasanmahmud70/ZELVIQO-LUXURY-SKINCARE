@@ -1,5 +1,5 @@
 const WHATSAPP_NUMBER = "8801860821074";
-const GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbxPaNiK7It8Rc5OQ3WXH5qDFc7CtubXWDvaMwBMCl4koitFbgjJTRPoWjvDV9C5oXIl/exec";
+const GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwjqxcIDPSqAQSOzNXamFNI9osBzSCqoo433-pMoipL5hDY7B8SWeXAPiVVwmBzKFVx/exec";
 
 function trackMetaEvent(eventName, payload = {}) {
   if (typeof window.fbq === "function") window.fbq("track", eventName, payload);
