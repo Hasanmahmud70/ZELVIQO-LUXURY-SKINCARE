@@ -2332,33 +2332,41 @@ body {
   }
 }
 
-/* Print Only Order Delivery Slip on 1 Page */
+/* Print Only 1 Single Page Delivery Slip (No Duplicates) */
 @media print {
   * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
-  body * {
-    visibility: hidden;
+  html, body {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
-  #invoiceModal,
-  #invoiceModal * {
-    visibility: visible;
+  body > *:not(#invoiceModal) {
+    display: none !important;
   }
   #invoiceModal {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
+    position: static !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
     background: #ffffff !important;
-    padding: 0;
-    margin: 0;
+    padding: 0 !important;
+    margin: 0 !important;
   }
   #invoiceModal .modal-card {
+    position: static !important;
     box-shadow: none !important;
-    border: 1.5px solid #0c2b21;
+    border: 1.5px solid #0c2b21 !important;
     width: 100% !important;
     max-width: 100% !important;
+    max-height: none !important;
+    overflow: visible !important;
+    margin: 0 !important;
   }
   #invoiceModal .modal-header,
   #invoiceModal .close-btn,
