@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ZELVIQO Luxury Skin Care | Authentic Skincare in Bangladesh</title>
+  <title>ZELVIQO Luxury Skin Care | 100% Authentic Skincare in Bangladesh</title>
+  <meta name="description" content="Shop 100% authentic Face Wash, Toner, Serum, Moisturizer & Sunscreen SPF 50+ in Bangladesh at ZELVIQO Luxury Skin Care." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- PWA App Install Bar -->
+  <!-- Mobile App Install Banner -->
   <div class="pwa-install-bar" id="pwaInstallBar">
     <div class="container pwa-flex">
       <span class="pwa-msg">
@@ -56,7 +57,7 @@
       <!-- Live Search Bar -->
       <div class="search-wrapper">
         <div class="search-box">
-          <input type="text" id="searchInput" placeholder="Search serums, sunscreens, cleansers..." autocomplete="off" />
+          <input type="text" id="searchInput" placeholder="Search face wash, toner, serum, sunscreen..." autocomplete="off" />
           <button type="button" id="searchBtn" data-i18n="searchBtn">Search</button>
         </div>
         <div class="search-dropdown" id="searchDropdown"></div>
@@ -106,16 +107,17 @@
     <div class="nav-drawer-body">
       <div class="drawer-section-label" data-i18n="menuMain">EXPLORE STORE</div>
       <ul class="drawer-nav-list">
-        <li><button type="button" class="drawer-link active" data-nav="home" onclick="navigateTo('home')" data-i18n="navHome">Home</button></li>
-        <li><button type="button" class="drawer-link" data-nav="all-products" onclick="navigateTo('category', 'all')" data-i18n="navAll">All Skincare Products</button></li>
+        <li><button type="button" class="drawer-link active" data-nav="home" onclick="navigateTo('home')" data-i18n="navHome">Home (Top 12 Hits)</button></li>
+        <li><button type="button" class="drawer-link" data-nav="all-products" onclick="navigateTo('category', 'all')" data-i18n="navAll">All Skincare Products (16)</button></li>
         <li><button type="button" class="drawer-link" data-nav="builder" onclick="navigateTo('builder')" data-i18n="navBuilder">Build Your Combo (15% Off)</button></li>
         <li><button type="button" class="drawer-link" data-nav="quiz" onclick="navigateTo('quiz')" data-i18n="navQuiz">Skin Consultation Quiz</button></li>
         <li><button type="button" class="drawer-link" data-nav="guide" onclick="navigateTo('guide')" data-i18n="navGuide">Daily Routine Guide</button></li>
       </ul>
 
-      <div class="drawer-section-label" data-i18n="menuCats">COLLECTIONS</div>
+      <div class="drawer-section-label" data-i18n="menuCats">SKINCARE CATEGORIES</div>
       <ul class="drawer-nav-list">
         <li><button type="button" class="drawer-link" data-nav="cleanser" onclick="navigateTo('category', 'cleanser')">Face Wash &amp; Cleansers</button></li>
+        <li><button type="button" class="drawer-link" data-nav="toner" onclick="navigateTo('category', 'toner')">Toners &amp; Essences</button></li>
         <li><button type="button" class="drawer-link" data-nav="serum" onclick="navigateTo('category', 'serum')">Targeted Face Serums</button></li>
         <li><button type="button" class="drawer-link" data-nav="sunscreen" onclick="navigateTo('category', 'sunscreen')">Sunscreen SPF 50+ PA+++</button></li>
         <li><button type="button" class="drawer-link" data-nav="moisturizer" onclick="navigateTo('category', 'moisturizer')">Moisturizers &amp; Night Gels</button></li>
@@ -174,65 +176,75 @@
         </div>
       </section>
 
-      <!-- Visual Category Cards with Luxury Line Icons -->
+      <!-- 6 Essential Skincare Category Cards -->
       <section class="section-block">
         <div class="section-row-head">
-          <h2 data-i18n="shopByCat">Shop by Collection</h2>
-          <button type="button" class="text-link-btn" onclick="navigateTo('category', 'all')" data-i18n="viewAll">Explore All &rarr;</button>
+          <h2 data-i18n="shopByCat">Shop by Skincare Category</h2>
+          <button type="button" class="text-link-btn" onclick="navigateTo('category', 'all')" data-i18n="viewAll">Browse All 16 Products &rarr;</button>
         </div>
-        <div class="visual-cat-grid">
+        <div class="visual-cat-grid six-cols">
           <div class="v-cat-card" onclick="navigateTo('category', 'cleanser')">
             <div class="v-cat-icon">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
             </div>
-            <strong>Cleansers</strong>
-            <span>Gentle Purifying</span>
+            <strong>Face Wash</strong>
+            <span>Gentle Cleansers</span>
+          </div>
+          <div class="v-cat-card" onclick="navigateTo('category', 'toner')">
+            <div class="v-cat-icon">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 2h4v3l2 2v13a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2V7l2-2V2z"/></svg>
+            </div>
+            <strong>Toner &amp; Essence</strong>
+            <span>pH Balancing</span>
           </div>
           <div class="v-cat-card" onclick="navigateTo('category', 'serum')">
             <div class="v-cat-icon">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3h6v4l2 2v10a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V9l2-2V3z"/><line x1="9" y1="13" x2="15" y2="13"/></svg>
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3h6v4l2 2v10a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V9l2-2V3z"/><line x1="9" y1="13" x2="15" y2="13"/></svg>
             </div>
             <strong>Face Serums</strong>
             <span>Targeted Actives</span>
           </div>
-          <div class="v-cat-card" onclick="navigateTo('category', 'sunscreen')">
-            <div class="v-cat-icon">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-            </div>
-            <strong>Sunscreen</strong>
-            <span>SPF 50+ PA+++</span>
-          </div>
           <div class="v-cat-card" onclick="navigateTo('category', 'moisturizer')">
             <div class="v-cat-icon">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg>
             </div>
             <strong>Moisturizer</strong>
             <span>Barrier Repair</span>
           </div>
-          <div class="v-cat-card" onclick="navigateTo('builder')">
+          <div class="v-cat-card" onclick="navigateTo('category', 'sunscreen')">
             <div class="v-cat-icon">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
             </div>
-            <strong>Build Combo</strong>
-            <span>Save 15% Extra</span>
+            <strong>Sunscreen</strong>
+            <span>SPF 50+ PA+++</span>
+          </div>
+          <div class="v-cat-card" onclick="navigateTo('category', 'combo')">
+            <div class="v-cat-icon">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/></svg>
+            </div>
+            <strong>Value Combos</strong>
+            <span>Save Up to 27%</span>
           </div>
         </div>
       </section>
 
       <!-- Auto-Moving Trending Showcase -->
       <section class="trending-strip">
-        <div class="trending-label">BEST SELLERS</div>
+        <div class="trending-label">TOP 12 HITS</div>
         <div class="marquee-wrapper">
           <div class="marquee-track" id="movingProductTrack"></div>
         </div>
       </section>
 
-      <!-- Featured Products with Skin Concern Filter -->
+      <!-- TOP 12 BEST-SELLING HIT PRODUCTS ONLY ON HOMEPAGE -->
       <section class="section-block">
         <div class="section-row-head">
-          <h2 data-i18n="popularTitle">Signature Skincare Essentials</h2>
+          <div>
+            <h2 data-i18n="popularTitle">Top 12 Most-Loved Bestsellers</h2>
+            <p style="font-size:13px; color:var(--text-muted);">Our highest-rated hit products — explore full categories for more essentials</p>
+          </div>
           <div class="concern-filter-pills">
-            <button type="button" class="cf-pill active" onclick="filterHomeByConcern('all', this)">All</button>
+            <button type="button" class="cf-pill active" onclick="filterHomeByConcern('all', this)">All 12 Hits</button>
             <button type="button" class="cf-pill" onclick="filterHomeByConcern('brightening', this)">Brightening</button>
             <button type="button" class="cf-pill" onclick="filterHomeByConcern('acne', this)">Acne &amp; Oil</button>
             <button type="button" class="cf-pill" onclick="filterHomeByConcern('darkspot', this)">Dark Spots</button>
@@ -240,6 +252,17 @@
           </div>
         </div>
         <div class="product-grid" id="homeProductGrid"></div>
+        <div style="text-align:center; margin-top:22px;">
+          <button type="button" class="btn-add" style="padding:11px 26px;" onclick="navigateTo('category', 'all')">View All Products Across Categories &rarr;</button>
+        </div>
+      </section>
+
+      <!-- Recently Viewed Products Strip -->
+      <section class="section-block" id="recentlyViewedSection" style="display:none;">
+        <div class="section-row-head">
+          <h2>Recently Viewed by You</h2>
+        </div>
+        <div class="product-grid" id="recentlyViewedGrid"></div>
       </section>
 
       <!-- Watch & Shop (UGC Reels Showcase) -->
@@ -257,10 +280,10 @@
           <span class="hero-pill" style="color:var(--gold-accent);">VISIBLE 14-DAY RESULTS</span>
           <h2>Real Skin Transformation</h2>
           <p>Drag the golden divider left or right to compare dull, sun-stressed skin (Before) against luminous, hydrated glass skin after 14 days of our Vitamin C + SPF 50+ Duo.</p>
-          <button type="button" class="btn-primary" style="margin-top:14px;" onclick="navigateTo('product', 8)">Shop the Day-Glow Duo &rarr;</button>
+          <button type="button" class="btn-primary" style="margin-top:14px;" onclick="navigateTo('product', 11)">Shop the Day-Glow Duo &rarr;</button>
         </div>
         <div class="ba-slider-box">
-          <img src="product-8.jpg" alt="After 14 Days" class="ba-img-after" />
+          <img src="product-11.jpg" alt="After 14 Days" class="ba-img-after" />
           <div class="ba-before-wrap" id="baBeforeWrap">
             <img src="product-1.jpg" alt="Before Routine" class="ba-img-before" />
           </div>
@@ -282,7 +305,7 @@
         <div class="feature-promo-card fp-gold" onclick="navigateTo('builder')">
           <span class="fp-tag">BUNDLE &amp; SAVE 15%</span>
           <h3>Curate Your 3-Step Routine</h3>
-          <p>Combine any Cleanser + Serum + Sunscreen and receive an automatic 15% privilege discount.</p>
+          <p>Combine any Face Wash + Serum + Sunscreen and receive an automatic 15% privilege discount.</p>
           <span class="fp-cta">Create My Combo &rarr;</span>
         </div>
       </section>
@@ -302,13 +325,13 @@
           </div>
           <div class="testimonial-card">
             <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <p>"Zero white cast and never feels greasy in Dhaka humidity. Delivery arrived in Mirpur within 24 hours."</p>
+            <p>"Simple Facial Wash and Niacinamide Serum worked wonders for my oily skin. Delivery arrived in Mirpur within 24 hours."</p>
             <strong>Tania Rahman</strong>
             <small>Dhanmondi, Dhaka</small>
           </div>
           <div class="testimonial-card">
             <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <p>"Ordered the Niacinamide 10% Serum after taking their Skin Quiz. Pores look noticeably refined and skin stays matte all day."</p>
+            <p>"Ordered the 3-Step Glass-Skin Routine Set. Zero white cast sunscreen and super gentle cleanser!"</p>
             <strong>Sadia Islam</strong>
             <small>Banani, Dhaka</small>
           </div>
@@ -317,7 +340,7 @@
 
       <!-- FAQ Accordion Section -->
       <section class="section-block faq-box">
-        <h2 style="font-family:'Cormorant Garamond', serif; font-size:28px; color:var(--emerald-dark); margin-bottom:14px;">Frequently Asked Questions</h2>
+        <h2 class="serif-page-title">Frequently Asked Questions</h2>
         <details class="faq-item" open>
           <summary>Are all ZELVIQO products 100% original and authentic?</summary>
           <p>Yes. Every product sold at ZELVIQO Luxury Skin Care is 100% authentic, factory-sealed, and batch-verified. You can inspect your parcel in front of the delivery rider before payment.</p>
@@ -390,7 +413,13 @@
           <h1 id="catPageTitle">All Skincare Products</h1>
           <p id="catPageDesc">Explore 100% authentic imported skincare curated for your daily routine.</p>
         </div>
-        <div class="sort-box">
+        <div class="sort-box" style="display:flex; gap:8px; flex-wrap:wrap;">
+          <select id="catSkinFilter" onchange="renderCategoryPageProducts()">
+            <option value="all">Skin Type: All</option>
+            <option value="Oily">Oily / Acne-Prone</option>
+            <option value="Dry">Dry / Dehydrated</option>
+            <option value="Sensitive">Sensitive Skin</option>
+          </select>
           <select id="catSortSelect" onchange="renderCategoryPageProducts()">
             <option value="featured">Sort: Featured</option>
             <option value="low-high">Price: Low to High</option>
@@ -402,10 +431,11 @@
       <div class="cat-switch-strip">
         <button type="button" class="c-tab" data-cat="all" onclick="navigateTo('category', 'all')">All Products</button>
         <button type="button" class="c-tab" data-cat="cleanser" onclick="navigateTo('category', 'cleanser')">Face Wash &amp; Cleanser</button>
+        <button type="button" class="c-tab" data-cat="toner" onclick="navigateTo('category', 'toner')">Toner &amp; Essence</button>
         <button type="button" class="c-tab" data-cat="serum" onclick="navigateTo('category', 'serum')">Face Serums</button>
+        <button type="button" class="c-tab" data-cat="moisturizer" onclick="navigateTo('category', 'moisturizer')">Moisturizer &amp; Night Gel</button>
         <button type="button" class="c-tab" data-cat="sunscreen" onclick="navigateTo('category', 'sunscreen')">Sunscreen SPF 50+</button>
-        <button type="button" class="c-tab" data-cat="moisturizer" onclick="navigateTo('category', 'moisturizer')">Moisturizer</button>
-        <button type="button" class="c-tab" data-cat="combo" onclick="navigateTo('category', 'combo')">Combo Sets</button>
+        <button type="button" class="c-tab" data-cat="combo" onclick="navigateTo('category', 'combo')">Value Combo Sets</button>
       </div>
 
       <div class="product-grid" id="categoryProductGrid"></div>
@@ -438,7 +468,7 @@
       <div class="page-card-box">
         <span class="hero-pill" style="color:var(--gold-accent);">BUNDLE &amp; SAVE 15%</span>
         <h1 class="serif-page-title">Build Your Custom 3-Step Skincare Combo</h1>
-        <p style="font-size:14px; color:var(--text-muted); margin-bottom:22px;">Select 1 Cleanser + 1 Serum + 1 Sunscreen below and get an instant <strong>15% Bundle Discount</strong>.</p>
+        <p style="font-size:14px; color:var(--text-muted); margin-bottom:22px;">Select 1 Face Wash + 1 Serum + 1 Sunscreen below and get an instant <strong>15% Bundle Discount</strong>.</p>
 
         <div class="builder-grid">
           <div class="builder-step">
@@ -518,17 +548,18 @@
       <div class="page-card-box">
         <h1 class="serif-page-title">Daily Morning &amp; Night Skincare Guide</h1>
         <div class="guide-article">
-          <h3>Morning Glow &amp; Sun Protection Routine (3 Steps)</h3>
-          <p><strong>Step 1 — Cleanse:</strong> Wash your face with a gentle pH-balanced cleanser to remove overnight oil without drying your skin.</p>
-          <p><strong>Step 2 — Treat:</strong> Apply 3–4 drops of <em>Vitamin C Serum</em> to brighten dullness and protect against pollution.</p>
-          <p><strong>Step 3 — Protect:</strong> Finish with 2 fingers' worth of <em>SPF 50+ PA+++ Sunscreen</em> 15 minutes before going outside.</p>
+          <h3>Morning Glow &amp; Sun Protection Routine (4 Steps)</h3>
+          <p><strong>Step 1 — Cleanse:</strong> Wash your face with a gentle pH-balanced Face Wash to remove overnight oil.</p>
+          <p><strong>Step 2 — Tone:</strong> Pat a hydrating Toner to balance skin pH and prep for active absorption.</p>
+          <p><strong>Step 3 — Treat:</strong> Apply 3–4 drops of <em>Vitamin C Serum</em> to brighten dullness.</p>
+          <p><strong>Step 4 — Protect:</strong> Finish with 2 fingers' worth of <em>SPF 50+ PA+++ Sunscreen</em> 15 minutes before sun exposure.</p>
           <button type="button" class="btn-add" style="margin-top:10px;" onclick="navigateTo('category', 'sunscreen')">Shop Sunscreens &amp; Serums &rarr;</button>
         </div>
         <hr class="soft-divider" />
         <div class="guide-article">
           <h3>Night Repair &amp; Hydration Routine (3 Steps)</h3>
           <p><strong>Step 1 — Deep Cleanse:</strong> Remove sunscreen, dust, and excess sebum thoroughly before bed.</p>
-          <p><strong>Step 2 — Repair:</strong> Use <em>Niacinamide 10%</em> (for oily/acne skin) or <em>Alpha Arbutin</em> (for dark spots).</p>
+          <p><strong>Step 2 — Repair:</strong> Use <em>Niacinamide 10%</em> (for oily/acne skin) or <em>Alpha Arbutin 2%</em> (for dark spots).</p>
           <p><strong>Step 3 — Lock Moisture:</strong> Seal everything with a cooling <em>Barrier Repair Gel Moisturizer</em> so skin heals overnight.</p>
           <button type="button" class="btn-add" style="margin-top:10px;" onclick="navigateTo('category', 'moisturizer')">Shop Night Moisturizers &rarr;</button>
         </div>
@@ -552,7 +583,7 @@
           <strong>ZELVIQO Luxury Skin Care</strong> was founded in Dhaka, Bangladesh with an unwavering commitment: to deliver 100% authentic, factory-sealed, and clinically effective international skincare directly to your doorstep.
         </p>
         <p style="font-size:14.5px; color:var(--text-muted); margin-bottom:18px;">
-          Every serum, sunscreen, cleanser, and moisturizer in our collection is carefully vetted for South Asian climate and skin types.
+          Every cleanser, toner, serum, sunscreen, and moisturizer in our collection is carefully vetted for South Asian climate and skin types.
         </p>
         <div class="contact-info-grid">
           <div class="info-tile">
@@ -748,7 +779,7 @@
 
       <div id="adminDashboardArea" style="display:none;">
         <div class="admin-stats-grid">
-          <div class="stat-card"><small>Catalog Products</small><strong id="admTotalProducts">8</strong></div>
+          <div class="stat-card"><small>Catalog Products</small><strong id="admTotalProducts">16</strong></div>
           <div class="stat-card"><small>Orders Received</small><strong id="admTotalOrders">0</strong></div>
           <div class="stat-card"><small>Gross Revenue</small><strong id="admTotalRevenue">৳0</strong></div>
         </div>
@@ -758,21 +789,23 @@
           <form onsubmit="adminAddNewProduct(event)" class="admin-add-form">
             <input type="text" id="admProdName" required placeholder="Product Title" />
             <select id="admProdCat">
-              <option value="serum">Face Serum</option>
               <option value="cleanser">Face Wash &amp; Cleanser</option>
-              <option value="sunscreen">Sunscreen</option>
+              <option value="toner">Toner &amp; Essence</option>
+              <option value="serum">Face Serum</option>
               <option value="moisturizer">Moisturizer</option>
+              <option value="sunscreen">Sunscreen</option>
               <option value="combo">Combo Set</option>
             </select>
             <input type="number" id="admProdReg" required placeholder="Regular Price (৳)" />
             <input type="number" id="admProdSale" required placeholder="Sale Price (৳)" />
-            <input type="text" id="admProdImg" required placeholder="Image (e.g. product-1.jpg)" />
+            <input type="text" id="admProdImg" required placeholder="Image (e.g. product-17.jpg)" />
+            <label style="display:flex; align-items:center; gap:6px; font-size:13px;"><input type="checkbox" id="admProdHit" checked /> Show in Homepage Top Hits</label>
             <button type="submit" class="btn-primary">Publish Product</button>
           </form>
         </div>
 
         <div class="page-card-box" style="margin-bottom:20px;">
-          <h3 style="color:var(--emerald-dark); margin-bottom:12px;">Inventory &amp; Stock Control</h3>
+          <h3 style="color:var(--emerald-dark); margin-bottom:12px;">Inventory, Stock &amp; Homepage Hit Control</h3>
           <div id="adminProductList"></div>
         </div>
 
@@ -784,7 +817,18 @@
     </div>
   </div>
 
-  <!-- Footer (All Links Fixed with return false) -->
+  <!-- Quick View Modal -->
+  <div class="modal-backdrop" id="quickViewModal">
+    <div class="modal-card" style="width:540px;">
+      <div class="modal-header">
+        <h3>Quick Product Preview</h3>
+        <button type="button" class="close-btn" onclick="document.getElementById('quickViewModal').classList.remove('open')">&times;</button>
+      </div>
+      <div class="checkout-form" id="quickViewBody"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="container footer-grid">
       <div>
@@ -871,7 +915,7 @@
     </button>
   </div>
 
-  <!-- Mobile App-Style Bottom Navigation Bar (With Luxury SVG Icons) -->
+  <!-- Mobile App-Style Bottom Navigation Bar -->
   <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
     <button type="button" class="b-nav-item active" data-bnav="home" onclick="navigateTo('home')">
       <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
