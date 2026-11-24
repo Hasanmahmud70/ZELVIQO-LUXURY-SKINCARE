@@ -1,5 +1,5 @@
 const WHATSAPP_NUMBER = "8801860821074";
-const GOOGLE_SHEET_WEBHOOK_URL = ""; // এখানে তোমার Google Apps Script Web App URL পেস্ট করবে
+const GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbxRaeyeoSTaBuqB_K06ZEu_Vzed5h36M8XwT_R8R5KIZwuPcMLGDMyTpsR-aJe4r96m/exec"; // এখানে তোমার Google Apps Script Web App URL পেস্ট করবে
 
 function trackMetaEvent(eventName, payload = {}) {
   if (typeof window.fbq === "function") window.fbq("track", eventName, payload);
