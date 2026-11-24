@@ -1,5 +1,13 @@
-// ZELVIQO Luxury Skin Care - Complete Multi-Page Storefront Engine
+// ZELVIQO Luxury Skin Care - Complete All-In-One Storefront Engine
 const WHATSAPP_NUMBER = "8801860821074";
+// Optional: Paste your Google Apps Script Web App URL below to auto-save orders into Google Sheets
+const GOOGLE_SHEET_WEBHOOK_URL = "";
+
+function trackMetaEvent(eventName, payload = {}) {
+  if (typeof window.fbq === "function") {
+    window.fbq("track", eventName, payload);
+  }
+}
 
 const translations = {
   en: {
@@ -14,7 +22,7 @@ const translations = {
     navBuilder: "🎁 Build Your Combo (15% Off)",
     navQuiz: "🔬 Skin Type Quiz",
     navGuide: "📖 Skincare Routine Guide",
-    navProfile: "👤 My Profile & Orders",
+    navProfile: "👤 My Profile & Loyalty Points",
     navTrack: "🚚 Track Your Order",
     navAbout: "🏛️ About Us",
     navPolicy: "🛡️ Delivery & Return Policy",
@@ -38,7 +46,7 @@ const translations = {
     navBuilder: "🎁 নিজের কম্বো বানান (১৫% ছাড়)",
     navQuiz: "🔬 স্কিন টাইপ কুইজ",
     navGuide: "📖 স্কিনকেয়ার রুটিন গাইড",
-    navProfile: "👤 আমার প্রোফাইল ও অর্ডার",
+    navProfile: "👤 আমার প্রোফাইল ও পয়েন্ট",
     navTrack: "🚚 অর্ডার ট্র্যাক করুন",
     navAbout: "🏛️ আমাদের সম্পর্কে (About Us)",
     navPolicy: "🛡️ ডেলিভারি ও রিটার্ন পলিসি",
@@ -55,33 +63,15 @@ const translations = {
 let currentLang = "en";
 
 const categoryMeta = {
-  all: {
-    title: "All Skincare Products",
-    desc: "Explore 100% authentic imported skincare curated for your daily routine."
-  },
-  cleanser: {
-    title: "Face Wash & Gentle Cleansers",
-    desc: "Soap-free, pH-balanced cleansers to purify pores without drying your skin."
-  },
-  serum: {
-    title: "Face Serums & Treatments",
-    desc: "Concentrated Vitamin C, Niacinamide & Alpha Arbutin serums for visible glow."
-  },
-  sunscreen: {
-    title: "Sunscreen SPF 50+ PA+++",
-    desc: "Lightweight, zero-white-cast sun protection tailored for Bangladeshi weather."
-  },
-  moisturizer: {
-    title: "Moisturizers & Night Gels",
-    desc: "Deep barrier-repair hydration for soft, plump, healthy-looking skin."
-  },
-  combo: {
-    title: "Curated Value Combo Sets",
-    desc: "Complete multi-step skincare bundles with extra savings."
-  }
+  all: { title: "All Skincare Products", desc: "Explore 100% authentic imported skincare curated for your daily routine." },
+  cleanser: { title: "Face Wash & Gentle Cleansers", desc: "Soap-free, pH-balanced cleansers to purify pores without drying your skin." },
+  serum: { title: "Face Serums & Treatments", desc: "Concentrated Vitamin C, Niacinamide & Alpha Arbutin serums for visible glow." },
+  sunscreen: { title: "Sunscreen SPF 50+ PA+++", desc: "Lightweight, zero-white-cast sun protection tailored for Bangladeshi weather." },
+  moisturizer: { title: "Moisturizers & Night Gels", desc: "Deep barrier-repair hydration for soft, plump, healthy-looking skin." },
+  combo: { title: "Curated Value Combo Sets", desc: "Complete multi-step skincare bundles with extra savings." }
 };
 
-const products = [
+const defaultProducts = [
   {
     id: 1,
     name: "Dr. Rashel Vitamin C Brightening & Anti-Aging Face Serum",
@@ -92,14 +82,13 @@ const products = [
     skinType: "All Skin Types",
     regularPrice: 850,
     salePrice: 650,
+    inStock: true,
     image: "product-1.jpg",
-    description: "A fast-absorbing daily antioxidant serum infused with pure Vitamin C and Hyaluronic Acid to fade dullness, boost natural collagen, and give your skin an even, glass-like glow.",
+    gallery: ["product-1.jpg", "product-8.jpg"],
+    description: "Fast-absorbing daily antioxidant serum infused with pure Vitamin C and Hyaluronic Acid to fade dullness and give a glass-like glow.",
     ingredients: "Aqua, Ascorbic Acid (Vitamin C), Hyaluronic Acid, Niacinamide, Glycerin, Aloe Barbadensis Leaf Extract.",
-    howToUse: "Apply 3-4 drops on clean face and neck every morning and night before moisturizer. Follow with SPF 50+ sunscreen during daytime.",
-    reviews: [
-      { user: "Nusrat Jahan (Uttara)", rating: 5, text: "100% original product! Within 2 weeks my skin looks much brighter." },
-      { user: "Farhana Akter (Mirpur)", rating: 5, text: "Fast delivery and authentic packaging. Love ZELVIQO!" }
-    ]
+    howToUse: "Apply 3-4 drops on clean face and neck every morning and night before moisturizer.",
+    reviews: [{ user: "Nusrat Jahan (Uttara)", rating: 5, text: "100% original product! Within 2 weeks my skin looks much brighter." }]
   },
   {
     id: 2,
@@ -111,13 +100,13 @@ const products = [
     skinType: "Oily, Combination & Normal Skin",
     regularPrice: 950,
     salePrice: 740,
+    inStock: true,
     image: "product-2.jpg",
-    description: "Specially formulated for humid Bangladeshi weather. Shields skin from harsh UVA/UVB rays with zero white cast, zero stickiness, and soothing barrier-repair ingredients.",
+    gallery: ["product-2.jpg", "product-6.jpg"],
+    description: "Specially formulated for humid Bangladeshi weather. Shields skin from UVA/UVB rays with zero white cast and zero stickiness.",
     ingredients: "Zinc Oxide, Titanium Dioxide, Centella Asiatica Extract, Panthenol (Vitamin B5), Hyaluronic Acid.",
-    howToUse: "Apply generously across face and neck 15 minutes before sun exposure. Reapply every 3 hours when outdoors.",
-    reviews: [
-      { user: "Tania Rahman (Dhanmondi)", rating: 5, text: "Zero white cast and doesn't feel oily even in Dhaka heat." }
-    ]
+    howToUse: "Apply generously across face and neck 15 minutes before sun exposure.",
+    reviews: [{ user: "Tania Rahman (Dhanmondi)", rating: 5, text: "Zero white cast and doesn't feel oily even in Dhaka heat." }]
   },
   {
     id: 3,
@@ -129,13 +118,13 @@ const products = [
     skinType: "Oily & Acne-Prone Skin",
     regularPrice: 1100,
     salePrice: 890,
+    inStock: true,
     image: "product-3.jpg",
-    description: "High-strength 10% Niacinamide balanced with Zinc PCA to control excess sebum, minimize enlarged pores, and calm active breakouts for smooth, clear skin.",
+    gallery: ["product-3.jpg", "product-1.jpg"],
+    description: "High-strength 10% Niacinamide balanced with Zinc PCA to control excess sebum, minimize pores, and calm active breakouts.",
     ingredients: "Niacinamide (10%), Zinc PCA (1%), Tamarindus Indica Seed Gum, Pentylene Glycol.",
-    howToUse: "Dispense 2-3 drops onto fingertips and gently pat into skin after cleansing, morning and evening.",
-    reviews: [
-      { user: "Sadia Islam (Banani)", rating: 5, text: "Controlled my excess oil and minimized pores noticeably." }
-    ]
+    howToUse: "Dispense 2-3 drops onto fingertips and gently pat into skin after cleansing.",
+    reviews: [{ user: "Sadia Islam (Banani)", rating: 5, text: "Controlled my excess oil and minimized pores noticeably." }]
   },
   {
     id: 4,
@@ -147,13 +136,13 @@ const products = [
     skinType: "Dry, Sensitive & Normal Skin",
     regularPrice: 780,
     salePrice: 620,
+    inStock: true,
     image: "product-4.jpg",
-    description: "Soap-free, pH-balanced daily face wash enriched with 3 essential Ceramides and Hyaluronic Acid to lift away dirt, sunscreen, and pollution without stripping natural moisture.",
+    gallery: ["product-4.jpg", "product-5.jpg"],
+    description: "Soap-free, pH-balanced daily face wash enriched with 3 essential Ceramides and Hyaluronic Acid to lift away dirt without drying.",
     ingredients: "Ceramide NP, Ceramide AP, Ceramide EOP, Sodium Hyaluronate, Glycerin.",
-    howToUse: "Massage a coin-sized amount onto wet face in circular motions for 30 seconds, then rinse thoroughly with water.",
-    reviews: [
-      { user: "Mehjabin Chowdhury (Sylhet)", rating: 5, text: "Super gentle face wash, leaves skin soft and hydrated." }
-    ]
+    howToUse: "Massage onto wet face for 30 seconds, then rinse thoroughly with water.",
+    reviews: []
   },
   {
     id: 5,
@@ -165,10 +154,12 @@ const products = [
     skinType: "All Skin Types",
     regularPrice: 1250,
     salePrice: 980,
+    inStock: true,
     image: "product-5.jpg",
-    description: "A cooling water-gel moisturizer infused with Damascus rosewater and micro-gold peptides that locks in 24-hour hydration while keeping skin plump and refreshed.",
+    gallery: ["product-5.jpg", "product-4.jpg"],
+    description: "Cooling water-gel moisturizer infused with Damascus rosewater and micro-gold peptides that locks in 24-hour hydration.",
     ingredients: "Rosa Damascena Flower Water, Colloidal Gold, Betaine, Allantoin, Sodium Hyaluronate.",
-    howToUse: "Take a pea-sized amount and massage gently onto face and neck as the final step of your night routine or before sunscreen.",
+    howToUse: "Massage gently onto face and neck as the final step of your night routine.",
     reviews: []
   },
   {
@@ -181,10 +172,12 @@ const products = [
     skinType: "Oily & Sensitive Skin",
     regularPrice: 1050,
     salePrice: 850,
+    inStock: true,
     image: "product-6.jpg",
-    description: "Water-light aqua gel sunscreen that melts into skin in seconds. Leaves a velvety soft-matte finish ideal for hot and humid days.",
+    gallery: ["product-6.jpg", "product-2.jpg"],
+    description: "Water-light aqua gel sunscreen that melts into skin in seconds with a soft-matte finish.",
     ingredients: "Ethylhexyl Methoxycinnamate, Niacinamide, Green Tea Leaf Extract, Madecassoside.",
-    howToUse: "Apply two fingers' worth evenly over face and ears every morning before stepping outside.",
+    howToUse: "Apply two fingers' worth evenly over face every morning.",
     reviews: []
   },
   {
@@ -197,10 +190,12 @@ const products = [
     skinType: "All Skin Types",
     regularPrice: 1150,
     salePrice: 920,
+    inStock: true,
     image: "product-7.jpg",
-    description: "Concentrated 2% Alpha Arbutin night treatment designed to target stubborn melasma, sunspots, and hyperpigmentation while you sleep.",
+    gallery: ["product-7.jpg", "product-3.jpg"],
+    description: "Concentrated 2% Alpha Arbutin night treatment designed to target stubborn sunspots and hyperpigmentation.",
     ingredients: "Alpha-Arbutin (2%), Hydrolyzed Hyaluronic Acid, Lactic Acid, Ferulic Acid.",
-    howToUse: "Apply 3 drops to clean skin at night before applying your moisturizer.",
+    howToUse: "Apply 3 drops to clean skin at night before moisturizer.",
     reviews: []
   },
   {
@@ -213,20 +208,33 @@ const products = [
     skinType: "All Skin Types",
     regularPrice: 1800,
     salePrice: 1320,
+    inStock: true,
     image: "product-8.jpg",
-    description: "Our bestselling morning protection and glow bundle. Pair Dr. Rashel Vitamin C Serum with Care & Repair SPF 50+ Sunscreen for maximum brightening and UV defense.",
-    ingredients: "Full-Size Dr. Rashel Vitamin C Serum (50ml) + Care & Repair UV Defense Sunscreen (60ml).",
-    howToUse: "Step 1: Apply Vitamin C Serum on clean skin. Step 2: Lock it in with Care & Repair SPF 50+ Sunscreen.",
+    gallery: ["product-8.jpg", "product-1.jpg", "product-2.jpg"],
+    description: "Our bestselling morning protection and glow bundle pairing Dr. Rashel Vitamin C Serum with Care & Repair SPF 50+ Sunscreen.",
+    ingredients: "Full-Size Vitamin C Serum (50ml) + Care & Repair UV Defense Sunscreen (60ml).",
+    howToUse: "Step 1: Apply Vitamin C Serum. Step 2: Lock it in with SPF 50+ Sunscreen.",
     reviews: []
   }
 ];
 
+function getProducts() {
+  const stored = JSON.parse(localStorage.getItem("zelviqo_catalog") || "null");
+  return stored || defaultProducts;
+}
+
+function saveProducts(list) {
+  localStorage.setItem("zelviqo_catalog", JSON.stringify(list));
+}
+
 let cart = [];
+let wishlist = JSON.parse(localStorage.getItem("zelviqo_wishlist") || "[]");
 let currentCategory = "all";
 let cartDeliveryCharge = 70;
 let appliedDiscountPercent = 0;
+let selectedPaymentMethod = "COD";
 
-// ================= LANGUAGE SWITCHER (EN | বাং) =================
+// ================= LANGUAGE SWITCHER =================
 function toggleLanguage() {
   currentLang = currentLang === "en" ? "bn" : "en";
   const dict = translations[currentLang];
@@ -264,17 +272,15 @@ function navigateTo(pageName, param = null, pushState = true) {
   });
 
   if (pageName === "home") {
-    renderProductCards("homeProductGrid", products.slice(0, 8));
+    renderProductCards("homeProductGrid", getProducts().slice(0, 8));
+    renderWatchAndShopReels();
   } else if (pageName === "category") {
     currentCategory = param || "all";
     const meta = categoryMeta[currentCategory] || categoryMeta.all;
     document.getElementById("catBreadcrumbName").textContent = meta.title;
     document.getElementById("catPageTitle").textContent = meta.title;
     document.getElementById("catPageDesc").textContent = meta.desc;
-
-    document.querySelectorAll(".c-tab").forEach((tab) => {
-      tab.classList.toggle("active", tab.dataset.cat === currentCategory);
-    });
+    document.querySelectorAll(".c-tab").forEach((tab) => tab.classList.toggle("active", tab.dataset.cat === currentCategory));
     renderCategoryPageProducts();
   } else if (pageName === "product") {
     renderFullProductPage(Number(param) || 1);
@@ -282,6 +288,8 @@ function navigateTo(pageName, param = null, pushState = true) {
     initCustomComboBuilder();
   } else if (pageName === "profile") {
     renderProfilePage();
+  } else if (pageName === "admin") {
+    renderAdminDashboard();
   }
 
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -292,11 +300,8 @@ function navigateTo(pageName, param = null, pushState = true) {
 }
 
 window.addEventListener("popstate", (e) => {
-  if (e.state && e.state.pageName) {
-    navigateTo(e.state.pageName, e.state.param, false);
-  } else {
-    navigateTo("home", null, false);
-  }
+  if (e.state && e.state.pageName) navigateTo(e.state.pageName, e.state.param, false);
+  else navigateTo("home", null, false);
 });
 
 // ================= 3-LINE MENU DRAWER =================
@@ -317,7 +322,57 @@ document.getElementById("openMenuBtn").addEventListener("click", openMenuDrawer)
 document.getElementById("closeMenuBtn").addEventListener("click", closeMenuDrawer);
 menuBackdrop.addEventListener("click", closeMenuDrawer);
 
-// ================= PRODUCT CARDS (WITH ADD TO CART & INSTANT ORDER NOW) =================
+// ================= WISHLIST =================
+function toggleWishlist(productId) {
+  const idx = wishlist.indexOf(productId);
+  if (idx === -1) wishlist.push(productId);
+  else wishlist.splice(idx, 1);
+  localStorage.setItem("zelviqo_wishlist", JSON.stringify(wishlist));
+  updateWishlistUI();
+  renderProductCards("homeProductGrid", getProducts().slice(0, 8));
+  renderCategoryPageProducts();
+}
+
+function updateWishlistUI() {
+  document.getElementById("wishlistCount").textContent = wishlist.length;
+  const container = document.getElementById("wishlistItemsContainer");
+  const all = getProducts();
+  const saved = all.filter((p) => wishlist.includes(p.id));
+  container.innerHTML =
+    saved.length === 0
+      ? `<p class="empty-msg">Your wishlist is empty. Tap ❤️ on any product to save it.</p>`
+      : saved
+          .map(
+            (p) => `
+          <div class="cart-item">
+            <img src="${p.image}" alt="${p.name}" />
+            <div style="flex:1;">
+              <div style="font-size:13px; font-weight:600;">${p.name}</div>
+              <div style="font-size:13px; font-weight:700; color:#0c2b21;">৳${p.salePrice}</div>
+              <div style="margin-top:6px; display:flex; gap:6px;">
+                <button type="button" class="btn-gold-sm" onclick="addToCart(${p.id}, 1, false); closeWishlistDrawer();">Move to Cart</button>
+                <button type="button" class="qty-btn" onclick="toggleWishlist(${p.id})">&times;</button>
+              </div>
+            </div>
+          </div>
+        `
+          )
+          .join("");
+}
+
+function openWishlistDrawer() {
+  updateWishlistUI();
+  document.getElementById("wishlistDrawer").classList.add("open");
+  document.getElementById("wishBackdrop").classList.add("open");
+}
+
+function closeWishlistDrawer() {
+  document.getElementById("wishlistDrawer").classList.remove("open");
+  document.getElementById("wishBackdrop").classList.remove("open");
+}
+document.getElementById("wishBackdrop").addEventListener("click", closeWishlistDrawer);
+
+// ================= PRODUCT CARDS =================
 function renderProductCards(containerId, list) {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -325,11 +380,15 @@ function renderProductCards(containerId, list) {
   container.innerHTML = list
     .map((product) => {
       const discount = Math.round(((product.regularPrice - product.salePrice) / product.regularPrice) * 100);
+      const isWished = wishlist.includes(product.id);
+      const outBadge = product.inStock === false ? `<span class="discount-tag" style="background:#555;">STOCK OUT</span>` : "";
+
       return `
         <article class="product-card">
-          <div class="card-media" onclick="navigateTo('product', ${product.id})">
-            ${discount > 0 ? `<span class="discount-tag">${discount}% OFF</span>` : ""}
-            <img src="${product.image}" alt="${product.name}" loading="lazy" />
+          <div class="card-media">
+            ${outBadge || (discount > 0 ? `<span class="discount-tag">${discount}% OFF</span>` : "")}
+            <button type="button" class="wish-heart-btn" onclick="toggleWishlist(${product.id})">${isWished ? "❤️" : "🤍"}</button>
+            <img src="${product.image}" alt="${product.name}" loading="lazy" onclick="navigateTo('product', ${product.id})" />
           </div>
           <div class="card-body">
             <span class="card-cat">${product.categoryLabel}</span>
@@ -351,38 +410,86 @@ function renderProductCards(containerId, list) {
 }
 
 function renderCategoryPageProducts() {
-  let list = currentCategory === "all" ? [...products] : products.filter((p) => p.category === currentCategory);
+  const all = getProducts();
+  let list = currentCategory === "all" ? [...all] : all.filter((p) => p.category === currentCategory);
   const sortVal = document.getElementById("catSortSelect").value;
   if (sortVal === "low-high") list.sort((a, b) => a.salePrice - b.salePrice);
   if (sortVal === "high-low") list.sort((a, b) => b.salePrice - a.salePrice);
   renderProductCards("categoryProductGrid", list);
 }
 
-// ================= FULL PRODUCT DETAIL PAGE + CUSTOMER REVIEWS =================
+// ================= WATCH & SHOP REELS + BEFORE/AFTER SLIDER =================
+function renderWatchAndShopReels() {
+  const reelsData = [
+    { id: 1, title: "Morning Vitamin C Glass-Skin Routine", img: "product-1.jpg", price: 650 },
+    { id: 2, title: "Zero White-Cast Sunscreen Test in Sun", img: "product-2.jpg", price: 740 },
+    { id: 3, title: "How Niacinamide Shrinks Pores in 7 Days", img: "product-3.jpg", price: 890 },
+    { id: 8, title: "Best Day-Glow Duo Unboxing & Review", img: "product-8.jpg", price: 1320 }
+  ];
+
+  document.getElementById("watchShopGrid").innerHTML = reelsData
+    .map(
+      (r) => `
+      <div class="reel-card">
+        <span class="reel-play-badge">▶ REEL</span>
+        <img src="${r.img}" alt="${r.title}" />
+        <div class="reel-bottom-bar">
+          <strong>${r.title}</strong>
+          <button type="button" class="btn-gold-sm" onclick="addToCart(${r.id}, 1, true)">Buy Now — ৳${r.price}</button>
+        </div>
+      </div>
+    `
+    )
+    .join("");
+}
+
+function updateBeforeAfter(val) {
+  document.getElementById("baBeforeWrap").style.width = `${val}%`;
+  document.getElementById("baDivider").style.left = `${val}%`;
+}
+
+// ================= FULL PRODUCT DETAIL PAGE + ZOOM GALLERY =================
 function renderFullProductPage(productId) {
-  const product = products.find((p) => p.id === productId) || products[0];
+  const all = getProducts();
+  const product = all.find((p) => p.id === productId) || all[0];
+  trackMetaEvent("ViewContent", { content_name: product.name, value: product.salePrice, currency: "BDT" });
+
   const discount = Math.round(((product.regularPrice - product.salePrice) / product.regularPrice) * 100);
+  const viewers = Math.floor(11 + Math.random() * 14);
+  const stockLeft = Math.floor(4 + Math.random() * 6);
 
   document.getElementById("prodBreadcrumbCat").textContent = product.categoryLabel;
   document.getElementById("prodBreadcrumbCat").onclick = () => navigateTo("category", product.category);
   document.getElementById("prodBreadcrumbTitle").textContent = product.name;
 
+  const gallery = product.gallery && product.gallery.length ? product.gallery : [product.image];
   const savedReviews = JSON.parse(localStorage.getItem(`zelviqo_rev_${product.id}`) || "[]");
-  const allReviews = [...product.reviews, ...savedReviews];
+  const allReviews = [...(product.reviews || []), ...savedReviews];
 
   document.getElementById("fullProductDetailContainer").innerHTML = `
     <div class="full-product-card">
       <div class="full-product-grid">
-        <div class="full-prod-img">
-          <img src="${product.image}" alt="${product.name}" />
+        <div>
+          <div class="zoom-gallery-wrap">
+            <img id="mainZoomProductImg" src="${gallery[0]}" alt="${product.name}" />
+          </div>
+          <div class="thumb-strip">
+            ${gallery.map((src) => `<img src="${src}" alt="Thumb" onclick="document.getElementById('mainZoomProductImg').src='${src}'" />`).join("")}
+          </div>
         </div>
+
         <div class="full-prod-info">
           <span class="card-cat">${product.categoryLabel}</span>
           <h1>${product.name}</h1>
 
+          <div class="live-urgency-strip">
+            <span class="urgency-pill">👀 ${viewers} people viewing now</span>
+            <span class="urgency-pill" style="background:#fbeaea; color:#a62c2c;">🔥 Only ${stockLeft} left in stock!</span>
+          </div>
+
           <div class="detail-meta">
-            <span>Volume: <strong>${product.volume}</strong></span>
-            <span>Skin Type: <strong>${product.skinType}</strong></span>
+            <span>Volume: <strong>${product.volume || "50ml"}</strong></span>
+            <span>Skin Type: <strong>${product.skinType || "All Skin Types"}</strong></span>
             <span>Rating: <strong>4.9 ★ (${allReviews.length} Reviews)</strong></span>
           </div>
 
@@ -398,40 +505,29 @@ function renderFullProductPage(productId) {
             <button type="button" class="d-tab-btn" onclick="switchProductTab('use', this)">How to Use</button>
           </div>
 
-          <div id="tab-desc" class="detail-tab-panel">${product.description}</div>
-          <div id="tab-ing" class="detail-tab-panel" style="display:none;">${product.ingredients}</div>
-          <div id="tab-use" class="detail-tab-panel" style="display:none;">${product.howToUse}</div>
+          <div id="tab-desc" class="detail-tab-panel">${product.description || "100% authentic imported skincare product."}</div>
+          <div id="tab-ing" class="detail-tab-panel" style="display:none;">${product.ingredients || "Dermatologist-tested skin-safe ingredients."}</div>
+          <div id="tab-use" class="detail-tab-panel" style="display:none;">${product.howToUse || "Apply gently on clean skin daily."}</div>
 
           <div style="display:flex; gap:12px; flex-wrap:wrap;">
             <button type="button" class="btn-add" style="padding:12px 22px;" onclick="addToCart(${product.id}, 1, false)">+ Add to My Cart</button>
-            <button type="button" class="btn-primary" style="padding:12px 26px;" onclick="addToCart(${product.id}, 1, true)">Order Now (Cash on Delivery)</button>
+            <button type="button" class="btn-primary" style="padding:12px 26px;" onclick="addToCart(${product.id}, 1, true)">Order Now</button>
           </div>
         </div>
       </div>
 
-      <!-- Verified Customer Reviews -->
       <div class="reviews-box">
-        <h3 style="color:var(--emerald-dark); margin-bottom:12px;">Customer Reviews (${allReviews.length})</h3>
+        <h3 style="color:var(--emerald-dark); margin-bottom:12px;">Verified Customer Reviews (${allReviews.length})</h3>
         <div>
           ${
             allReviews.length === 0
               ? `<p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">Be the first to review this product!</p>`
-              : allReviews
-                  .map(
-                    (r) => `
-                  <div class="review-item">
-                    <strong>${r.user}</strong> <span style="color:#d49b35;">★★★★★</span>
-                    <p style="margin-top:4px; color:var(--text-muted);">${r.text}</p>
-                  </div>
-                `
-                  )
-                  .join("")
+              : allReviews.map((r) => `<div class="review-item"><strong>${r.user}</strong> <span style="color:#d49b35;">★★★★★</span><p style="margin-top:4px; color:var(--text-muted);">${r.text}</p></div>`).join("")
           }
         </div>
-
         <form onsubmit="submitProductReview(event, ${product.id})" style="margin-top:14px; display:flex; gap:8px; flex-wrap:wrap;">
           <input type="text" id="revReviewerName" required placeholder="Your Name" style="padding:9px; border:1px solid var(--border-color); border-radius:6px; flex:1;" />
-          <input type="text" id="revReviewerText" required placeholder="Write your experience..." style="padding:9px; border:1px solid var(--border-color); border-radius:6px; flex:2;" />
+          <input type="text" id="revReviewerText" required placeholder="Write your review..." style="padding:9px; border:1px solid var(--border-color); border-radius:6px; flex:2;" />
           <button type="submit" class="btn-primary">Post Review</button>
         </form>
       </div>
@@ -457,53 +553,43 @@ function switchProductTab(tabKey, btnEl) {
   document.getElementById("tab-use").style.display = tabKey === "use" ? "block" : "none";
 }
 
-// ================= BUILD YOUR OWN COMBO (15% OFF) =================
+// ================= CUSTOM COMBO BUILDER & QUIZ =================
 function initCustomComboBuilder() {
-  const cleansers = products.filter((p) => p.category === "cleanser");
-  const serums = products.filter((p) => p.category === "serum");
-  const sunscreens = products.filter((p) => p.category === "sunscreen");
+  const all = getProducts();
+  const cleansers = all.filter((p) => p.category === "cleanser");
+  const serums = all.filter((p) => p.category === "serum");
+  const sunscreens = all.filter((p) => p.category === "sunscreen");
 
-  document.getElementById("buildStep1").innerHTML = cleansers
-    .map((p) => `<option value="${p.id}">${p.name} (৳${p.salePrice})</option>`)
-    .join("");
-  document.getElementById("buildStep2").innerHTML = serums
-    .map((p) => `<option value="${p.id}">${p.name} (৳${p.salePrice})</option>`)
-    .join("");
-  document.getElementById("buildStep3").innerHTML = sunscreens
-    .map((p) => `<option value="${p.id}">${p.name} (৳${p.salePrice})</option>`)
-    .join("");
-
+  document.getElementById("buildStep1").innerHTML = cleansers.map((p) => `<option value="${p.id}">${p.name} (৳${p.salePrice})</option>`).join("");
+  document.getElementById("buildStep2").innerHTML = serums.map((p) => `<option value="${p.id}">${p.name} (৳${p.salePrice})</option>`).join("");
+  document.getElementById("buildStep3").innerHTML = sunscreens.map((p) => `<option value="${p.id}">${p.name} (৳${p.salePrice})</option>`).join("");
   calculateCustomCombo();
 }
 
 function calculateCustomCombo() {
-  const p1 = products.find((p) => p.id === Number(document.getElementById("buildStep1").value));
-  const p2 = products.find((p) => p.id === Number(document.getElementById("buildStep2").value));
-  const p3 = products.find((p) => p.id === Number(document.getElementById("buildStep3").value));
+  const all = getProducts();
+  const p1 = all.find((p) => p.id === Number(document.getElementById("buildStep1").value));
+  const p2 = all.find((p) => p.id === Number(document.getElementById("buildStep2").value));
+  const p3 = all.find((p) => p.id === Number(document.getElementById("buildStep3").value));
   if (!p1 || !p2 || !p3) return;
-
   const regSum = p1.salePrice + p2.salePrice + p3.salePrice;
-  const discountedSum = Math.round(regSum * 0.85);
   document.getElementById("comboRegPrice").textContent = `৳${regSum}`;
-  document.getElementById("comboOfferPrice").textContent = `৳${discountedSum}`;
+  document.getElementById("comboOfferPrice").textContent = `৳${Math.round(regSum * 0.85)}`;
 }
 
 function addCustomComboToCart() {
-  const ids = [
+  [
     Number(document.getElementById("buildStep1").value),
     Number(document.getElementById("buildStep2").value),
     Number(document.getElementById("buildStep3").value)
-  ];
-  ids.forEach((id) => addToCart(id, 1, false));
+  ].forEach((id) => addToCart(id, 1, false));
   appliedDiscountPercent = 15;
   openCartDrawer();
 }
 
-// ================= SKIN TYPE QUIZ =================
 function generateQuizResult() {
   const concern = document.getElementById("quizConcern").value;
-  const matched = products.filter((p) => p.concern === concern || p.category === "sunscreen").slice(0, 3);
-
+  const matched = getProducts().filter((p) => p.concern === concern || p.category === "sunscreen").slice(0, 3);
   document.getElementById("quizResultsArea").innerHTML = `
     <h3 style="color:var(--emerald-dark); margin-bottom:12px;">✨ Your Recommended Routine:</h3>
     <div class="product-grid" id="quizResultGrid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));"></div>
@@ -511,23 +597,19 @@ function generateQuizResult() {
   renderProductCards("quizResultGrid", matched);
 }
 
-// ================= MY CART WITH BUILT-IN DELIVERY CHARGE CALCULATOR =================
+// ================= MY CART WITH DELIVERY CHARGE & SMART UPSELL =================
 function addToCart(productId, qty = 1, openCheckoutImmediately = false) {
-  const product = products.find((p) => p.id === productId);
+  const product = getProducts().find((p) => p.id === productId);
   if (!product) return;
-  const existing = cart.find((c) => c.id === productId);
-  if (existing) {
-    existing.qty += qty;
-  } else {
-    cart.push({ ...product, qty });
-  }
-  updateCartUI();
+  trackMetaEvent("AddToCart", { content_name: product.name, value: product.salePrice, currency: "BDT" });
 
-  if (openCheckoutImmediately) {
-    openCheckoutModal();
-  } else {
-    openCartDrawer();
-  }
+  const existing = cart.find((c) => c.id === productId);
+  if (existing) existing.qty += qty;
+  else cart.push({ ...product, qty });
+
+  updateCartUI();
+  if (openCheckoutImmediately) openCheckoutModal();
+  else openCartDrawer();
 }
 
 function changeQty(productId, delta) {
@@ -560,8 +642,7 @@ function updateCartUI() {
   document.getElementById("bottomCartCount").textContent = totalItems;
   document.getElementById("headerBagTotal").textContent = `৳${grandTotal}`;
   document.getElementById("cartSubtotal").textContent = `৳${subtotal}`;
-  document.getElementById("cartDeliveryFee").textContent =
-    subtotal >= 2000 && subtotal > 0 ? "FREE (৳0)" : `৳${actualDelivery}`;
+  document.getElementById("cartDeliveryFee").textContent = subtotal >= 2000 && subtotal > 0 ? "FREE (৳0)" : `৳${actualDelivery}`;
   document.getElementById("cartGrandTotal").textContent = `৳${grandTotal}`;
 
   const target = 2000;
@@ -573,8 +654,11 @@ function updateCartUI() {
       : `Add <strong>৳${target - subtotal}</strong> more for <strong>FREE Delivery</strong>!`;
 
   const container = document.getElementById("cartItemsContainer");
+  const upsellBox = document.getElementById("cartUpsellBox");
+
   if (cart.length === 0) {
     container.innerHTML = `<p class="empty-msg">Your cart is currently empty.</p>`;
+    upsellBox.style.display = "none";
     return;
   }
 
@@ -596,6 +680,25 @@ function updateCartUI() {
     `
     )
     .join("");
+
+  // Smart Cart Upsell Recommendation
+  const upsellItem = getProducts().find((p) => !cart.some((c) => c.id === p.id));
+  if (upsellItem) {
+    upsellBox.style.display = "block";
+    upsellBox.innerHTML = `
+      <div style="font-size:11px; font-weight:800; color:var(--emerald-dark); margin-bottom:6px;">✨ COMPLETE YOUR ROUTINE</div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <img src="${upsellItem.image}" style="width:42px; height:42px; border-radius:6px; object-fit:cover;" />
+        <div style="flex:1; font-size:12px;">
+          <strong>${upsellItem.name.split(" ").slice(0, 4).join(" ")}</strong>
+          <div>৳${upsellItem.salePrice}</div>
+        </div>
+        <button type="button" class="btn-gold-sm" onclick="addToCart(${upsellItem.id}, 1, false)">+ Add</button>
+      </div>
+    `;
+  } else {
+    upsellBox.style.display = "none";
+  }
 }
 
 const cartDrawer = document.getElementById("cartDrawer");
@@ -615,9 +718,24 @@ document.getElementById("openCartBtn").addEventListener("click", openCartDrawer)
 document.getElementById("closeCartBtn").addEventListener("click", closeCartDrawer);
 drawerBackdrop.addEventListener("click", closeCartDrawer);
 
-// ================= CHECKOUT & DIGITAL INVOICE RECEIPT =================
+// ================= CHECKOUT (COD + bKash/Nagad + Google Sheets + Invoice) =================
 const checkoutModal = document.getElementById("checkoutModal");
 const deliveryAreaSelect = document.getElementById("deliveryArea");
+
+function selectPaymentMethod(method, btnEl) {
+  selectedPaymentMethod = method;
+  document.querySelectorAll(".pay-tab").forEach((b) => b.classList.remove("active"));
+  btnEl.classList.add("active");
+  const mobileBox = document.getElementById("mobilePayBox");
+  const trxInput = document.getElementById("paymentTrxId");
+  if (method === "COD") {
+    mobileBox.style.display = "none";
+    trxInput.required = false;
+  } else {
+    mobileBox.style.display = "block";
+    trxInput.required = true;
+  }
+}
 
 function openCheckoutModal() {
   if (cart.length === 0) {
@@ -640,9 +758,9 @@ function openCheckoutModal() {
 function applyCoupon() {
   const code = document.getElementById("couponInput").value.trim().toUpperCase();
   const msgEl = document.getElementById("couponStatusMsg");
-  if (code === "GLOW10" || code === "ZELVIQO10") {
-    appliedDiscountPercent = 10;
-    msgEl.textContent = "✓ 10% Promo Discount Applied!";
+  if (code === "GLOW10" || code === "ZELVIQO10" || code === "SPIN15") {
+    appliedDiscountPercent = code === "SPIN15" ? 15 : 10;
+    msgEl.textContent = `✓ ${appliedDiscountPercent}% Promo Discount Applied!`;
     msgEl.style.color = "#157347";
   } else {
     appliedDiscountPercent = 0;
@@ -682,6 +800,7 @@ document.getElementById("codOrderForm").addEventListener("submit", (e) => {
   const name = document.getElementById("custName").value.trim();
   const phone = document.getElementById("custPhone").value.trim();
   const address = document.getElementById("custAddress").value.trim();
+  const trxId = document.getElementById("paymentTrxId").value.trim();
   const subtotal = getSubtotal();
   const discountAmount = Math.round((subtotal * appliedDiscountPercent) / 100);
   const afterDiscount = subtotal - discountAmount;
@@ -691,40 +810,66 @@ document.getElementById("codOrderForm").addEventListener("submit", (e) => {
   const orderId = String(Math.floor(100000 + Math.random() * 900000));
   const itemsListText = cart.map((i) => `${i.name} (x${i.qty}) - ৳${i.salePrice * i.qty}`).join("\n");
   const itemsSummary = cart.map((i) => `${i.name} (x${i.qty})`).join(", ");
+  const paymentNote = selectedPaymentMethod === "COD" ? "Cash on Delivery" : `${selectedPaymentMethod} (TrxID: ${trxId})`;
 
-  const allOrders = JSON.parse(localStorage.getItem("zelviqo_orders") || "[]");
-  allOrders.unshift({
+  const orderRecord = {
     orderId,
     name,
     phone,
     address,
+    payment: paymentNote,
     total,
     itemsSummary,
     date: new Date().toLocaleDateString("en-GB"),
     status: "Confirmed & Processing"
-  });
+  };
+
+  const allOrders = JSON.parse(localStorage.getItem("zelviqo_orders") || "[]");
+  allOrders.unshift(orderRecord);
   localStorage.setItem("zelviqo_orders", JSON.stringify(allOrders));
 
-  // Build WhatsApp Order Slip URL
-  const waMsg = encodeURIComponent(
-    `*NEW ORDER - ZELVIQO LUXURY SKIN CARE*\nOrder ID: #${orderId}\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\n\n*Items:*\n${itemsListText}\n\nDelivery: ৳${shipping}\n*Total Payable (COD): ৳${total}*`
-  );
-  const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${waMsg}`;
+  // Award Loyalty Points if logged in
+  const user = getCurrentUser();
+  if (user) {
+    user.points = (user.points || 50) + Math.floor(total / 10);
+    setCurrentUser(user);
+    const users = getUsers();
+    const uIdx = users.findIndex((u) => u.phone === user.phone);
+    if (uIdx !== -1) {
+      users[uIdx].points = user.points;
+      localStorage.setItem("zelviqo_users", JSON.stringify(users));
+    }
+  }
 
-  // Show Digital Invoice Receipt Modal
+  // Send to Google Sheets if webhook URL is configured
+  if (GOOGLE_SHEET_WEBHOOK_URL) {
+    fetch(GOOGLE_SHEET_WEBHOOK_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(orderRecord)
+    }).catch(() => {});
+  }
+
+  trackMetaEvent("Purchase", { value: total, currency: "BDT" });
+
+  const waMsg = encodeURIComponent(
+    `*NEW ORDER - ZELVIQO LUXURY SKIN CARE*\nOrder ID: #${orderId}\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\nPayment: ${paymentNote}\n\n*Items:*\n${itemsListText}\n\nDelivery: ৳${shipping}\n*Total Payable: ৳${total}*`
+  );
+  const waLink = `[https://wa.me/$](https://wa.me/$){WHATSAPP_NUMBER}?text=${waMsg}`;
+
   document.getElementById("invoiceReceiptBody").innerHTML = `
     <div style="border:1px dashed var(--emerald-main); padding:14px; border-radius:8px; background:var(--bg-page); margin-bottom:14px;">
       <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
         <strong>Invoice #${orderId}</strong>
-        <span>${new Date().toLocaleDateString("en-GB")}</span>
+        <span>${orderRecord.date}</span>
       </div>
       <p style="font-size:13px;"><strong>Customer:</strong> ${name} (${phone})</p>
+      <p style="font-size:13px;"><strong>Payment:</strong> ${paymentNote}</p>
       <p style="font-size:13px; margin-bottom:8px;"><strong>Address:</strong> ${address}</p>
-      <div style="font-size:12.5px; border-top:1px solid var(--border-color); padding-top:8px;">
-        ${itemsSummary}
-      </div>
+      <div style="font-size:12.5px; border-top:1px solid var(--border-color); padding-top:8px;">${itemsSummary}</div>
       <div style="font-size:15px; font-weight:700; color:var(--emerald-dark); margin-top:10px; border-top:1px solid var(--border-color); padding-top:8px;">
-        Total Payable (COD): ৳${total}
+        Total Payable: ৳${total}
       </div>
     </div>
     <a href="${waLink}" target="_blank" rel="noopener" class="btn-primary full-width" style="background:#25d366; text-decoration:none; display:block; margin-bottom:8px;">📲 Send Order Slip to WhatsApp</a>
@@ -739,13 +884,153 @@ document.getElementById("codOrderForm").addEventListener("submit", (e) => {
   document.getElementById("invoiceModal").classList.add("open");
 });
 
+// ================= SPIN & WIN WHEEL + WELCOME POPUP =================
+function openSpinModal() {
+  document.getElementById("spinWheelModal").classList.add("open");
+}
+
+function spinDiscountWheel() {
+  const wheel = document.getElementById("wheelVisual");
+  const btn = document.getElementById("spinActionBtn");
+  btn.disabled = true;
+  wheel.style.transform = "rotate(1080deg)";
+  setTimeout(() => {
+    document.getElementById("spinResultText").textContent = "🎉 Congratulations! You won 15% OFF! Code: SPIN15";
+    document.getElementById("couponInput").value = "SPIN15";
+    appliedDiscountPercent = 15;
+    btn.textContent = "Code SPIN15 Applied!";
+  }, 2200);
+}
+
+function closeWelcomePopup() {
+  document.getElementById("welcomePopupModal").classList.remove("open");
+  sessionStorage.setItem("zelviqo_welcomed", "1");
+}
+
+function claimWelcomeCode() {
+  document.getElementById("couponInput").value = "GLOW10";
+  appliedDiscountPercent = 10;
+  closeWelcomePopup();
+  navigateTo("category", "all");
+}
+
+setTimeout(() => {
+  if (!sessionStorage.getItem("zelviqo_welcomed")) {
+    document.getElementById("welcomePopupModal").classList.add("open");
+  }
+}, 4000);
+
+// ================= ADMIN PANEL =================
+function unlockAdminPanel() {
+  const pass = document.getElementById("adminPassInput").value;
+  if (pass === "zelviqo2026" || pass === "1234") {
+    document.getElementById("adminLoginGate").style.display = "none";
+    document.getElementById("adminDashboardArea").style.display = "block";
+    renderAdminDashboard();
+  } else {
+    alert("Incorrect admin password.");
+  }
+}
+
+function renderAdminDashboard() {
+  const all = getProducts();
+  const orders = JSON.parse(localStorage.getItem("zelviqo_orders") || "[]");
+  const revenue = orders.reduce((s, o) => s + (Number(o.total) || 0), 0);
+
+  document.getElementById("admTotalProducts").textContent = all.length;
+  document.getElementById("admTotalOrders").textContent = orders.length;
+  document.getElementById("admTotalRevenue").textContent = `৳${revenue}`;
+
+  document.getElementById("adminProductList").innerHTML = all
+    .map(
+      (p) => `
+      <div class="admin-row">
+        <div><strong>${p.name}</strong> — ৳${p.salePrice} (${p.inStock === false ? "Out of Stock" : "In Stock"})</div>
+        <button type="button" class="btn-add" onclick="toggleAdminStock(${p.id})">Toggle Stock</button>
+      </div>
+    `
+    )
+    .join("");
+
+  document.getElementById("adminOrderList").innerHTML =
+    orders.length === 0
+      ? `<p style="font-size:13px; color:#666;">No orders recorded yet.</p>`
+      : orders
+          .map(
+            (o, idx) => `
+          <div class="admin-row">
+            <div><strong>#${o.orderId}</strong> • ${o.name} (${o.phone}) • ৳${o.total} • <em>${o.status}</em></div>
+            <button type="button" class="btn-gold-sm" onclick="markOrderDelivered(${idx})">Mark Delivered</button>
+          </div>
+        `
+          )
+          .join("");
+}
+
+function adminAddNewProduct(e) {
+  e.preventDefault();
+  const list = getProducts();
+  const cat = document.getElementById("admProdCat").value;
+  list.unshift({
+    id: Date.now(),
+    name: document.getElementById("admProdName").value.trim(),
+    category: cat,
+    categoryLabel: cat.toUpperCase(),
+    concern: "brightening",
+    volume: "50ml",
+    skinType: "All Skin Types",
+    regularPrice: Number(document.getElementById("admProdReg").value),
+    salePrice: Number(document.getElementById("admProdSale").value),
+    inStock: true,
+    image: document.getElementById("admProdImg").value.trim(),
+    description: "100% authentic imported skincare.",
+    ingredients: "Dermatologist-tested ingredients.",
+    howToUse: "Apply daily on clean skin.",
+    reviews: []
+  });
+  saveProducts(list);
+  e.target.reset();
+  renderAdminDashboard();
+  alert("New product added to store!");
+}
+
+function toggleAdminStock(id) {
+  const list = getProducts();
+  const item = list.find((p) => p.id === id);
+  if (item) item.inStock = item.inStock === false ? true : false;
+  saveProducts(list);
+  renderAdminDashboard();
+}
+
+function markOrderDelivered(idx) {
+  const orders = JSON.parse(localStorage.getItem("zelviqo_orders") || "[]");
+  if (orders[idx]) orders[idx].status = "Delivered ✅";
+  localStorage.setItem("zelviqo_orders", JSON.stringify(orders));
+  renderAdminDashboard();
+}
+
+// ================= PWA APP INSTALL PROMPT =================
+let deferredPrompt = null;
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+});
+
+function installZelviqoApp() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+  } else {
+    alert("To install ZELVIQO App: Tap your browser's 3-dot menu (⋮) and select 'Add to Home screen' or 'Install App'.");
+  }
+}
+
 // ================= SMART WHATSAPP CHAT WIDGET =================
 function toggleWaBox() {
   document.getElementById("waChatBox").classList.toggle("open");
 }
 
 function sendPresetWa(text) {
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank");
+  window.open(`[https://wa.me/$](https://wa.me/$){WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank");
 }
 
 function sendCustomWa() {
@@ -753,13 +1038,14 @@ function sendCustomWa() {
   const msg = input.value.trim();
   if (!msg) return;
   input.value = "";
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
+  window.open(`[https://wa.me/$](https://wa.me/$){WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
 }
 
 // ================= MOVING SHOWCASE & LIVE SEARCH =================
 function renderMovingShowcase() {
   const track = document.getElementById("movingProductTrack");
-  const loopItems = [...products, ...products];
+  const all = getProducts();
+  const loopItems = [...all, ...all];
   track.innerHTML = loopItems
     .map(
       (p) => `
@@ -782,7 +1068,7 @@ searchInput.addEventListener("input", (e) => {
     searchDropdown.classList.remove("open");
     return;
   }
-  const hits = products.filter((p) => p.name.toLowerCase().includes(q) || p.categoryLabel.toLowerCase().includes(q));
+  const hits = getProducts().filter((p) => p.name.toLowerCase().includes(q) || p.categoryLabel.toLowerCase().includes(q));
   searchDropdown.innerHTML =
     hits.length === 0
       ? `<div style="padding:12px; font-size:13px;">No matching products found.</div>`
@@ -854,6 +1140,7 @@ function renderProfilePage() {
     document.getElementById("profileDisplayName").textContent = user.name;
     document.getElementById("profileDisplayPhone").textContent = user.phone;
     document.getElementById("profileBigAvatar").textContent = user.name.charAt(0).toUpperCase();
+    document.getElementById("profilePointsVal").textContent = `${user.points || 50} pts`;
     document.getElementById("profileEditAddress").value = user.address || "";
 
     const allOrders = JSON.parse(localStorage.getItem("zelviqo_orders") || "[]");
@@ -862,15 +1149,7 @@ function renderProfilePage() {
       myOrders.length === 0
         ? `<p style="font-size:13px; color:#5e6963;">No orders placed from this account yet.</p>`
         : myOrders
-            .map(
-              (o) => `
-            <div class="history-item">
-              <strong>Order #${o.orderId} — ৳${o.total}</strong>
-              <div>${o.itemsSummary}</div>
-              <small style="color:#666;">${o.date} • ${o.status}</small>
-            </div>
-          `
-            )
+            .map((o) => `<div class="history-item"><strong>Order #${o.orderId} — ৳${o.total}</strong><div>${o.itemsSummary}</div><small style="color:#666;">${o.date} • ${o.status}</small></div>`)
             .join("");
   } else {
     authSec.style.display = "block";
@@ -910,7 +1189,7 @@ document.getElementById("registerForm").addEventListener("submit", (e) => {
     switchAuthTab("login");
     return;
   }
-  const newUser = { name, phone, address, password };
+  const newUser = { name, phone, address, password, points: 50 };
   users.push(newUser);
   localStorage.setItem("zelviqo_users", JSON.stringify(users));
   setCurrentUser(newUser);
@@ -965,12 +1244,9 @@ function searchOrderTracking() {
 let countdownSeconds = 5 * 3600 + 42 * 60 + 19;
 setInterval(() => {
   if (countdownSeconds > 0) countdownSeconds--;
-  const h = String(Math.floor(countdownSeconds / 3600)).padStart(2, "0");
-  const m = String(Math.floor((countdownSeconds % 3600) / 60)).padStart(2, "0");
-  const s = String(countdownSeconds % 60).padStart(2, "0");
-  document.getElementById("timerHours").textContent = h;
-  document.getElementById("timerMins").textContent = m;
-  document.getElementById("timerSecs").textContent = s;
+  document.getElementById("timerHours").textContent = String(Math.floor(countdownSeconds / 3600)).padStart(2, "0");
+  document.getElementById("timerMins").textContent = String(Math.floor((countdownSeconds % 3600) / 60)).padStart(2, "0");
+  document.getElementById("timerSecs").textContent = String(countdownSeconds % 60).padStart(2, "0");
 }, 1000);
 
 const recentOrdersSample = [
@@ -988,8 +1264,9 @@ setInterval(() => {
   setTimeout(() => toast.classList.remove("show"), 4000);
 }, 14000);
 
-// Initialize Everything
+// Initialize Storefront
 updateHeaderAuthUI();
+updateWishlistUI();
 updateCartUI();
 renderMovingShowcase();
 navigateTo("home", null, false);
