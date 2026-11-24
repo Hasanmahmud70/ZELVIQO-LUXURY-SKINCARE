@@ -2331,42 +2331,60 @@ body {
     color: var(--emerald-dark);
   }
 }
+/* Strictly Print 1 Single Page Delivery Slip */
+@page {
+  size: auto;
+  margin: 8mm;
+}
 
-/* Print Only 1 Single Page Delivery Slip (No Duplicates) */
 @media print {
   * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
   html, body {
+    width: 100% !important;
     height: auto !important;
     min-height: 0 !important;
-    overflow: visible !important;
-    background: #ffffff !important;
+    max-height: none !important;
     margin: 0 !important;
     padding: 0 !important;
+    overflow: visible !important;
+    background: #ffffff !important;
   }
-  body > *:not(#invoiceModal) {
+  body > * {
     display: none !important;
   }
   #invoiceModal {
-    position: static !important;
     display: block !important;
+    position: relative !important;
+    inset: auto !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
     width: 100% !important;
     height: auto !important;
-    background: #ffffff !important;
+    min-height: 0 !important;
+    max-height: none !important;
     padding: 0 !important;
     margin: 0 !important;
+    background: transparent !important;
+    overflow: visible !important;
   }
   #invoiceModal .modal-card {
-    position: static !important;
-    box-shadow: none !important;
-    border: 1.5px solid #0c2b21 !important;
+    display: block !important;
+    position: relative !important;
     width: 100% !important;
     max-width: 100% !important;
+    height: auto !important;
     max-height: none !important;
-    overflow: visible !important;
+    box-shadow: none !important;
+    border: 1.5px solid #0c2b21 !important;
     margin: 0 !important;
+    overflow: visible !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
   }
   #invoiceModal .modal-header,
   #invoiceModal .close-btn,
