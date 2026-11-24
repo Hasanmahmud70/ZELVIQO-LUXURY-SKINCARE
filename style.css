@@ -1189,6 +1189,48 @@ body {
   flex-shrink: 0;
 }
 
+/* Home Page Bottom Track Parcel Card */
+.home-track-box {
+  background: linear-gradient(135deg, var(--emerald-dark) 0%, var(--emerald-main) 100%);
+  color: #fff;
+  border-radius: var(--radius-md);
+  padding: 26px;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 22px;
+  align-items: center;
+  box-shadow: var(--shadow-card);
+}
+
+.home-track-info h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  margin: 4px 0 6px;
+}
+
+.home-track-info p {
+  font-size: 13.5px;
+  color: #dce6e1;
+}
+
+.home-track-row {
+  display: flex;
+  gap: 8px;
+  background: #fff;
+  padding: 6px;
+  border-radius: 8px;
+}
+
+.home-track-row input {
+  flex: 1;
+  border: none;
+  padding: 9px 12px;
+  font-size: 13.5px;
+  font-family: inherit;
+  outline: none;
+  color: var(--text-dark);
+}
+
 /* Sub-pages, Product Page & Forms */
 .breadcrumb-bar {
   display: flex;
@@ -1663,6 +1705,37 @@ body {
   padding: 10px;
   border-radius: 6px;
   font-size: 12.5px;
+}
+
+/* Delivery Slip Brand Header */
+.slip-brand-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: #f4f8f7;
+  border-bottom: 2px solid #0c2b21;
+}
+
+.slip-brand-header img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.slip-brand-header strong {
+  display: block;
+  font-size: 17px;
+  color: #0c2b21;
+  letter-spacing: 0.3px;
+}
+
+.slip-brand-header small {
+  display: block;
+  font-size: 11.5px;
+  color: #444444;
+  margin-top: 2px;
 }
 
 /* Admin, Spin Wheel, Buttons & Forms */
@@ -2177,7 +2250,7 @@ body {
   .product-grid, .reels-grid, .testimonial-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .ba-section-card {
+  .ba-section-card, .home-track-box {
     grid-template-columns: 1fr;
   }
 }
@@ -2256,5 +2329,41 @@ body {
   }
   .b-nav-item.active {
     color: var(--emerald-dark);
+  }
+}
+
+/* Print Only Order Delivery Slip on 1 Page */
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  body * {
+    visibility: hidden;
+  }
+  #invoiceModal,
+  #invoiceModal * {
+    visibility: visible;
+  }
+  #invoiceModal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: #ffffff !important;
+    padding: 0;
+    margin: 0;
+  }
+  #invoiceModal .modal-card {
+    box-shadow: none !important;
+    border: 1.5px solid #0c2b21;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  #invoiceModal .modal-header,
+  #invoiceModal .close-btn,
+  #invoiceModal button,
+  #invoiceModal a {
+    display: none !important;
   }
 }
