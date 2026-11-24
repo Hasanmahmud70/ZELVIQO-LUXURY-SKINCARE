@@ -1,62 +1,56 @@
-// ZELVIQO Luxury Skin Care - Complete All-In-One Storefront Engine
 const WHATSAPP_NUMBER = "8801860821074";
-// Optional: Paste your Google Apps Script Web App URL below to auto-save orders into Google Sheets
 const GOOGLE_SHEET_WEBHOOK_URL = "";
 
 function trackMetaEvent(eventName, payload = {}) {
-  if (typeof window.fbq === "function") {
-    window.fbq("track", eventName, payload);
-  }
+  if (typeof window.fbq === "function") window.fbq("track", eventName, payload);
 }
 
 const translations = {
   en: {
-    topNotice: "✨ 100% Authentic Imported Skincare | Use Code <strong>GLOW10</strong> for 10% Extra Off",
+    topNotice: "100% Authentic Imported Skincare &bull; Use Code <strong>GLOW10</strong> for 10% Extra Off",
     searchBtn: "Search",
     myCart: "My Cart",
     menuMain: "EXPLORE STORE",
-    menuCats: "SKINCARE CATEGORIES",
-    menuSupport: "PAGES & SUPPORT",
-    navHome: "🏠 Home",
-    navAll: "✨ All Skincare Products",
-    navBuilder: "🎁 Build Your Combo (15% Off)",
-    navQuiz: "🔬 Skin Type Quiz",
-    navGuide: "📖 Skincare Routine Guide",
-    navProfile: "👤 My Profile & Loyalty Points",
-    navTrack: "🚚 Track Your Order",
-    navAbout: "🏛️ About Us",
-    navPolicy: "🛡️ Delivery & Return Policy",
-    navContact: "📞 Contact Us",
-    flashText: "Up to 27% Off on Authentic Serums & Combos!",
+    menuCats: "COLLECTIONS",
+    menuSupport: "CLIENT SERVICES",
+    navHome: "Home",
+    navAll: "All Skincare Products",
+    navBuilder: "Build Your Combo (15% Off)",
+    navQuiz: "Skin Consultation Quiz",
+    navGuide: "Daily Routine Guide",
+    navProfile: "My Profile & Glow Points",
+    navTrack: "Track Your Parcel",
+    navAbout: "About ZELVIQO",
+    navPolicy: "Delivery & Return Policy",
+    navContact: "Contact Concierge",
+    flashText: "Up to 27% Off on Authentic Serums & Value Combos",
     endsIn: "Ends in:",
-    shopByCat: "Shop by Category",
-    viewAll: "View All →",
-    popularTitle: "Popular Skincare Essentials",
-    seeFullCatalog: "See Full Catalog →"
+    shopByCat: "Shop by Collection",
+    viewAll: "Explore All →",
+    popularTitle: "Signature Skincare Essentials"
   },
   bn: {
-    topNotice: "✨ ১০০% অরিজিনাল ইমপোর্টেড স্কিনকেয়ার | <strong>GLOW10</strong> কোডে ১০% অতিরিক্ত ছাড়!",
+    topNotice: "১০০% অরিজিনাল ইমপোর্টেড স্কিনকেয়ার &bull; <strong>GLOW10</strong> কোডে ১০% অতিরিক্ত ছাড়",
     searchBtn: "খুঁজুন",
     myCart: "আমার কার্ট",
     menuMain: "স্টোর মেনু",
-    menuCats: "স্কিনকেয়ার ক্যাটাগরি",
-    menuSupport: "অন্যান্য পেজ ও সাপোর্ট",
-    navHome: "🏠 হোম পেজ",
-    navAll: "✨ সব স্কিনকেয়ার প্রোডাক্ট",
-    navBuilder: "🎁 নিজের কম্বো বানান (১৫% ছাড়)",
-    navQuiz: "🔬 স্কিন টাইপ কুইজ",
-    navGuide: "📖 স্কিনকেয়ার রুটিন গাইড",
-    navProfile: "👤 আমার প্রোফাইল ও পয়েন্ট",
-    navTrack: "🚚 অর্ডার ট্র্যাক করুন",
-    navAbout: "🏛️ আমাদের সম্পর্কে (About Us)",
-    navPolicy: "🛡️ ডেলিভারি ও রিটার্ন পলিসি",
-    navContact: "📞 যোগাযোগ করুন",
-    flashText: "অরিজিনাল সিরাম ও কম্বো প্যাকে ২৭% পর্যন্ত ছাড়!",
+    menuCats: "কালেকশনসমূহ",
+    menuSupport: "কাস্টমার সার্ভিস",
+    navHome: "হোম পেজ",
+    navAll: "সব স্কিনকেয়ার প্রোডাক্ট",
+    navBuilder: "নিজের কম্বো বানান (১৫% ছাড়)",
+    navQuiz: "স্কিন কনসালটেশন কুইজ",
+    navGuide: "দৈনিক স্কিনকেয়ার গাইড",
+    navProfile: "আমার প্রোফাইল ও পয়েন্ট",
+    navTrack: "অর্ডার ট্র্যাক করুন",
+    navAbout: "আমাদের সম্পর্কে (About Us)",
+    navPolicy: "ডেলিভারি ও রিটার্ন পলিসি",
+    navContact: "যোগাযোগ করুন",
+    flashText: "অরিজিনাল সিরাম ও কম্বো প্যাকে ২৭% পর্যন্ত ছাড়",
     endsIn: "অফার শেষ হতে বাকি:",
-    shopByCat: "ক্যাটাগরি অনুযায়ী কিনুন",
+    shopByCat: "কালেকশন অনুযায়ী কিনুন",
     viewAll: "সব দেখুন →",
-    popularTitle: "জনপ্রিয় স্কিনকেয়ার প্রোডাক্টসমূহ",
-    seeFullCatalog: "সম্পূর্ণ ক্যাটালগ দেখুন →"
+    popularTitle: "জনপ্রিয় স্কিনকেয়ার প্রোডাক্টসমূহ"
   }
 };
 
@@ -85,10 +79,10 @@ const defaultProducts = [
     inStock: true,
     image: "product-1.jpg",
     gallery: ["product-1.jpg", "product-8.jpg"],
-    description: "Fast-absorbing daily antioxidant serum infused with pure Vitamin C and Hyaluronic Acid to fade dullness and give a glass-like glow.",
+    description: "Fast-absorbing daily antioxidant serum infused with pure Vitamin C and Hyaluronic Acid to fade dullness and give a luminous glass-skin glow.",
     ingredients: "Aqua, Ascorbic Acid (Vitamin C), Hyaluronic Acid, Niacinamide, Glycerin, Aloe Barbadensis Leaf Extract.",
-    howToUse: "Apply 3-4 drops on clean face and neck every morning and night before moisturizer.",
-    reviews: [{ user: "Nusrat Jahan (Uttara)", rating: 5, text: "100% original product! Within 2 weeks my skin looks much brighter." }]
+    howToUse: "Apply 3–4 drops on clean face and neck every morning and night before moisturizer.",
+    reviews: [{ user: "Nusrat Jahan (Uttara)", text: "100% original product! Within 2 weeks my skin looks noticeably brighter." }]
   },
   {
     id: 2,
@@ -106,7 +100,7 @@ const defaultProducts = [
     description: "Specially formulated for humid Bangladeshi weather. Shields skin from UVA/UVB rays with zero white cast and zero stickiness.",
     ingredients: "Zinc Oxide, Titanium Dioxide, Centella Asiatica Extract, Panthenol (Vitamin B5), Hyaluronic Acid.",
     howToUse: "Apply generously across face and neck 15 minutes before sun exposure.",
-    reviews: [{ user: "Tania Rahman (Dhanmondi)", rating: 5, text: "Zero white cast and doesn't feel oily even in Dhaka heat." }]
+    reviews: [{ user: "Tania Rahman (Dhanmondi)", text: "Zero white cast and never feels oily even in Dhaka heat." }]
   },
   {
     id: 3,
@@ -123,8 +117,8 @@ const defaultProducts = [
     gallery: ["product-3.jpg", "product-1.jpg"],
     description: "High-strength 10% Niacinamide balanced with Zinc PCA to control excess sebum, minimize pores, and calm active breakouts.",
     ingredients: "Niacinamide (10%), Zinc PCA (1%), Tamarindus Indica Seed Gum, Pentylene Glycol.",
-    howToUse: "Dispense 2-3 drops onto fingertips and gently pat into skin after cleansing.",
-    reviews: [{ user: "Sadia Islam (Banani)", rating: 5, text: "Controlled my excess oil and minimized pores noticeably." }]
+    howToUse: "Dispense 2–3 drops onto fingertips and gently pat into skin after cleansing.",
+    reviews: [{ user: "Sadia Islam (Banani)", text: "Controlled my excess oil and minimized pores noticeably." }]
   },
   {
     id: 4,
@@ -219,8 +213,7 @@ const defaultProducts = [
 ];
 
 function getProducts() {
-  const stored = JSON.parse(localStorage.getItem("zelviqo_catalog") || "null");
-  return stored || defaultProducts;
+  return JSON.parse(localStorage.getItem("zelviqo_catalog") || "null") || defaultProducts;
 }
 
 function saveProducts(list) {
@@ -234,7 +227,7 @@ let cartDeliveryCharge = 70;
 let appliedDiscountPercent = 0;
 let selectedPaymentMethod = "COD";
 
-// ================= LANGUAGE SWITCHER =================
+// Language Switcher
 function toggleLanguage() {
   currentLang = currentLang === "en" ? "bn" : "en";
   const dict = translations[currentLang];
@@ -244,13 +237,12 @@ function toggleLanguage() {
   });
 }
 
-// ================= MULTI-PAGE ROUTER =================
+// Multi-Page Router
 function navigateTo(pageName, param = null, pushState = true) {
   closeMenuDrawer();
-
-  document.querySelectorAll(".page-view").forEach((view) => view.classList.remove("active"));
-  const targetPage = document.getElementById(`page-${pageName}`);
-  if (targetPage) targetPage.classList.add("active");
+  document.querySelectorAll(".page-view").forEach((v) => v.classList.remove("active"));
+  const target = document.getElementById(`page-${pageName}`);
+  if (target) target.classList.add("active");
 
   document.querySelectorAll(".drawer-link").forEach((btn) => {
     const navKey = btn.dataset.nav;
@@ -280,7 +272,7 @@ function navigateTo(pageName, param = null, pushState = true) {
     document.getElementById("catBreadcrumbName").textContent = meta.title;
     document.getElementById("catPageTitle").textContent = meta.title;
     document.getElementById("catPageDesc").textContent = meta.desc;
-    document.querySelectorAll(".c-tab").forEach((tab) => tab.classList.toggle("active", tab.dataset.cat === currentCategory));
+    document.querySelectorAll(".c-tab").forEach((t) => t.classList.toggle("active", t.dataset.cat === currentCategory));
     renderCategoryPageProducts();
   } else if (pageName === "product") {
     renderFullProductPage(Number(param) || 1);
@@ -294,8 +286,7 @@ function navigateTo(pageName, param = null, pushState = true) {
 
   window.scrollTo({ top: 0, behavior: "smooth" });
   if (pushState) {
-    const hash = param ? `#${pageName}/${param}` : `#${pageName}`;
-    history.pushState({ pageName, param }, "", hash);
+    history.pushState({ pageName, param }, "", param ? `#${pageName}/${param}` : `#${pageName}`);
   }
 }
 
@@ -304,7 +295,7 @@ window.addEventListener("popstate", (e) => {
   else navigateTo("home", null, false);
 });
 
-// ================= 3-LINE MENU DRAWER =================
+// 3-Line Menu Drawer
 const navDrawer = document.getElementById("navDrawer");
 const menuBackdrop = document.getElementById("menuBackdrop");
 
@@ -322,7 +313,7 @@ document.getElementById("openMenuBtn").addEventListener("click", openMenuDrawer)
 document.getElementById("closeMenuBtn").addEventListener("click", closeMenuDrawer);
 menuBackdrop.addEventListener("click", closeMenuDrawer);
 
-// ================= WISHLIST =================
+// Wishlist
 function toggleWishlist(productId) {
   const idx = wishlist.indexOf(productId);
   if (idx === -1) wishlist.push(productId);
@@ -336,11 +327,10 @@ function toggleWishlist(productId) {
 function updateWishlistUI() {
   document.getElementById("wishlistCount").textContent = wishlist.length;
   const container = document.getElementById("wishlistItemsContainer");
-  const all = getProducts();
-  const saved = all.filter((p) => wishlist.includes(p.id));
+  const saved = getProducts().filter((p) => wishlist.includes(p.id));
   container.innerHTML =
     saved.length === 0
-      ? `<p class="empty-msg">Your wishlist is empty. Tap ❤️ on any product to save it.</p>`
+      ? `<p style="font-size:13.5px; color:var(--text-muted); text-align:center; padding:24px 0;">Your wishlist is empty. Tap the heart icon on any product to save it.</p>`
       : saved
           .map(
             (p) => `
@@ -350,7 +340,7 @@ function updateWishlistUI() {
               <div style="font-size:13px; font-weight:600;">${p.name}</div>
               <div style="font-size:13px; font-weight:700; color:#0c2b21;">৳${p.salePrice}</div>
               <div style="margin-top:6px; display:flex; gap:6px;">
-                <button type="button" class="btn-gold-sm" onclick="addToCart(${p.id}, 1, false); closeWishlistDrawer();">Move to Cart</button>
+                <button type="button" class="btn-gold-sm" onclick="addToCart(${p.id}, 1, false); closeWishlistDrawer();">Add to Cart</button>
                 <button type="button" class="qty-btn" onclick="toggleWishlist(${p.id})">&times;</button>
               </div>
             </div>
@@ -372,7 +362,15 @@ function closeWishlistDrawer() {
 }
 document.getElementById("wishBackdrop").addEventListener("click", closeWishlistDrawer);
 
-// ================= PRODUCT CARDS =================
+// Product Cards & Skin Concern Filter
+function filterHomeByConcern(concern, btnEl) {
+  document.querySelectorAll(".cf-pill").forEach((b) => b.classList.remove("active"));
+  btnEl.classList.add("active");
+  const all = getProducts();
+  const list = concern === "all" ? all.slice(0, 8) : all.filter((p) => p.concern === concern);
+  renderProductCards("homeProductGrid", list);
+}
+
 function renderProductCards(containerId, list) {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -387,7 +385,9 @@ function renderProductCards(containerId, list) {
         <article class="product-card">
           <div class="card-media">
             ${outBadge || (discount > 0 ? `<span class="discount-tag">${discount}% OFF</span>` : "")}
-            <button type="button" class="wish-heart-btn" onclick="toggleWishlist(${product.id})">${isWished ? "❤️" : "🤍"}</button>
+            <button type="button" class="wish-heart-btn ${isWished ? "active" : ""}" onclick="toggleWishlist(${product.id})" aria-label="Save to Wishlist">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="${isWished ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
             <img src="${product.image}" alt="${product.name}" loading="lazy" onclick="navigateTo('product', ${product.id})" />
           </div>
           <div class="card-body">
@@ -418,24 +418,24 @@ function renderCategoryPageProducts() {
   renderProductCards("categoryProductGrid", list);
 }
 
-// ================= WATCH & SHOP REELS + BEFORE/AFTER SLIDER =================
+// Watch & Shop Reels + Before/After Slider
 function renderWatchAndShopReels() {
   const reelsData = [
     { id: 1, title: "Morning Vitamin C Glass-Skin Routine", img: "product-1.jpg", price: 650 },
-    { id: 2, title: "Zero White-Cast Sunscreen Test in Sun", img: "product-2.jpg", price: 740 },
-    { id: 3, title: "How Niacinamide Shrinks Pores in 7 Days", img: "product-3.jpg", price: 890 },
-    { id: 8, title: "Best Day-Glow Duo Unboxing & Review", img: "product-8.jpg", price: 1320 }
+    { id: 2, title: "Zero White-Cast Sunscreen Outdoor Test", img: "product-2.jpg", price: 740 },
+    { id: 3, title: "How Niacinamide 10% Refines Pores", img: "product-3.jpg", price: 890 },
+    { id: 8, title: "Complete Day-Glow Duo Unboxing", img: "product-8.jpg", price: 1320 }
   ];
 
   document.getElementById("watchShopGrid").innerHTML = reelsData
     .map(
       (r) => `
       <div class="reel-card">
-        <span class="reel-play-badge">▶ REEL</span>
+        <span class="reel-play-badge">&#9654; REEL</span>
         <img src="${r.img}" alt="${r.title}" />
         <div class="reel-bottom-bar">
           <strong>${r.title}</strong>
-          <button type="button" class="btn-gold-sm" onclick="addToCart(${r.id}, 1, true)">Buy Now — ৳${r.price}</button>
+          <button type="button" class="btn-gold-sm" onclick="addToCart(${r.id}, 1, true)">Shop Now &mdash; ৳${r.price}</button>
         </div>
       </div>
     `
@@ -448,7 +448,7 @@ function updateBeforeAfter(val) {
   document.getElementById("baDivider").style.left = `${val}%`;
 }
 
-// ================= FULL PRODUCT DETAIL PAGE + ZOOM GALLERY =================
+// Full Product Detail Page
 function renderFullProductPage(productId) {
   const all = getProducts();
   const product = all.find((p) => p.id === productId) || all[0];
@@ -474,7 +474,7 @@ function renderFullProductPage(productId) {
             <img id="mainZoomProductImg" src="${gallery[0]}" alt="${product.name}" />
           </div>
           <div class="thumb-strip">
-            ${gallery.map((src) => `<img src="${src}" alt="Thumb" onclick="document.getElementById('mainZoomProductImg').src='${src}'" />`).join("")}
+            ${gallery.map((src) => `<img src="${src}" alt="Preview" onclick="document.getElementById('mainZoomProductImg').src='${src}'" />`).join("")}
           </div>
         </div>
 
@@ -483,20 +483,20 @@ function renderFullProductPage(productId) {
           <h1>${product.name}</h1>
 
           <div class="live-urgency-strip">
-            <span class="urgency-pill">👀 ${viewers} people viewing now</span>
-            <span class="urgency-pill" style="background:#fbeaea; color:#a62c2c;">🔥 Only ${stockLeft} left in stock!</span>
+            <span class="urgency-pill">${viewers} clients viewing right now</span>
+            <span class="urgency-pill" style="background:#fbeaea; color:#a62c2c;">Only ${stockLeft} units left in stock</span>
           </div>
 
           <div class="detail-meta">
             <span>Volume: <strong>${product.volume || "50ml"}</strong></span>
             <span>Skin Type: <strong>${product.skinType || "All Skin Types"}</strong></span>
-            <span>Rating: <strong>4.9 ★ (${allReviews.length} Reviews)</strong></span>
+            <span>Rating: <strong>4.9 &#9733; (${allReviews.length} Reviews)</strong></span>
           </div>
 
           <div class="detail-price-box">
             <span class="detail-price-now">৳${product.salePrice}</span>
             <span class="price-old">৳${product.regularPrice}</span>
-            ${discount > 0 ? `<span style="background:#c0392b; color:#fff; font-size:11px; padding:3px 8px; border-radius:4px; font-weight:700;">SAVE ${discount}%</span>` : ""}
+            ${discount > 0 ? `<span style="background:#b93829; color:#fff; font-size:11px; padding:3px 8px; border-radius:4px; font-weight:700;">SAVE ${discount}%</span>` : ""}
           </div>
 
           <div class="detail-tabs-bar">
@@ -510,25 +510,25 @@ function renderFullProductPage(productId) {
           <div id="tab-use" class="detail-tab-panel" style="display:none;">${product.howToUse || "Apply gently on clean skin daily."}</div>
 
           <div style="display:flex; gap:12px; flex-wrap:wrap;">
-            <button type="button" class="btn-add" style="padding:12px 22px;" onclick="addToCart(${product.id}, 1, false)">+ Add to My Cart</button>
+            <button type="button" class="btn-add" style="padding:12px 22px;" onclick="addToCart(${product.id}, 1, false)">Add to Shopping Bag</button>
             <button type="button" class="btn-primary" style="padding:12px 26px;" onclick="addToCart(${product.id}, 1, true)">Order Now</button>
           </div>
         </div>
       </div>
 
       <div class="reviews-box">
-        <h3 style="color:var(--emerald-dark); margin-bottom:12px;">Verified Customer Reviews (${allReviews.length})</h3>
+        <h3 style="color:var(--emerald-dark); margin-bottom:12px;">Verified Client Reviews (${allReviews.length})</h3>
         <div>
           ${
             allReviews.length === 0
-              ? `<p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">Be the first to review this product!</p>`
-              : allReviews.map((r) => `<div class="review-item"><strong>${r.user}</strong> <span style="color:#d49b35;">★★★★★</span><p style="margin-top:4px; color:var(--text-muted);">${r.text}</p></div>`).join("")
+              ? `<p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">Be the first to share your experience with this product.</p>`
+              : allReviews.map((r) => `<div class="review-item"><strong>${r.user}</strong> <span style="color:#c59b6d;">&#9733;&#9733;&#9733;&#9733;&#9733;</span><p style="margin-top:4px; color:var(--text-muted);">${r.text}</p></div>`).join("")
           }
         </div>
         <form onsubmit="submitProductReview(event, ${product.id})" style="margin-top:14px; display:flex; gap:8px; flex-wrap:wrap;">
           <input type="text" id="revReviewerName" required placeholder="Your Name" style="padding:9px; border:1px solid var(--border-color); border-radius:6px; flex:1;" />
           <input type="text" id="revReviewerText" required placeholder="Write your review..." style="padding:9px; border:1px solid var(--border-color); border-radius:6px; flex:2;" />
-          <button type="submit" class="btn-primary">Post Review</button>
+          <button type="submit" class="btn-primary">Submit Review</button>
         </form>
       </div>
     </div>
@@ -540,7 +540,7 @@ function submitProductReview(e, productId) {
   const user = document.getElementById("revReviewerName").value.trim();
   const text = document.getElementById("revReviewerText").value.trim();
   const saved = JSON.parse(localStorage.getItem(`zelviqo_rev_${productId}`) || "[]");
-  saved.push({ user, rating: 5, text });
+  saved.push({ user, text });
   localStorage.setItem(`zelviqo_rev_${productId}`, JSON.stringify(saved));
   renderFullProductPage(productId);
 }
@@ -553,16 +553,12 @@ function switchProductTab(tabKey, btnEl) {
   document.getElementById("tab-use").style.display = tabKey === "use" ? "block" : "none";
 }
 
-// ================= CUSTOM COMBO BUILDER & QUIZ =================
+// Custom Combo Builder & Quiz
 function initCustomComboBuilder() {
   const all = getProducts();
-  const cleansers = all.filter((p) => p.category === "cleanser");
-  const serums = all.filter((p) => p.category === "serum");
-  const sunscreens = all.filter((p) => p.category === "sunscreen");
-
-  document.getElementById("buildStep1").innerHTML = cleansers.map((p) => `<option value="${p.id}">${p.name} (৳${p.salePrice})</option>`).join("");
-  document.getElementById("buildStep2").innerHTML = serums.map((p) => `<option value="${p.id}">${p.name} (৳${p.salePrice})</option>`).join("");
-  document.getElementById("buildStep3").innerHTML = sunscreens.map((p) => `<option value="${p.id}">${p.name} (৳${p.salePrice})</option>`).join("");
+  document.getElementById("buildStep1").innerHTML = all.filter((p) => p.category === "cleanser").map((p) => `<option value="${p.id}">${p.name} (৳${p.salePrice})</option>`).join("");
+  document.getElementById("buildStep2").innerHTML = all.filter((p) => p.category === "serum").map((p) => `<option value="${p.id}">${p.name} (৳${p.salePrice})</option>`).join("");
+  document.getElementById("buildStep3").innerHTML = all.filter((p) => p.category === "sunscreen").map((p) => `<option value="${p.id}">${p.name} (৳${p.salePrice})</option>`).join("");
   calculateCustomCombo();
 }
 
@@ -591,13 +587,13 @@ function generateQuizResult() {
   const concern = document.getElementById("quizConcern").value;
   const matched = getProducts().filter((p) => p.concern === concern || p.category === "sunscreen").slice(0, 3);
   document.getElementById("quizResultsArea").innerHTML = `
-    <h3 style="color:var(--emerald-dark); margin-bottom:12px;">✨ Your Recommended Routine:</h3>
+    <h3 style="color:var(--emerald-dark); margin-bottom:12px;">Your Tailored Routine:</h3>
     <div class="product-grid" id="quizResultGrid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));"></div>
   `;
   renderProductCards("quizResultGrid", matched);
 }
 
-// ================= MY CART WITH DELIVERY CHARGE & SMART UPSELL =================
+// Cart & Upsell
 function addToCart(productId, qty = 1, openCheckoutImmediately = false) {
   const product = getProducts().find((p) => p.id === productId);
   if (!product) return;
@@ -646,18 +642,17 @@ function updateCartUI() {
   document.getElementById("cartGrandTotal").textContent = `৳${grandTotal}`;
 
   const target = 2000;
-  const pct = Math.min(100, Math.round((subtotal / target) * 100));
-  document.getElementById("freeShipProgress").style.width = `${pct}%`;
+  document.getElementById("freeShipProgress").style.width = `${Math.min(100, Math.round((subtotal / target) * 100))}%`;
   document.getElementById("freeShipText").innerHTML =
     subtotal >= target
-      ? `🎉 You unlocked <strong>FREE Home Delivery</strong>!`
-      : `Add <strong>৳${target - subtotal}</strong> more for <strong>FREE Delivery</strong>!`;
+      ? `You unlocked <strong>Complimentary Free Delivery</strong>!`
+      : `Add <strong>৳${target - subtotal}</strong> more for <strong>FREE Delivery</strong>`;
 
   const container = document.getElementById("cartItemsContainer");
   const upsellBox = document.getElementById("cartUpsellBox");
 
   if (cart.length === 0) {
-    container.innerHTML = `<p class="empty-msg">Your cart is currently empty.</p>`;
+    container.innerHTML = `<p style="font-size:13.5px; color:var(--text-muted); text-align:center; padding:24px 0;">Your shopping bag is currently empty.</p>`;
     upsellBox.style.display = "none";
     return;
   }
@@ -681,12 +676,11 @@ function updateCartUI() {
     )
     .join("");
 
-  // Smart Cart Upsell Recommendation
   const upsellItem = getProducts().find((p) => !cart.some((c) => c.id === p.id));
   if (upsellItem) {
     upsellBox.style.display = "block";
     upsellBox.innerHTML = `
-      <div style="font-size:11px; font-weight:800; color:var(--emerald-dark); margin-bottom:6px;">✨ COMPLETE YOUR ROUTINE</div>
+      <div style="font-size:10.5px; font-weight:800; letter-spacing:0.6px; color:var(--emerald-dark); margin-bottom:6px;">COMPLETE YOUR ROUTINE</div>
       <div style="display:flex; align-items:center; gap:8px;">
         <img src="${upsellItem.image}" style="width:42px; height:42px; border-radius:6px; object-fit:cover;" />
         <div style="flex:1; font-size:12px;">
@@ -718,7 +712,7 @@ document.getElementById("openCartBtn").addEventListener("click", openCartDrawer)
 document.getElementById("closeCartBtn").addEventListener("click", closeCartDrawer);
 drawerBackdrop.addEventListener("click", closeCartDrawer);
 
-// ================= CHECKOUT (COD + bKash/Nagad + Google Sheets + Invoice) =================
+// Checkout & Order Invoice
 const checkoutModal = document.getElementById("checkoutModal");
 const deliveryAreaSelect = document.getElementById("deliveryArea");
 
@@ -739,12 +733,11 @@ function selectPaymentMethod(method, btnEl) {
 
 function openCheckoutModal() {
   if (cart.length === 0) {
-    alert("Please add at least one product to your cart first.");
+    alert("Please add at least one product to your bag first.");
     return;
   }
   closeCartDrawer();
   deliveryAreaSelect.value = String(cartDeliveryCharge);
-
   const user = getCurrentUser();
   if (user) {
     document.getElementById("custName").value = user.name || "";
@@ -760,12 +753,12 @@ function applyCoupon() {
   const msgEl = document.getElementById("couponStatusMsg");
   if (code === "GLOW10" || code === "ZELVIQO10" || code === "SPIN15") {
     appliedDiscountPercent = code === "SPIN15" ? 15 : 10;
-    msgEl.textContent = `✓ ${appliedDiscountPercent}% Promo Discount Applied!`;
+    msgEl.textContent = `${appliedDiscountPercent}% Privilege Discount Applied`;
     msgEl.style.color = "#157347";
   } else {
     appliedDiscountPercent = 0;
-    msgEl.textContent = "Invalid code. Try GLOW10.";
-    msgEl.style.color = "#c0392b";
+    msgEl.textContent = "Invalid promo code. Try GLOW10.";
+    msgEl.style.color = "#b93829";
   }
   updateModalTotals();
 }
@@ -828,7 +821,6 @@ document.getElementById("codOrderForm").addEventListener("submit", (e) => {
   allOrders.unshift(orderRecord);
   localStorage.setItem("zelviqo_orders", JSON.stringify(allOrders));
 
-  // Award Loyalty Points if logged in
   const user = getCurrentUser();
   if (user) {
     user.points = (user.points || 50) + Math.floor(total / 10);
@@ -841,7 +833,6 @@ document.getElementById("codOrderForm").addEventListener("submit", (e) => {
     }
   }
 
-  // Send to Google Sheets if webhook URL is configured
   if (GOOGLE_SHEET_WEBHOOK_URL) {
     fetch(GOOGLE_SHEET_WEBHOOK_URL, {
       method: "POST",
@@ -856,15 +847,15 @@ document.getElementById("codOrderForm").addEventListener("submit", (e) => {
   const waMsg = encodeURIComponent(
     `*NEW ORDER - ZELVIQO LUXURY SKIN CARE*\nOrder ID: #${orderId}\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\nPayment: ${paymentNote}\n\n*Items:*\n${itemsListText}\n\nDelivery: ৳${shipping}\n*Total Payable: ৳${total}*`
   );
-  const waLink = `[https://wa.me/$](https://wa.me/$){WHATSAPP_NUMBER}?text=${waMsg}`;
+  const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${waMsg}`;
 
   document.getElementById("invoiceReceiptBody").innerHTML = `
     <div style="border:1px dashed var(--emerald-main); padding:14px; border-radius:8px; background:var(--bg-page); margin-bottom:14px;">
       <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-        <strong>Invoice #${orderId}</strong>
+        <strong>Order #${orderId}</strong>
         <span>${orderRecord.date}</span>
       </div>
-      <p style="font-size:13px;"><strong>Customer:</strong> ${name} (${phone})</p>
+      <p style="font-size:13px;"><strong>Client:</strong> ${name} (${phone})</p>
       <p style="font-size:13px;"><strong>Payment:</strong> ${paymentNote}</p>
       <p style="font-size:13px; margin-bottom:8px;"><strong>Address:</strong> ${address}</p>
       <div style="font-size:12.5px; border-top:1px solid var(--border-color); padding-top:8px;">${itemsSummary}</div>
@@ -872,8 +863,8 @@ document.getElementById("codOrderForm").addEventListener("submit", (e) => {
         Total Payable: ৳${total}
       </div>
     </div>
-    <a href="${waLink}" target="_blank" rel="noopener" class="btn-primary full-width" style="background:#25d366; text-decoration:none; display:block; margin-bottom:8px;">📲 Send Order Slip to WhatsApp</a>
-    <button type="button" class="btn-add full-width" onclick="window.print()">🖨️ Print / Save Invoice</button>
+    <a href="${waLink}" target="_blank" rel="noopener" class="btn-primary full-width" style="background:#1ea952; text-decoration:none; display:block; margin-bottom:8px;">Send Order Slip to WhatsApp</a>
+    <button type="button" class="btn-add full-width" onclick="window.print()">Print / Save Receipt</button>
   `;
 
   cart = [];
@@ -884,7 +875,7 @@ document.getElementById("codOrderForm").addEventListener("submit", (e) => {
   document.getElementById("invoiceModal").classList.add("open");
 });
 
-// ================= SPIN & WIN WHEEL + WELCOME POPUP =================
+// Spin Wheel & Welcome Popup
 function openSpinModal() {
   document.getElementById("spinWheelModal").classList.add("open");
 }
@@ -895,10 +886,10 @@ function spinDiscountWheel() {
   btn.disabled = true;
   wheel.style.transform = "rotate(1080deg)";
   setTimeout(() => {
-    document.getElementById("spinResultText").textContent = "🎉 Congratulations! You won 15% OFF! Code: SPIN15";
+    document.getElementById("spinResultText").textContent = "Congratulations! Unlocked 15% OFF — Code: SPIN15";
     document.getElementById("couponInput").value = "SPIN15";
     appliedDiscountPercent = 15;
-    btn.textContent = "Code SPIN15 Applied!";
+    btn.textContent = "Code SPIN15 Applied";
   }, 2200);
 }
 
@@ -918,9 +909,9 @@ setTimeout(() => {
   if (!sessionStorage.getItem("zelviqo_welcomed")) {
     document.getElementById("welcomePopupModal").classList.add("open");
   }
-}, 4000);
+}, 4500);
 
-// ================= ADMIN PANEL =================
+// Admin Panel
 function unlockAdminPanel() {
   const pass = document.getElementById("adminPassInput").value;
   if (pass === "zelviqo2026" || pass === "1234") {
@@ -928,7 +919,7 @@ function unlockAdminPanel() {
     document.getElementById("adminDashboardArea").style.display = "block";
     renderAdminDashboard();
   } else {
-    alert("Incorrect admin password.");
+    alert("Incorrect administrator password.");
   }
 }
 
@@ -945,7 +936,7 @@ function renderAdminDashboard() {
     .map(
       (p) => `
       <div class="admin-row">
-        <div><strong>${p.name}</strong> — ৳${p.salePrice} (${p.inStock === false ? "Out of Stock" : "In Stock"})</div>
+        <div><strong>${p.name}</strong> &mdash; ৳${p.salePrice} (${p.inStock === false ? "Out of Stock" : "In Stock"})</div>
         <button type="button" class="btn-add" onclick="toggleAdminStock(${p.id})">Toggle Stock</button>
       </div>
     `
@@ -959,7 +950,7 @@ function renderAdminDashboard() {
           .map(
             (o, idx) => `
           <div class="admin-row">
-            <div><strong>#${o.orderId}</strong> • ${o.name} (${o.phone}) • ৳${o.total} • <em>${o.status}</em></div>
+            <div><strong>#${o.orderId}</strong> &bull; ${o.name} (${o.phone}) &bull; ৳${o.total} &bull; <em>${o.status}</em></div>
             <button type="button" class="btn-gold-sm" onclick="markOrderDelivered(${idx})">Mark Delivered</button>
           </div>
         `
@@ -991,7 +982,7 @@ function adminAddNewProduct(e) {
   saveProducts(list);
   e.target.reset();
   renderAdminDashboard();
-  alert("New product added to store!");
+  alert("New product published!");
 }
 
 function toggleAdminStock(id) {
@@ -1004,12 +995,12 @@ function toggleAdminStock(id) {
 
 function markOrderDelivered(idx) {
   const orders = JSON.parse(localStorage.getItem("zelviqo_orders") || "[]");
-  if (orders[idx]) orders[idx].status = "Delivered ✅";
+  if (orders[idx]) orders[idx].status = "Delivered";
   localStorage.setItem("zelviqo_orders", JSON.stringify(orders));
   renderAdminDashboard();
 }
 
-// ================= PWA APP INSTALL PROMPT =================
+// PWA Install
 let deferredPrompt = null;
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
@@ -1017,20 +1008,17 @@ window.addEventListener("beforeinstallprompt", (e) => {
 });
 
 function installZelviqoApp() {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-  } else {
-    alert("To install ZELVIQO App: Tap your browser's 3-dot menu (⋮) and select 'Add to Home screen' or 'Install App'.");
-  }
+  if (deferredPrompt) deferredPrompt.prompt();
+  else alert("To install ZELVIQO App: Tap your browser menu and select 'Add to Home screen' or 'Install App'.");
 }
 
-// ================= SMART WHATSAPP CHAT WIDGET =================
+// WhatsApp Concierge
 function toggleWaBox() {
   document.getElementById("waChatBox").classList.toggle("open");
 }
 
 function sendPresetWa(text) {
-  window.open(`[https://wa.me/$](https://wa.me/$){WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank");
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank");
 }
 
 function sendCustomWa() {
@@ -1038,15 +1026,14 @@ function sendCustomWa() {
   const msg = input.value.trim();
   if (!msg) return;
   input.value = "";
-  window.open(`[https://wa.me/$](https://wa.me/$){WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
 }
 
-// ================= MOVING SHOWCASE & LIVE SEARCH =================
+// Moving Showcase & Live Search
 function renderMovingShowcase() {
   const track = document.getElementById("movingProductTrack");
   const all = getProducts();
-  const loopItems = [...all, ...all];
-  track.innerHTML = loopItems
+  track.innerHTML = [...all, ...all]
     .map(
       (p) => `
       <div class="marquee-chip" onclick="navigateTo('product', ${p.id})">
@@ -1092,7 +1079,7 @@ document.addEventListener("click", (e) => {
   if (!e.target.closest(".search-wrapper")) searchDropdown.classList.remove("open");
 });
 
-// ================= PROFILE & ORDER TRACKING =================
+// Profile & Tracking
 function getUsers() {
   return JSON.parse(localStorage.getItem("zelviqo_users") || "[]");
 }
@@ -1116,8 +1103,7 @@ function updateHeaderAuthUI() {
     nameEl.textContent = first;
     avatarEl.textContent = first.charAt(0).toUpperCase();
   } else {
-    nameEl.textContent = "Login";
-    avatarEl.textContent = "👤";
+    nameEl.textContent = "Account";
   }
 }
 
@@ -1143,13 +1129,12 @@ function renderProfilePage() {
     document.getElementById("profilePointsVal").textContent = `${user.points || 50} pts`;
     document.getElementById("profileEditAddress").value = user.address || "";
 
-    const allOrders = JSON.parse(localStorage.getItem("zelviqo_orders") || "[]");
-    const myOrders = allOrders.filter((o) => o.phone === user.phone);
+    const myOrders = JSON.parse(localStorage.getItem("zelviqo_orders") || "[]").filter((o) => o.phone === user.phone);
     document.getElementById("userOrderHistoryList").innerHTML =
       myOrders.length === 0
         ? `<p style="font-size:13px; color:#5e6963;">No orders placed from this account yet.</p>`
         : myOrders
-            .map((o) => `<div class="history-item"><strong>Order #${o.orderId} — ৳${o.total}</strong><div>${o.itemsSummary}</div><small style="color:#666;">${o.date} • ${o.status}</small></div>`)
+            .map((o) => `<div class="history-item"><strong>Order #${o.orderId} &mdash; ৳${o.total}</strong><div>${o.itemsSummary}</div><small style="color:#666;">${o.date} &bull; ${o.status}</small></div>`)
             .join("");
   } else {
     authSec.style.display = "block";
@@ -1168,7 +1153,7 @@ function saveProfileAddress() {
     users[idx].address = user.address;
     localStorage.setItem("zelviqo_users", JSON.stringify(users));
   }
-  alert("Saved!");
+  alert("Address updated!");
 }
 
 function logoutUser() {
@@ -1185,7 +1170,7 @@ document.getElementById("registerForm").addEventListener("submit", (e) => {
 
   const users = getUsers();
   if (users.some((u) => u.phone === phone)) {
-    alert("Account already exists. Please login.");
+    alert("Account already exists. Please sign in.");
     switchAuthTab("login");
     return;
   }
@@ -1203,7 +1188,7 @@ document.getElementById("loginForm").addEventListener("submit", (e) => {
   const password = document.getElementById("loginPassword").value;
   const matched = getUsers().find((u) => u.phone === phone && u.password === password);
   if (!matched) {
-    alert("Wrong phone number or password.");
+    alert("Incorrect phone number or password.");
     return;
   }
   setCurrentUser(matched);
@@ -1216,11 +1201,9 @@ function searchOrderTracking() {
   const box = document.getElementById("trackResultBox");
   if (!query) return;
 
-  const allOrders = JSON.parse(localStorage.getItem("zelviqo_orders") || "[]");
-  const found = allOrders.filter((o) => o.phone === query || o.orderId === query);
-
+  const found = JSON.parse(localStorage.getItem("zelviqo_orders") || "[]").filter((o) => o.phone === query || o.orderId === query);
   if (found.length === 0) {
-    box.innerHTML = `<div style="padding:14px; background:#fbeaea; color:#a62c2c; border-radius:8px; font-size:13.5px;">No order found for "${query}".</div>`;
+    box.innerHTML = `<div style="padding:14px; background:#fbeaea; color:#a62c2c; border-radius:8px; font-size:13.5px;">No parcel found matching "${query}".</div>`;
     return;
   }
 
@@ -1240,7 +1223,7 @@ function searchOrderTracking() {
     .join("");
 }
 
-// ================= FLASH SALE TIMER & SOCIAL PROOF TOAST =================
+// Countdown & Social Proof Toast
 let countdownSeconds = 5 * 3600 + 42 * 60 + 19;
 setInterval(() => {
   if (countdownSeconds > 0) countdownSeconds--;
@@ -1250,10 +1233,10 @@ setInterval(() => {
 }, 1000);
 
 const recentOrdersSample = [
-  "Sadia (Dhanmondi) just ordered Vitamin C Serum",
-  "Nusrat (Uttara) just ordered Day-Glow Combo Set",
-  "Rafi (Mirpur 10) just ordered SPF 50+ Sunscreen",
-  "Mitu (Chattogram) just ordered Niacinamide 10% Serum"
+  "Sadia (Dhanmondi) ordered Vitamin C Serum",
+  "Nusrat (Uttara) ordered Day-Glow Combo Set",
+  "Rafi (Mirpur 10) ordered SPF 50+ Sunscreen",
+  "Mitu (Chattogram) ordered Niacinamide 10% Serum"
 ];
 let toastIdx = 0;
 setInterval(() => {
