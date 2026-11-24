@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <link rel="manifest" href="manifest.json">
-
- <meta name="google-site-verification" content="uwxGdozwt0lrmTAM3ZJsZFtNhrdKVi43WJ7DOYgyABU" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ZELVIQO Luxury Skin Care | Authentic Imported Skincare in Bangladesh</title>
+  <title>ZELVIQO Luxury Skin Care | Authentic Skincare in Bangladesh</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -14,28 +11,37 @@
 </head>
 <body>
 
-  <!-- Top Utility Bar -->
+  <!-- PWA App Install Top Bar -->
+  <div class="pwa-install-bar" id="pwaInstallBar">
+    <div class="container pwa-flex">
+      <span>📲 Install <strong>ZELVIQO App</strong> on your phone for 1-tap shopping!</span>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <button type="button" class="btn-gold-sm" onclick="installZelviqoApp()">Install App</button>
+        <button type="button" class="pwa-close" onclick="document.getElementById('pwaInstallBar').style.display='none'">&times;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Announcement Strip -->
   <div class="top-notice">
     <div class="container notice-flex">
-      <span data-i18n="topNotice">✨ 100% Authentic Imported Skincare | Use Code <strong>GLOW10</strong> for 10% Extra Off</span>
+      <p data-i18n="topNotice">✨ 100% Authentic Imported Skincare | Use Code <strong>GLOW10</strong> for 10% Extra Off</p>
       <span class="hide-mobile">📞 Hotline: 01860-821074</span>
     </div>
   </div>
 
-  <!-- Sticky Header -->
+  <!-- Sticky Main Header -->
   <header class="site-header">
     <div class="container header-inner">
       <div class="header-left-group">
-        <!-- 3-Line Menu Trigger -->
         <button type="button" class="hamburger-btn" id="openMenuBtn" aria-label="Open Navigation Menu">
           <span></span>
           <span></span>
           <span></span>
         </button>
 
-        <!-- Brand Logo -->
-        <a href="#home" class="brand-logo" onclick="navigateTo('home')">
-          <img src="logo.png" alt="ZELVIQO Logo" onerror="this.style.display='none'" />
+        <a href="#home" class="brand-logo logo-animate" onclick="navigateTo('home'); return false;">
+          <img src="logo.png" alt="ZELVIQO Luxury Skin Care Logo" />
           <div class="brand-text">
             <span class="brand-title">ZELVIQO</span>
             <span class="brand-sub">LUXURY SKIN CARE</span>
@@ -43,30 +49,29 @@
         </a>
       </div>
 
-      <!-- Smart Search Box -->
+      <!-- Live Search Bar -->
       <div class="search-wrapper">
         <div class="search-box">
-          <input type="text" id="searchInput" placeholder="Search serum, face wash, sunscreen..." autocomplete="off" />
+          <input type="text" id="searchInput" placeholder="Search Vitamin C, Sunscreen, Cleanser..." autocomplete="off" />
           <button type="button" id="searchBtn" data-i18n="searchBtn">Search</button>
         </div>
         <div class="search-dropdown" id="searchDropdown"></div>
       </div>
 
-      <!-- Header Right Actions -->
+      <!-- Header Right Controls -->
       <div class="header-actions">
-        <!-- Language Switcher (EN | বাং) -->
-        <button type="button" class="lang-switch-btn" id="langToggleBtn" onclick="toggleLanguage()" title="Switch Language">
-          <span id="langLabel">EN | বাং</span>
+        <button type="button" class="lang-switch-btn" id="langSwitchBtn" onclick="toggleLanguage()">EN / বাং</button>
+
+        <button type="button" class="icon-pill-btn" onclick="openWishlistDrawer()" title="My Wishlist">
+          ❤️ <span id="wishlistCount">0</span>
         </button>
 
-        <!-- Member Account Button -->
-        <button type="button" class="account-trigger hide-mobile" onclick="navigateTo('profile')">
+        <button type="button" class="account-trigger hide-mobile" id="headerAccountBtn" onclick="navigateTo('profile')">
           <span class="user-avatar" id="headerUserAvatar">👤</span>
           <span id="headerUserName">Login</span>
         </button>
 
-        <!-- Professional My Cart Button -->
-        <button type="button" class="bag-summary-btn" id="openCartBtn">
+        <button type="button" class="bag-summary-btn" id="openCartBtn" aria-label="Open My Cart">
           <div class="bag-icon-wrap">
             <span>🛒</span>
             <span class="cart-badge" id="cartCount">0</span>
@@ -104,24 +109,25 @@
       <div class="drawer-section-label" data-i18n="menuCats">SKINCARE CATEGORIES</div>
       <ul class="drawer-nav-list">
         <li><button type="button" class="drawer-link" data-nav="cleanser" onclick="navigateTo('category', 'cleanser')">🫧 Face Wash &amp; Cleanser</button></li>
-        <li><button type="button" class="drawer-link" data-nav="serum" onclick="navigateTo('category', 'serum')">💧 Face Serums &amp; Treatments</button></li>
-        <li><button type="button" class="drawer-link" data-nav="sunscreen" onclick="navigateTo('category', 'sunscreen')">☀️ Sunscreen SPF 50+ PA+++</button></li>
+        <li><button type="button" class="drawer-link" data-nav="serum" onclick="navigateTo('category', 'serum')">💧 Face Serums</button></li>
+        <li><button type="button" class="drawer-link" data-nav="sunscreen" onclick="navigateTo('category', 'sunscreen')">☀️ Sunscreen SPF 50+</button></li>
         <li><button type="button" class="drawer-link" data-nav="moisturizer" onclick="navigateTo('category', 'moisturizer')">🌿 Moisturizer &amp; Night Gel</button></li>
-        <li><button type="button" class="drawer-link" data-nav="combo" onclick="navigateTo('category', 'combo')">🎀 Curated Combo Sets</button></li>
+        <li><button type="button" class="drawer-link" data-nav="combo" onclick="navigateTo('category', 'combo')">🎀 Value Combo Sets</button></li>
       </ul>
 
       <div class="drawer-section-label" data-i18n="menuSupport">PAGES &amp; SUPPORT</div>
       <ul class="drawer-nav-list">
-        <li><button type="button" class="drawer-link" data-nav="profile" onclick="navigateTo('profile')" data-i18n="navProfile">👤 My Profile &amp; Orders</button></li>
+        <li><button type="button" class="drawer-link" data-nav="profile" onclick="navigateTo('profile')" data-i18n="navProfile">👤 My Profile &amp; Loyalty Points</button></li>
         <li><button type="button" class="drawer-link" data-nav="track" onclick="navigateTo('track')" data-i18n="navTrack">🚚 Track Your Order</button></li>
         <li><button type="button" class="drawer-link" data-nav="about" onclick="navigateTo('about')" data-i18n="navAbout">🏛️ About Us</button></li>
         <li><button type="button" class="drawer-link" data-nav="policy" onclick="navigateTo('policy')" data-i18n="navPolicy">🛡️ Delivery &amp; Return Policy</button></li>
         <li><button type="button" class="drawer-link" data-nav="contact" onclick="navigateTo('contact')" data-i18n="navContact">📞 Contact Us</button></li>
+        <li><button type="button" class="drawer-link" data-nav="admin" onclick="navigateTo('admin')">⚙️ Store Admin Panel</button></li>
       </ul>
 
-      <!-- Official Social Media Links inside Drawer -->
+      <!-- Social Media Icons (Facebook, Instagram, TikTok) -->
       <div class="drawer-social-box">
-        <span>Follow ZELVIQO</span>
+        <span>Follow ZELVIQO Official</span>
         <div class="social-icon-row">
           <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook" class="soc-btn fb">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
@@ -137,13 +143,13 @@
     </div>
   </aside>
 
-  <!-- ==================== PAGE 1: HOME VIEW ==================== -->
+  <!-- ==================== PAGE 1: HOME PAGE ==================== -->
   <div id="page-home" class="page-view active">
     <div class="container home-container">
 
-      <!-- 100% Clean Hero Banner (No Text Overlay on Image) -->
-      <section class="clean-hero-banner" onclick="navigateTo('category', 'all')" title="Click to Explore Collection">
-        <img src="hero-banner.jpg" alt="ZELVIQO Luxury Skin Care Banner" />
+      <!-- Clean Hero Banner (No Text Overlay) -->
+      <section class="clean-hero-banner" onclick="navigateTo('category', 'all')" title="Click to explore ZELVIQO Collection">
+        <img src="hero-banner.jpg" alt="ZELVIQO Luxury Skin Care Collection" />
       </section>
 
       <!-- Flash Sale Countdown Strip -->
@@ -171,13 +177,13 @@
         <div class="visual-cat-grid">
           <div class="v-cat-card" onclick="navigateTo('category', 'cleanser')">
             <div class="v-cat-icon">🫧</div>
-            <strong>Face Wash</strong>
-            <span>Gentle Cleansers</span>
+            <strong>Cleansers</strong>
+            <span>Gentle Face Wash</span>
           </div>
           <div class="v-cat-card" onclick="navigateTo('category', 'serum')">
             <div class="v-cat-icon">💧</div>
             <strong>Face Serums</strong>
-            <span>Vitamin C &amp; Glow</span>
+            <span>Vitamin C &amp; Niacinamide</span>
           </div>
           <div class="v-cat-card" onclick="navigateTo('category', 'sunscreen')">
             <div class="v-cat-icon">☀️</div>
@@ -212,6 +218,35 @@
           <button type="button" class="text-link-btn" onclick="navigateTo('category', 'all')" data-i18n="seeFullCatalog">See Full Catalog &rarr;</button>
         </div>
         <div class="product-grid" id="homeProductGrid"></div>
+      </section>
+
+      <!-- Watch & Shop (UGC Video Reels Section) -->
+      <section class="section-block">
+        <div class="section-row-head">
+          <h2>Watch &amp; Shop Skincare Reels</h2>
+          <span style="font-size:12.5px; color:var(--text-muted);">Real texture &amp; glow results</span>
+        </div>
+        <div class="reels-grid" id="watchShopGrid"></div>
+      </section>
+
+      <!-- Interactive Before & After Skin Transformation Slider -->
+      <section class="section-block ba-section-card">
+        <div class="ba-info">
+          <span class="hero-pill" style="color:var(--gold-accent);">VISIBLE 14-DAY RESULTS</span>
+          <h2>Real Skin Transformation</h2>
+          <p>Drag the golden slider left or right to compare dull, sun-damaged skin (Before) vs. hydrated glass-skin glow after 14 days of our Vitamin C + SPF 50+ Duo.</p>
+          <button type="button" class="btn-primary" style="margin-top:12px;" onclick="navigateTo('product', 8)">Shop the Day-Glow Duo &rarr;</button>
+        </div>
+        <div class="ba-slider-box" id="baSliderBox">
+          <img src="product-8.jpg" alt="After 14 Days Glow" class="ba-img-after" />
+          <div class="ba-before-wrap" id="baBeforeWrap">
+            <img src="product-1.jpg" alt="Before Routine" class="ba-img-before" />
+          </div>
+          <span class="ba-label ba-left">BEFORE</span>
+          <span class="ba-label ba-right">AFTER 14 DAYS</span>
+          <input type="range" min="5" max="95" value="50" class="ba-range" id="baRangeInput" oninput="updateBeforeAfter(this.value)" />
+          <div class="ba-divider" id="baDivider"><span>⇄</span></div>
+        </div>
       </section>
 
       <!-- Interactive Routine & Quiz Promo Banners -->
@@ -302,7 +337,7 @@
     </div>
   </div>
 
-  <!-- ==================== PAGE 3: FULL PRODUCT DETAIL & REVIEWS PAGE ==================== -->
+  <!-- ==================== PAGE 3: FULL PRODUCT DETAIL & ZOOM GALLERY PAGE ==================== -->
   <div id="page-product" class="page-view">
     <div class="container page-container">
       <div class="breadcrumb-bar">
@@ -392,7 +427,6 @@
         </div>
 
         <button type="button" class="btn-primary full-width" onclick="generateQuizResult()">Show My Recommended Products</button>
-
         <div id="quizResultsArea" style="margin-top:24px;"></div>
       </div>
     </div>
@@ -447,9 +481,8 @@
           <strong>ZELVIQO Luxury Skin Care</strong> was founded in Dhaka, Bangladesh with a simple promise: to bring 100% authentic, sealed, and effective international skincare directly to your doorstep—without fake replicas or inflated prices.
         </p>
         <p style="font-size:14.5px; color:var(--text-muted); margin-bottom:18px;">
-          Every serum, sunscreen, cleanser, and moisturizer in our store is carefully selected for South Asian weather and skin types. Whether you are fighting humidity, sun tan, or acne marks, ZELVIQO ensures safe ingredients and honest guidance.
+          Every serum, sunscreen, cleanser, and moisturizer in our store is carefully selected for South Asian weather and skin types.
         </p>
-
         <div class="contact-info-grid">
           <div class="info-tile">
             <strong>✅ 100% Original Products</strong>
@@ -478,20 +511,20 @@
         <div class="guide-article">
           <h3>🚚 Delivery Charges &amp; Timeframe</h3>
           <p>• <strong>Inside Dhaka City:</strong> ৳70 (Delivery within 24–48 hours).</p>
-          <p>• <strong>Outside Dhaka:</strong> ৳130 (Delivery within 2–3 working days via Steadfast / Pathao Courier).</p>
+          <p>• <strong>Outside Dhaka:</strong> ৳130 (Delivery within 2–3 working days).</p>
           <p>• <strong>Free Home Delivery:</strong> Automatically applied on all orders of <strong>৳2,000 or more</strong>.</p>
         </div>
         <hr style="border:none; border-top:1px solid var(--border-color); margin:18px 0;" />
         <div class="guide-article">
           <h3>🔄 Easy 7-Day Return &amp; Exchange</h3>
-          <p>• Please inspect your parcel in front of the delivery person upon arrival.</p>
-          <p>• If you receive a damaged, leaked, or wrong product, contact our hotline (<strong>01860-821074</strong>) immediately for a free replacement.</p>
+          <p>• Inspect your parcel in front of the delivery person upon arrival.</p>
+          <p>• Contact our hotline (<strong>01860-821074</strong>) immediately for a free replacement if anything is damaged.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ==================== PAGE 9: MY PROFILE & ORDER HISTORY ==================== -->
+  <!-- ==================== PAGE 9: MY PROFILE & LOYALTY POINTS ==================== -->
   <div id="page-profile" class="page-view">
     <div class="container page-container narrow-page">
       <div class="breadcrumb-bar">
@@ -500,7 +533,6 @@
         <strong>My Profile</strong>
       </div>
 
-      <!-- Auth Card -->
       <div id="profileAuthSection" class="page-card-box">
         <div class="auth-tabs">
           <button type="button" class="auth-tab-btn active" id="tabLoginBtn" onclick="switchAuthTab('login')">Member Login</button>
@@ -536,18 +568,21 @@
             <label for="regPassword">Create Password *</label>
             <input type="password" id="regPassword" required placeholder="Create password" />
           </div>
-          <button type="submit" class="btn-primary full-width">Create My Profile</button>
+          <button type="submit" class="btn-primary full-width">Create My Profile (Get 50 Bonus Points!)</button>
         </form>
       </div>
 
-      <!-- Logged-In Dashboard -->
       <div id="profileDashboardSection" class="page-card-box" style="display: none;">
         <div class="profile-banner-card">
           <div class="profile-big-avatar" id="profileBigAvatar">Z</div>
-          <div>
+          <div style="flex:1;">
             <h2 id="profileDisplayName">Member Name</h2>
             <p id="profileDisplayPhone">01XXXXXXXXX</p>
             <span class="member-badge">ZELVIQO VIP Member</span>
+          </div>
+          <div class="loyalty-pill">
+            <small>Glow Points</small>
+            <strong id="profilePointsVal">50 pts</strong>
           </div>
         </div>
 
@@ -624,12 +659,77 @@
     </div>
   </div>
 
-  <!-- Footer with Official Facebook, Instagram & TikTok Logos -->
+  <!-- ==================== PAGE 12: PASSWORD-PROTECTED STORE ADMIN PANEL ==================== -->
+  <div id="page-admin" class="page-view">
+    <div class="container page-container">
+      <div class="breadcrumb-bar">
+        <button type="button" onclick="navigateTo('home')">Home</button>
+        <span>/</span>
+        <strong>Store Admin Panel</strong>
+      </div>
+
+      <div id="adminLoginGate" class="page-card-box narrow-page" style="margin:0 auto;">
+        <h2 style="font-family:'Cormorant Garamond', serif; font-size:30px; color:var(--emerald-dark); margin-bottom:8px;">🔐 ZELVIQO Owner Login</h2>
+        <p style="font-size:13.5px; color:var(--text-muted); margin-bottom:14px;">Enter store admin password to manage products, stock &amp; orders.</p>
+        <div class="form-group">
+          <input type="password" id="adminPassInput" placeholder="Enter Admin Password (Default: zelviqo2026)" />
+        </div>
+        <button type="button" class="btn-primary full-width" onclick="unlockAdminPanel()">Unlock Dashboard</button>
+      </div>
+
+      <div id="adminDashboardArea" style="display:none;">
+        <div class="admin-stats-grid">
+          <div class="stat-card">
+            <small>Total Products</small>
+            <strong id="admTotalProducts">8</strong>
+          </div>
+          <div class="stat-card">
+            <small>Total Orders Received</small>
+            <strong id="admTotalOrders">0</strong>
+          </div>
+          <div class="stat-card">
+            <small>Total Sales Revenue</small>
+            <strong id="admTotalRevenue">৳0</strong>
+          </div>
+        </div>
+
+        <div class="page-card-box" style="margin-bottom:20px;">
+          <h3 style="color:var(--emerald-dark); margin-bottom:12px;">➕ Add New Skincare Product</h3>
+          <form onsubmit="adminAddNewProduct(event)" class="admin-add-form">
+            <input type="text" id="admProdName" required placeholder="Product Name" />
+            <select id="admProdCat">
+              <option value="serum">Face Serum</option>
+              <option value="cleanser">Face Wash &amp; Cleanser</option>
+              <option value="sunscreen">Sunscreen</option>
+              <option value="moisturizer">Moisturizer</option>
+              <option value="combo">Combo Set</option>
+            </select>
+            <input type="number" id="admProdReg" required placeholder="Regular Price (৳)" />
+            <input type="number" id="admProdSale" required placeholder="Sale Price (৳)" />
+            <input type="text" id="admProdImg" required placeholder="Image filename (e.g. product-1.jpg)" />
+            <button type="submit" class="btn-primary">Add Product</button>
+          </form>
+        </div>
+
+        <div class="page-card-box" style="margin-bottom:20px;">
+          <h3 style="color:var(--emerald-dark); margin-bottom:12px;">📦 Manage Products &amp; Stock Status</h3>
+          <div id="adminProductList"></div>
+        </div>
+
+        <div class="page-card-box">
+          <h3 style="color:var(--emerald-dark); margin-bottom:12px;">🧾 Recent Customer Orders</h3>
+          <div id="adminOrderList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="container footer-grid">
       <div>
         <h3 class="footer-brand">ZELVIQO Luxury Skin Care</h3>
-        <p class="footer-desc">100% authentic imported skincare in Bangladesh. Cash on Delivery nationwide.</p>
+        <p class="footer-desc">100% authentic imported skincare in Bangladesh. Cash on Delivery &amp; bKash/Nagad nationwide.</p>
         <div class="social-icon-row" style="margin-top:14px;">
           <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook" class="soc-btn fb">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
@@ -648,7 +748,7 @@
           <li><a href="#about" onclick="navigateTo('about')">About Us</a></li>
           <li><a href="#policy" onclick="navigateTo('policy')">Delivery &amp; Return Policy</a></li>
           <li><a href="#track" onclick="navigateTo('track')">Track Order</a></li>
-          <li><a href="#guide" onclick="navigateTo('guide')">Skincare Routine Guide</a></li>
+          <li><a href="#admin" onclick="navigateTo('admin')">Admin Panel</a></li>
         </ul>
       </div>
       <div>
@@ -662,7 +762,12 @@
     </div>
   </footer>
 
-  <!-- Live Social Proof Order Toast (Bottom Left) -->
+  <!-- Lucky Spin & Win Floating Button (Bottom Left) -->
+  <button type="button" class="spin-float-btn" onclick="openSpinModal()" title="Spin & Win Discount">
+    🎡 <span>Spin &amp; Win</span>
+  </button>
+
+  <!-- Live Social Proof Order Toast -->
   <div class="live-toast" id="liveOrderToast">
     <span class="toast-dot">✓</span>
     <div id="liveToastText">Sadia from Dhanmondi ordered Vitamin C Serum</div>
@@ -722,7 +827,17 @@
     </button>
   </nav>
 
-  <!-- Professional "My Cart" Drawer with Live Delivery Charge Calculator -->
+  <!-- Wishlist Slide-Out Drawer -->
+  <div class="drawer-backdrop" id="wishBackdrop"></div>
+  <aside class="cart-drawer" id="wishlistDrawer">
+    <div class="drawer-header">
+      <h3>❤️ My Wishlist</h3>
+      <button type="button" class="close-btn" onclick="closeWishlistDrawer()">&times;</button>
+    </div>
+    <div class="drawer-body" id="wishlistItemsContainer"></div>
+  </aside>
+
+  <!-- Professional "My Cart" Drawer with Delivery Charge & Smart Upsell -->
   <div class="drawer-backdrop" id="drawerBackdrop"></div>
   <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
     <div class="drawer-header">
@@ -737,11 +852,15 @@
       </div>
     </div>
 
-    <div class="drawer-body" id="cartItemsContainer">
-      <p class="empty-msg">Your cart is currently empty.</p>
+    <div class="drawer-body">
+      <div id="cartItemsContainer">
+        <p class="empty-msg">Your cart is currently empty.</p>
+      </div>
+
+      <!-- Smart Cart Upsell Box -->
+      <div class="cart-upsell-box" id="cartUpsellBox"></div>
     </div>
 
-    <!-- Live Delivery Zone & Total Breakdown inside My Cart -->
     <div class="drawer-footer">
       <div class="cart-zone-selector">
         <label>Select Delivery Area:</label>
@@ -763,15 +882,15 @@
         <span>Total Payable:</span>
         <strong id="cartGrandTotal">৳0</strong>
       </div>
-      <button type="button" class="btn-primary full-width" id="proceedCheckoutBtn">Confirm Order (Cash on Delivery)</button>
+      <button type="button" class="btn-primary full-width" id="proceedCheckoutBtn">Proceed to Checkout</button>
     </div>
   </aside>
 
-  <!-- Fast 10-Second Checkout Modal -->
+  <!-- Checkout Modal (COD + bKash / Nagad Payment + Loyalty Points) -->
   <div class="modal-backdrop" id="checkoutModal">
     <div class="modal-card">
       <div class="modal-header">
-        <h3>Complete Cash on Delivery Order</h3>
+        <h3>Complete Your Order</h3>
         <button type="button" class="close-btn" id="closeModalBtn">&times;</button>
       </div>
 
@@ -799,8 +918,22 @@
           <textarea id="custAddress" rows="2" required placeholder="House, Road, Area, District"></textarea>
         </div>
 
+        <!-- Payment Method Selector (COD / bKash / Nagad) -->
         <div class="form-group">
-          <label for="couponInput">Promo Code (Try: GLOW10)</label>
+          <label>Select Payment Method *</label>
+          <div class="pay-method-tabs">
+            <button type="button" class="pay-tab active" onclick="selectPaymentMethod('COD', this)">💵 Cash on Delivery</button>
+            <button type="button" class="pay-tab" onclick="selectPaymentMethod('bKash', this)">🩷 bKash</button>
+            <button type="button" class="pay-tab" onclick="selectPaymentMethod('Nagad', this)">🧡 Nagad</button>
+          </div>
+          <div id="mobilePayBox" class="mobile-pay-info" style="display:none;">
+            <p>Send Money (Personal) to: <strong style="color:var(--emerald-dark);">01860-821074</strong></p>
+            <input type="text" id="paymentTrxId" placeholder="Enter Transaction ID (TrxID) *" style="margin-top:6px;" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="couponInput">Promo Code (Use: GLOW10)</label>
           <div style="display:flex; gap:8px;">
             <input type="text" id="couponInput" placeholder="Enter coupon code" />
             <button type="button" class="btn-add" onclick="applyCoupon()">Apply</button>
@@ -814,7 +947,7 @@
             <span id="modalSubtotal">৳0</span>
           </div>
           <div class="summary-row" id="discountSummaryRow" style="display:none; color:#157347;">
-            <span>Promo Discount (10%):</span>
+            <span>Discount:</span>
             <span id="modalDiscount">-৳0</span>
           </div>
           <div class="summary-row">
@@ -822,7 +955,7 @@
             <span id="modalShipping">৳70</span>
           </div>
           <div class="summary-row total-line">
-            <span>Total Payable (COD):</span>
+            <span>Total Payable:</span>
             <strong id="modalGrandTotal">৳0</strong>
           </div>
         </div>
@@ -843,12 +976,29 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
- <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/service-worker.js');
-  }
-</script>
+  <!-- Welcome Discount Popup -->
+  <div class="modal-backdrop" id="welcomePopupModal">
+    <div class="modal-card" style="text-align:center; padding:26px;">
+      <button type="button" class="close-btn" style="float:right;" onclick="closeWelcomePopup()">&times;</button>
+      <span class="hero-pill" style="color:var(--gold-accent);">WELCOME GIFT</span>
+      <h2 style="font-family:'Cormorant Garamond', serif; font-size:32px; color:var(--emerald-dark); margin:8px 0;">Get 10% Off Your First Glow!</h2>
+      <p style="font-size:13.5px; color:var(--text-muted); margin-bottom:16px;">Use promo code <strong>GLOW10</strong> at checkout on any authentic serum, sunscreen, or combo set.</p>
+      <button type="button" class="btn-primary full-width" onclick="claimWelcomeCode()">Copy Code &amp; Start Shopping</button>
+    </div>
+  </div>
 
+  <!-- Spin & Win Discount Wheel Modal -->
+  <div class="modal-backdrop" id="spinWheelModal">
+    <div class="modal-card" style="text-align:center; padding:24px;">
+      <button type="button" class="close-btn" style="float:right;" onclick="document.getElementById('spinWheelModal').classList.remove('open')">&times;</button>
+      <h2 style="font-family:'Cormorant Garamond', serif; font-size:30px; color:var(--emerald-dark);">🎡 Spin &amp; Win Luxury Rewards</h2>
+      <p style="font-size:13px; color:var(--text-muted); margin-bottom:14px;">Spin the ZELVIQO wheel to unlock an instant discount code!</p>
+      <div class="wheel-visual" id="wheelVisual">✨ ZELVIQO ✨</div>
+      <p id="spinResultText" style="font-weight:700; color:var(--emerald-main); margin:12px 0; min-height:22px;"></p>
+      <button type="button" class="btn-primary full-width" id="spinActionBtn" onclick="spinDiscountWheel()">Spin Now!</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
