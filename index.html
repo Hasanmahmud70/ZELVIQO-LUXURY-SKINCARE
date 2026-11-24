@@ -356,7 +356,7 @@
       </section>
 
       <!-- Luxury Trust Guarantees -->
-      <section class="trust-strip-cards">
+      <section class="trust-strip-cards" style="margin-bottom: 28px;">
         <div class="trust-box">
           <div class="trust-svg">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
@@ -389,9 +389,25 @@
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           </div>
           <div>
-            <strong>Skin Concierge</strong>
-            <small>Free WhatsApp routine advice</small>
+            <strong>WhatsApp Support</strong>
+            <small>Free routine advice</small>
           </div>
+        </div>
+      </section>
+
+      <!-- Track Your Parcel Box at Bottom of Home Page -->
+      <section class="home-track-box">
+        <div class="home-track-info">
+          <span class="hero-pill" style="color:var(--gold-accent);">LIVE PARCEL TRACKING</span>
+          <h2>Track Your ZELVIQO Parcel</h2>
+          <p>Enter your Mobile Number or Order ID below to check your order status right away.</p>
+        </div>
+        <div class="home-track-form">
+          <div class="home-track-row">
+            <input type="text" id="homeTrackInput" placeholder="e.g. 01860821074 or 482910" />
+            <button type="button" class="btn-primary" onclick="var q=document.getElementById('homeTrackInput').value.trim(), b=document.getElementById('homeTrackResult'); if(!q)return; var f=(JSON.parse(localStorage.getItem('zelviqo_orders')||'[]')).filter(function(o){return o.phone===q||o.orderId===q;}); b.innerHTML=f.length===0?'<div style=\'padding:10px;background:#fbeaea;color:#a62c2c;border-radius:6px;font-size:13px;\'>No parcel found matching '+q+'.</div>':f.map(function(o){return '<div style=\'padding:12px;background:#e7f1ed;border:1px solid #bfd4cb;border-radius:8px;margin-top:8px;text-align:left;\'><div style=\'display:flex;justify-content:space-between;font-weight:700;color:#0c2b21;\'><span>Order #'+o.orderId+'</span><span>৳'+o.total+'</span></div><div style=\'font-size:12.5px;margin:4px 0;\'>'+o.itemsSummary+'</div><div style=\'font-size:12px;color:#144032;font-weight:700;\'>Status: '+o.status+' ('+o.date+')</div></div>';}).join('');">Track Parcel</button>
+          </div>
+          <div id="homeTrackResult" style="margin-top:10px;"></div>
         </div>
       </section>
 
@@ -753,7 +769,7 @@
         </div>
 
         <div style="margin-top:20px;">
-          <a href="https://wa.me/8801860821074?text=Hello%20ZELVIQO!%20I%20would%20like%20assistance%20with%20skincare%20products." target="_blank" rel="noopener" class="btn-primary full-width" style="text-align:center; display:block; text-decoration:none;">Connect on WhatsApp Concierge</a>
+          <a href="https://wa.me/8801860821074?text=Hello%20ZELVIQO!%20I%20would%20like%20assistance%20with%20skincare%20products." target="_blank" rel="noopener" class="btn-primary full-width" style="text-align:center; display:block; text-decoration:none;">Connect on WhatsApp</a>
         </div>
       </div>
     </div>
@@ -885,12 +901,12 @@
     <div id="liveToastText">Sadia (Dhanmondi) ordered Vitamin C Serum</div>
   </div>
 
-  <!-- Smart Floating WhatsApp Concierge Widget -->
+  <!-- Smart Floating WhatsApp Widget -->
   <div class="wa-chat-widget">
     <div class="wa-chat-box" id="waChatBox">
       <div class="wa-chat-head">
         <div>
-          <strong>ZELVIQO Skin Concierge</strong>
+          <strong>ZELVIQO WhatsApp</strong>
           <small>Online &bull; Replies within minutes</small>
         </div>
         <button type="button" onclick="toggleWaBox()">&times;</button>
@@ -903,15 +919,15 @@
           <button type="button" onclick="sendPresetWa('Hello ZELVIQO! I would like to place an order via WhatsApp.')">Order via WhatsApp</button>
         </div>
         <div class="wa-input-row">
-          <input type="text" id="waCustomMsg" placeholder="Type your inquiry..." />
+          <input type="text" id="waCustomMsg" placeholder="Type your message..." />
           <button type="button" onclick="sendCustomWa()">Send</button>
         </div>
       </div>
     </div>
 
-    <button type="button" class="wa-float-btn" onclick="toggleWaBox()" aria-label="WhatsApp Concierge">
+    <button type="button" class="wa-float-btn" onclick="toggleWaBox()" aria-label="WhatsApp">
       <svg viewBox="0 0 24 24" width="22" height="22" fill="#ffffff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2m5.82 14.01c-.24.68-1.41 1.3-1.95 1.38-.5.08-1.14.11-1.84-.11-.43-.14-.98-.32-1.68-.62-2.94-1.27-4.86-4.24-5.01-4.44-.15-.2-1.2-1.59-1.2-3.04 0-1.45.76-2.16 1.03-2.46.27-.3.59-.37.79-.37.2 0 .39 0 .56.01.18.01.42-.07.66.5.24.59.83 2.02.9 2.17.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.38-.44.51-.15.15-.3.31-.13.61.17.3.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.36 1.46.3.15.47.12.64-.07.17-.2.74-.86.94-1.16.2-.3.39-.25.66-.15.27.1 1.72.81 2.02.96.3.15.49.22.56.35.07.12.07.72-.17 1.4z"/></svg>
-      <span>Concierge</span>
+      <span>WhatsApp</span>
     </button>
   </div>
 
@@ -1054,12 +1070,19 @@
     </div>
   </div>
 
-  <!-- Official Digital Order Invoice Modal -->
+  <!-- Official Digital Order Invoice Modal (With Company Logo & 1-Page Print) -->
   <div class="modal-backdrop" id="invoiceModal">
     <div class="modal-card">
       <div class="modal-header" style="background:var(--emerald-dark); color:#fff;">
         <h3>Order Confirmed</h3>
         <button type="button" class="close-btn" style="color:#fff;" onclick="document.getElementById('invoiceModal').classList.remove('open')">&times;</button>
+      </div>
+      <div class="slip-brand-header">
+        <img src="logo.png" alt="ZELVIQO Luxury Skin Care" />
+        <div>
+          <strong>ZELVIQO Luxury Skin Care</strong>
+          <small>100% Authentic Skincare &bull; Mirpur 11, Dhaka &bull; 01860-821074</small>
+        </div>
       </div>
       <div class="checkout-form" id="invoiceReceiptBody"></div>
     </div>
