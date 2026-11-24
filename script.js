@@ -1,5 +1,5 @@
 const WHATSAPP_NUMBER = "8801860821074";
-const GOOGLE_SHEET_WEBHOOK_URL = "";
+const GOOGLE_SHEET_WEBHOOK_URL = ""; // এখানে তোমার Google Apps Script Web App URL পেস্ট করবে
 
 function trackMetaEvent(eventName, payload = {}) {
   if (typeof window.fbq === "function") window.fbq("track", eventName, payload);
@@ -11,10 +11,10 @@ const translations = {
     searchBtn: "Search",
     myCart: "My Cart",
     menuMain: "EXPLORE STORE",
-    menuCats: "COLLECTIONS",
+    menuCats: "SKINCARE CATEGORIES",
     menuSupport: "CLIENT SERVICES",
-    navHome: "Home",
-    navAll: "All Skincare Products",
+    navHome: "Home (Top 12 Hits)",
+    navAll: "All Skincare Products (16)",
     navBuilder: "Build Your Combo (15% Off)",
     navQuiz: "Skin Consultation Quiz",
     navGuide: "Daily Routine Guide",
@@ -25,19 +25,19 @@ const translations = {
     navContact: "Contact Concierge",
     flashText: "Up to 27% Off on Authentic Serums & Value Combos",
     endsIn: "Ends in:",
-    shopByCat: "Shop by Collection",
-    viewAll: "Explore All →",
-    popularTitle: "Signature Skincare Essentials"
+    shopByCat: "Shop by Skincare Category",
+    viewAll: "Browse All 16 Products →",
+    popularTitle: "Top 12 Most-Loved Bestsellers"
   },
   bn: {
     topNotice: "১০০% অরিজিনাল ইমপোর্টেড স্কিনকেয়ার &bull; <strong>GLOW10</strong> কোডে ১০% অতিরিক্ত ছাড়",
     searchBtn: "খুঁজুন",
     myCart: "আমার কার্ট",
     menuMain: "স্টোর মেনু",
-    menuCats: "কালেকশনসমূহ",
+    menuCats: "স্কিনকেয়ার ক্যাটাগরি",
     menuSupport: "কাস্টমার সার্ভিস",
-    navHome: "হোম পেজ",
-    navAll: "সব স্কিনকেয়ার প্রোডাক্ট",
+    navHome: "হোম পেজ (সেরা ১২টি প্রোডাক্ট)",
+    navAll: "সব স্কিনকেয়ার প্রোডাক্ট (১৬টি)",
     navBuilder: "নিজের কম্বো বানান (১৫% ছাড়)",
     navQuiz: "স্কিন কনসালটেশন কুইজ",
     navGuide: "দৈনিক স্কিনকেয়ার গাইড",
@@ -48,26 +48,29 @@ const translations = {
     navContact: "যোগাযোগ করুন",
     flashText: "অরিজিনাল সিরাম ও কম্বো প্যাকে ২৭% পর্যন্ত ছাড়",
     endsIn: "অফার শেষ হতে বাকি:",
-    shopByCat: "কালেকশন অনুযায়ী কিনুন",
-    viewAll: "সব দেখুন →",
-    popularTitle: "জনপ্রিয় স্কিনকেয়ার প্রোডাক্টসমূহ"
+    shopByCat: "ক্যাটাগরি অনুযায়ী কিনুন",
+    viewAll: "সব ১৬টি প্রোডাক্ট দেখুন →",
+    popularTitle: "সেরা ১২টি হিট স্কিনকেয়ার প্রোডাক্ট"
   }
 };
 
 let currentLang = "en";
 
 const categoryMeta = {
-  all: { title: "All Skincare Products", desc: "Explore 100% authentic imported skincare curated for your daily routine." },
-  cleanser: { title: "Face Wash & Gentle Cleansers", desc: "Soap-free, pH-balanced cleansers to purify pores without drying your skin." },
-  serum: { title: "Face Serums & Treatments", desc: "Concentrated Vitamin C, Niacinamide & Alpha Arbutin serums for visible glow." },
-  sunscreen: { title: "Sunscreen SPF 50+ PA+++", desc: "Lightweight, zero-white-cast sun protection tailored for Bangladeshi weather." },
+  all: { title: "All Skincare Products", desc: "Complete collection of 100% authentic imported skincare across all categories." },
+  cleanser: { title: "Face Wash & Gentle Cleansers", desc: "Soap-free, pH-balanced face washes to purify pores without drying skin." },
+  toner: { title: "Hydrating Toners & Essences", desc: "Soothing pH-balancing toners & essences for deep hydration and barrier prep." },
+  serum: { title: "Targeted Face Serums", desc: "Concentrated Vitamin C, Niacinamide & Alpha Arbutin serums for visible glow." },
   moisturizer: { title: "Moisturizers & Night Gels", desc: "Deep barrier-repair hydration for soft, plump, healthy-looking skin." },
+  sunscreen: { title: "Sunscreen SPF 50+ PA+++", desc: "Lightweight, zero-white-cast sun protection tailored for Bangladeshi weather." },
   combo: { title: "Curated Value Combo Sets", desc: "Complete multi-step skincare bundles with extra savings." }
 };
 
+// 16 Products Total: Top 12 have isHit: true (Shown on Homepage), All 16 shown inside Categories
 const defaultProducts = [
   {
     id: 1,
+    isHit: true,
     name: "Dr. Rashel Vitamin C Brightening & Anti-Aging Face Serum",
     category: "serum",
     categoryLabel: "Face Serum",
@@ -78,105 +81,149 @@ const defaultProducts = [
     salePrice: 650,
     inStock: true,
     image: "product-1.jpg",
-    gallery: ["product-1.jpg", "product-8.jpg"],
+    gallery: ["product-1.jpg", "product-11.jpg"],
     description: "Fast-absorbing daily antioxidant serum infused with pure Vitamin C and Hyaluronic Acid to fade dullness and give a luminous glass-skin glow.",
-    ingredients: "Aqua, Ascorbic Acid (Vitamin C), Hyaluronic Acid, Niacinamide, Glycerin, Aloe Barbadensis Leaf Extract.",
+    ingredients: "Aqua, Ascorbic Acid (Vitamin C), Hyaluronic Acid, Niacinamide, Glycerin.",
     howToUse: "Apply 3–4 drops on clean face and neck every morning and night before moisturizer.",
     reviews: [{ user: "Nusrat Jahan (Uttara)", text: "100% original product! Within 2 weeks my skin looks noticeably brighter." }]
   },
   {
     id: 2,
+    isHit: true,
     name: "Care & Repair UV Defense Sunscreen SPF 50+ PA+++",
     category: "sunscreen",
     categoryLabel: "Sunscreen",
     concern: "darkspot",
     volume: "60ml",
-    skinType: "Oily, Combination & Normal Skin",
+    skinType: "Oily, Combination & Normal",
     regularPrice: 950,
     salePrice: 740,
     inStock: true,
     image: "product-2.jpg",
-    gallery: ["product-2.jpg", "product-6.jpg"],
+    gallery: ["product-2.jpg", "product-8.jpg"],
     description: "Specially formulated for humid Bangladeshi weather. Shields skin from UVA/UVB rays with zero white cast and zero stickiness.",
-    ingredients: "Zinc Oxide, Titanium Dioxide, Centella Asiatica Extract, Panthenol (Vitamin B5), Hyaluronic Acid.",
+    ingredients: "Zinc Oxide, Titanium Dioxide, Centella Asiatica Extract, Panthenol (Vitamin B5).",
     howToUse: "Apply generously across face and neck 15 minutes before sun exposure.",
     reviews: [{ user: "Tania Rahman (Dhanmondi)", text: "Zero white cast and never feels oily even in Dhaka heat." }]
   },
   {
     id: 3,
+    isHit: true,
+    name: "Simple Kind to Skin Refreshing Facial Wash",
+    category: "cleanser",
+    categoryLabel: "Face Wash & Cleanser",
+    concern: "hydration",
+    volume: "150ml",
+    skinType: "Sensitive & All Skin Types",
+    regularPrice: 720,
+    salePrice: 560,
+    inStock: true,
+    image: "product-3.jpg",
+    gallery: ["product-3.jpg", "product-5.jpg"],
+    description: "100% soap-free, fragrance-free gentle face wash enriched with Pro-Vitamin B5 and Vitamin E to cleanse impurities without irritation.",
+    ingredients: "Aqua, Cocamidopropyl Betaine, Panthenol (Pro-Vitamin B5), Tocopheryl Acetate (Vitamin E).",
+    howToUse: "Lather a small amount in hands, massage gently onto wet skin, and rinse thoroughly.",
+    reviews: [{ user: "Maliha Chowdhury (Mirpur)", text: "Best daily face wash! Leaves skin clean and never feels tight." }]
+  },
+  {
+    id: 4,
+    isHit: true,
     name: "Niacinamide 10% + Zinc Pore Refining Glow Serum",
     category: "serum",
     categoryLabel: "Face Serum",
     concern: "acne",
     volume: "30ml",
-    skinType: "Oily & Acne-Prone Skin",
+    skinType: "Oily & Acne-Prone",
     regularPrice: 1100,
     salePrice: 890,
     inStock: true,
-    image: "product-3.jpg",
-    gallery: ["product-3.jpg", "product-1.jpg"],
+    image: "product-4.jpg",
+    gallery: ["product-4.jpg", "product-1.jpg"],
     description: "High-strength 10% Niacinamide balanced with Zinc PCA to control excess sebum, minimize pores, and calm active breakouts.",
     ingredients: "Niacinamide (10%), Zinc PCA (1%), Tamarindus Indica Seed Gum, Pentylene Glycol.",
     howToUse: "Dispense 2–3 drops onto fingertips and gently pat into skin after cleansing.",
     reviews: [{ user: "Sadia Islam (Banani)", text: "Controlled my excess oil and minimized pores noticeably." }]
   },
   {
-    id: 4,
-    name: "Ceramide & Hyaluronic Gentle Hydrating Face Cleanser",
+    id: 5,
+    isHit: true,
+    name: "Ceramide & Hyaluronic Gentle Hydrating Cleanser",
     category: "cleanser",
     categoryLabel: "Face Wash & Cleanser",
     concern: "hydration",
     volume: "150ml",
-    skinType: "Dry, Sensitive & Normal Skin",
+    skinType: "Dry & Sensitive",
     regularPrice: 780,
     salePrice: 620,
     inStock: true,
-    image: "product-4.jpg",
-    gallery: ["product-4.jpg", "product-5.jpg"],
-    description: "Soap-free, pH-balanced daily face wash enriched with 3 essential Ceramides and Hyaluronic Acid to lift away dirt without drying.",
+    image: "product-5.jpg",
+    gallery: ["product-5.jpg", "product-3.jpg"],
+    description: "Barrier-supporting daily cleanser with 3 essential Ceramides and Hyaluronic Acid to lift away dirt while locking in moisture.",
     ingredients: "Ceramide NP, Ceramide AP, Ceramide EOP, Sodium Hyaluronate, Glycerin.",
     howToUse: "Massage onto wet face for 30 seconds, then rinse thoroughly with water.",
     reviews: []
   },
   {
-    id: 5,
+    id: 6,
+    isHit: true,
+    name: "Rosewater & Niacinamide Hydrating Glow Toner",
+    category: "toner",
+    categoryLabel: "Toner & Essence",
+    concern: "brightening",
+    volume: "150ml",
+    skinType: "All Skin Types",
+    regularPrice: 820,
+    salePrice: 650,
+    inStock: true,
+    image: "product-6.jpg",
+    gallery: ["product-6.jpg", "product-13.jpg"],
+    description: "Alcohol-free soothing toner distilled from Damascus rose petals and Niacinamide to tighten pores and prep skin for serums.",
+    ingredients: "Rosa Damascena Flower Water, Niacinamide, Panthenol, Sodium Hyaluronate.",
+    howToUse: "Apply with a cotton pad or pat directly onto clean face after washing.",
+    reviews: []
+  },
+  {
+    id: 7,
+    isHit: true,
     name: "24K Gold & Rosewater Barrier Repair Gel Moisturizer",
     category: "moisturizer",
-    categoryLabel: "Moisturizer",
+    categoryLabel: "Moisturizer & Night Gel",
     concern: "hydration",
     volume: "100g",
     skinType: "All Skin Types",
     regularPrice: 1250,
     salePrice: 980,
     inStock: true,
-    image: "product-5.jpg",
-    gallery: ["product-5.jpg", "product-4.jpg"],
+    image: "product-7.jpg",
+    gallery: ["product-7.jpg", "product-14.jpg"],
     description: "Cooling water-gel moisturizer infused with Damascus rosewater and micro-gold peptides that locks in 24-hour hydration.",
     ingredients: "Rosa Damascena Flower Water, Colloidal Gold, Betaine, Allantoin, Sodium Hyaluronate.",
-    howToUse: "Massage gently onto face and neck as the final step of your night routine.",
+    howToUse: "Massage gently onto face and neck as the final step of your routine.",
     reviews: []
   },
   {
-    id: 6,
+    id: 8,
+    isHit: true,
     name: "Ultra-Light Invisible Matte Aqua Sun Gel SPF 50+",
     category: "sunscreen",
     categoryLabel: "Sunscreen",
     concern: "acne",
     volume: "50ml",
-    skinType: "Oily & Sensitive Skin",
+    skinType: "Oily & Sensitive",
     regularPrice: 1050,
     salePrice: 850,
     inStock: true,
-    image: "product-6.jpg",
-    gallery: ["product-6.jpg", "product-2.jpg"],
+    image: "product-8.jpg",
+    gallery: ["product-8.jpg", "product-2.jpg"],
     description: "Water-light aqua gel sunscreen that melts into skin in seconds with a soft-matte finish.",
     ingredients: "Ethylhexyl Methoxycinnamate, Niacinamide, Green Tea Leaf Extract, Madecassoside.",
     howToUse: "Apply two fingers' worth evenly over face every morning.",
     reviews: []
   },
   {
-    id: 7,
-    name: "Alpha Arbutin Dark Spot Corrector Night Elixir",
+    id: 9,
+    isHit: true,
+    name: "Alpha Arbutin 2% Dark Spot Corrector Night Serum",
     category: "serum",
     categoryLabel: "Face Serum",
     concern: "darkspot",
@@ -185,15 +232,35 @@ const defaultProducts = [
     regularPrice: 1150,
     salePrice: 920,
     inStock: true,
-    image: "product-7.jpg",
-    gallery: ["product-7.jpg", "product-3.jpg"],
-    description: "Concentrated 2% Alpha Arbutin night treatment designed to target stubborn sunspots and hyperpigmentation.",
+    image: "product-9.jpg",
+    gallery: ["product-9.jpg", "product-4.jpg"],
+    description: "Concentrated 2% Alpha Arbutin night treatment designed to target stubborn sunspots, acne marks, and hyperpigmentation.",
     ingredients: "Alpha-Arbutin (2%), Hydrolyzed Hyaluronic Acid, Lactic Acid, Ferulic Acid.",
     howToUse: "Apply 3 drops to clean skin at night before moisturizer.",
     reviews: []
   },
   {
-    id: 8,
+    id: 10,
+    isHit: true,
+    name: "Salicylic Acid 2% Anti-Acne Pore Clearing Face Wash",
+    category: "cleanser",
+    categoryLabel: "Face Wash & Cleanser",
+    concern: "acne",
+    volume: "120ml",
+    skinType: "Oily & Acne-Prone",
+    regularPrice: 790,
+    salePrice: 640,
+    inStock: true,
+    image: "product-10.jpg",
+    gallery: ["product-10.jpg", "product-3.jpg"],
+    description: "Deep-cleansing BHA foaming face wash that unclogs blackheads, reduces excess oil, and prevents future acne breakouts.",
+    ingredients: "Salicylic Acid (2%), Tea Tree Leaf Oil, Centella Asiatica, Glycerin.",
+    howToUse: "Use morning and night; massage gently onto damp skin for 30 seconds and rinse.",
+    reviews: []
+  },
+  {
+    id: 11,
+    isHit: true,
     name: "ZELVIQO Complete Day-Glow Duo (Vitamin C + SPF 50+)",
     category: "combo",
     categoryLabel: "Combo Set",
@@ -203,25 +270,128 @@ const defaultProducts = [
     regularPrice: 1800,
     salePrice: 1320,
     inStock: true,
-    image: "product-8.jpg",
-    gallery: ["product-8.jpg", "product-1.jpg", "product-2.jpg"],
+    image: "product-11.jpg",
+    gallery: ["product-11.jpg", "product-1.jpg", "product-2.jpg"],
     description: "Our bestselling morning protection and glow bundle pairing Dr. Rashel Vitamin C Serum with Care & Repair SPF 50+ Sunscreen.",
     ingredients: "Full-Size Vitamin C Serum (50ml) + Care & Repair UV Defense Sunscreen (60ml).",
     howToUse: "Step 1: Apply Vitamin C Serum. Step 2: Lock it in with SPF 50+ Sunscreen.",
+    reviews: []
+  },
+  {
+    id: 12,
+    isHit: true,
+    name: "Glass-Skin 3-Step Routine (Face Wash + Serum + Sunscreen)",
+    category: "combo",
+    categoryLabel: "Combo Set",
+    concern: "brightening",
+    volume: "Full 3-Product Kit",
+    skinType: "All Skin Types",
+    regularPrice: 2520,
+    salePrice: 1890,
+    inStock: true,
+    image: "product-12.jpg",
+    gallery: ["product-12.jpg", "product-3.jpg", "product-1.jpg"],
+    description: "Complete daily morning glow set including Simple Facial Wash, Vitamin C Brightening Serum, and SPF 50+ PA+++ Sunscreen.",
+    ingredients: "Simple Facial Wash (150ml) + Dr. Rashel Vitamin C Serum (50ml) + SPF 50+ Sunscreen (60ml).",
+    howToUse: "Cleanse with Face Wash, apply Vitamin C Serum, and finish with SPF 50+ Sunscreen.",
+    reviews: []
+  },
+  // Additional 4 Category-Exclusive Products (Shown inside Categories & Search)
+  {
+    id: 13,
+    isHit: false,
+    name: "Centella Asiatica Calming & Soothing Face Toner",
+    category: "toner",
+    categoryLabel: "Toner & Essence",
+    concern: "acne",
+    volume: "120ml",
+    skinType: "Sensitive & Acne-Prone",
+    regularPrice: 890,
+    salePrice: 710,
+    inStock: true,
+    image: "product-13.jpg",
+    gallery: ["product-13.jpg", "product-6.jpg"],
+    description: "Ultra-gentle Centella Cica toner that calms redness, strengthens sensitive skin barrier, and restores optimal pH balance.",
+    ingredients: "Centella Asiatica Extract, Madecassoside, Panthenol, Allantoin.",
+    howToUse: "Pat gently onto skin right after cleansing.",
+    reviews: []
+  },
+  {
+    id: 14,
+    isHit: false,
+    name: "Hyaluronic Acid Deep Moisture Barrier Night Cream",
+    category: "moisturizer",
+    categoryLabel: "Moisturizer & Night Gel",
+    concern: "hydration",
+    volume: "50g",
+    skinType: "Dry & Normal",
+    regularPrice: 1180,
+    salePrice: 940,
+    inStock: true,
+    image: "product-14.jpg",
+    gallery: ["product-14.jpg", "product-7.jpg"],
+    description: "Rich yet non-comedogenic overnight recovery cream formulated with multi-molecular Hyaluronic Acid and Shea Butter.",
+    ingredients: "Sodium Hyaluronate, Ceramide NP, Squalane, Butyrospermum Parkii Butter.",
+    howToUse: "Apply evenly to face and neck every night before sleep.",
+    reviews: []
+  },
+  {
+    id: 15,
+    isHit: false,
+    name: "Snail Mucin 96% Power Repair Hydrating Essence",
+    category: "toner",
+    categoryLabel: "Toner & Essence",
+    concern: "darkspot",
+    volume: "100ml",
+    skinType: "All Skin Types",
+    regularPrice: 1450,
+    salePrice: 1190,
+    inStock: true,
+    image: "product-15.jpg",
+    gallery: ["product-15.jpg", "product-6.jpg"],
+    description: "Lightweight, fast-absorbing essence with 96% Snail Secretion Filtrate to repair damaged skin texture and boost elasticity.",
+    ingredients: "Snail Secretion Filtrate (96%), Betaine, Sodium Hyaluronate, Panthenol.",
+    howToUse: "Apply 2 pumps after toner and pat gently until fully absorbed.",
+    reviews: []
+  },
+  {
+    id: 16,
+    isHit: false,
+    name: "Acne & Oil Control Complete 3-Step Clear Skin Kit",
+    category: "combo",
+    categoryLabel: "Combo Set",
+    concern: "acne",
+    volume: "3-Product Set",
+    skinType: "Oily & Acne-Prone",
+    regularPrice: 2940,
+    salePrice: 2150,
+    inStock: true,
+    image: "product-16.jpg",
+    gallery: ["product-16.jpg", "product-10.jpg", "product-4.jpg"],
+    description: "Targeted anti-acne bundle combining Salicylic Acid Face Wash, Niacinamide 10% Serum, and Matte Aqua Sun Gel SPF 50+.",
+    ingredients: "Salicylic Acid Face Wash + Niacinamide 10% Serum + Aqua Sun Gel SPF 50+.",
+    howToUse: "Cleanse with Salicylic Face Wash, apply Niacinamide Serum, and protect with Aqua Sun Gel.",
     reviews: []
   }
 ];
 
 function getProducts() {
-  return JSON.parse(localStorage.getItem("zelviqo_catalog") || "null") || defaultProducts;
+  return JSON.parse(localStorage.getItem("zelviqo_catalog_v2") || "null") || defaultProducts;
 }
 
 function saveProducts(list) {
-  localStorage.setItem("zelviqo_catalog", JSON.stringify(list));
+  localStorage.setItem("zelviqo_catalog_v2", JSON.stringify(list));
+}
+
+function getHitProducts() {
+  const all = getProducts();
+  const hits = all.filter((p) => p.isHit !== false);
+  return hits.slice(0, 12);
 }
 
 let cart = [];
 let wishlist = JSON.parse(localStorage.getItem("zelviqo_wishlist") || "[]");
+let recentlyViewed = JSON.parse(localStorage.getItem("zelviqo_recent") || "[]");
 let currentCategory = "all";
 let cartDeliveryCharge = 70;
 let appliedDiscountPercent = 0;
@@ -264,7 +434,8 @@ function navigateTo(pageName, param = null, pushState = true) {
   });
 
   if (pageName === "home") {
-    renderProductCards("homeProductGrid", getProducts().slice(0, 8));
+    renderProductCards("homeProductGrid", getHitProducts());
+    renderRecentlyViewed();
     renderWatchAndShopReels();
   } else if (pageName === "category") {
     currentCategory = param || "all";
@@ -320,7 +491,7 @@ function toggleWishlist(productId) {
   else wishlist.splice(idx, 1);
   localStorage.setItem("zelviqo_wishlist", JSON.stringify(wishlist));
   updateWishlistUI();
-  renderProductCards("homeProductGrid", getProducts().slice(0, 8));
+  renderProductCards("homeProductGrid", getHitProducts());
   renderCategoryPageProducts();
 }
 
@@ -362,12 +533,12 @@ function closeWishlistDrawer() {
 }
 document.getElementById("wishBackdrop").addEventListener("click", closeWishlistDrawer);
 
-// Product Cards & Skin Concern Filter
+// Product Cards & Skin Concern Filter (Homepage = Top 12 Hits)
 function filterHomeByConcern(concern, btnEl) {
   document.querySelectorAll(".cf-pill").forEach((b) => b.classList.remove("active"));
   btnEl.classList.add("active");
-  const all = getProducts();
-  const list = concern === "all" ? all.slice(0, 8) : all.filter((p) => p.concern === concern);
+  const hits = getHitProducts();
+  const list = concern === "all" ? hits : hits.filter((p) => p.concern === concern);
   renderProductCards("homeProductGrid", list);
 }
 
@@ -388,6 +559,7 @@ function renderProductCards(containerId, list) {
             <button type="button" class="wish-heart-btn ${isWished ? "active" : ""}" onclick="toggleWishlist(${product.id})" aria-label="Save to Wishlist">
               <svg viewBox="0 0 24 24" width="15" height="15" fill="${isWished ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             </button>
+            <button type="button" class="quick-eye-btn" onclick="openQuickView(${product.id})">Quick View</button>
             <img src="${product.image}" alt="${product.name}" loading="lazy" onclick="navigateTo('product', ${product.id})" />
           </div>
           <div class="card-body">
@@ -412,10 +584,56 @@ function renderProductCards(containerId, list) {
 function renderCategoryPageProducts() {
   const all = getProducts();
   let list = currentCategory === "all" ? [...all] : all.filter((p) => p.category === currentCategory);
+  const skinVal = document.getElementById("catSkinFilter").value;
+  if (skinVal !== "all") {
+    list = list.filter((p) => (p.skinType || "").toLowerCase().includes(skinVal.toLowerCase()) || (p.skinType || "").includes("All"));
+  }
   const sortVal = document.getElementById("catSortSelect").value;
   if (sortVal === "low-high") list.sort((a, b) => a.salePrice - b.salePrice);
   if (sortVal === "high-low") list.sort((a, b) => b.salePrice - a.salePrice);
   renderProductCards("categoryProductGrid", list);
+}
+
+// Quick View Modal
+function openQuickView(productId) {
+  const product = getProducts().find((p) => p.id === productId);
+  if (!product) return;
+  document.getElementById("quickViewBody").innerHTML = `
+    <div style="display:grid; grid-template-columns:1fr 1.2fr; gap:16px; align-items:center;">
+      <img src="${product.image}" alt="${product.name}" style="width:100%; border-radius:8px; border:1px solid var(--border-color);" />
+      <div>
+        <span class="card-cat">${product.categoryLabel}</span>
+        <h3 style="font-family:'Cormorant Garamond', serif; font-size:24px; color:var(--emerald-dark); margin:4px 0;">${product.name}</h3>
+        <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:8px;">${product.description}</p>
+        <div style="font-size:12px; margin-bottom:10px;"><strong>Skin Type:</strong> ${product.skinType} &bull; <strong>Vol:</strong> ${product.volume}</div>
+        <div class="price-row">
+          <span class="price-now">৳${product.salePrice}</span>
+          <span class="price-old">৳${product.regularPrice}</span>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button type="button" class="btn-add" onclick="addToCart(${product.id}, 1, false); document.getElementById('quickViewModal').classList.remove('open');">Add to Cart</button>
+          <button type="button" class="btn-primary" onclick="addToCart(${product.id}, 1, true); document.getElementById('quickViewModal').classList.remove('open');">Order Now</button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.getElementById("quickViewModal").classList.add("open");
+}
+
+// Recently Viewed Tracker
+function recordRecentlyViewed(productId) {
+  recentlyViewed = [productId, ...recentlyViewed.filter((id) => id !== productId)].slice(0, 4);
+  localStorage.setItem("zelviqo_recent", JSON.stringify(recentlyViewed));
+}
+
+function renderRecentlyViewed() {
+  const sec = document.getElementById("recentlyViewedSection");
+  if (!sec || recentlyViewed.length === 0) return;
+  const all = getProducts();
+  const list = recentlyViewed.map((id) => all.find((p) => p.id === id)).filter(Boolean);
+  if (list.length === 0) return;
+  sec.style.display = "block";
+  renderProductCards("recentlyViewedGrid", list);
 }
 
 // Watch & Shop Reels + Before/After Slider
@@ -423,8 +641,8 @@ function renderWatchAndShopReels() {
   const reelsData = [
     { id: 1, title: "Morning Vitamin C Glass-Skin Routine", img: "product-1.jpg", price: 650 },
     { id: 2, title: "Zero White-Cast Sunscreen Outdoor Test", img: "product-2.jpg", price: 740 },
-    { id: 3, title: "How Niacinamide 10% Refines Pores", img: "product-3.jpg", price: 890 },
-    { id: 8, title: "Complete Day-Glow Duo Unboxing", img: "product-8.jpg", price: 1320 }
+    { id: 3, title: "Simple Facial Wash Gentle Foaming Demo", img: "product-3.jpg", price: 560 },
+    { id: 11, title: "Complete Day-Glow Duo Unboxing", img: "product-11.jpg", price: 1320 }
   ];
 
   document.getElementById("watchShopGrid").innerHTML = reelsData
@@ -452,6 +670,7 @@ function updateBeforeAfter(val) {
 function renderFullProductPage(productId) {
   const all = getProducts();
   const product = all.find((p) => p.id === productId) || all[0];
+  recordRecentlyViewed(product.id);
   trackMetaEvent("ViewContent", { content_name: product.name, value: product.salePrice, currency: "BDT" });
 
   const discount = Math.round(((product.regularPrice - product.salePrice) / product.regularPrice) * 100);
@@ -465,6 +684,10 @@ function renderFullProductPage(productId) {
   const gallery = product.gallery && product.gallery.length ? product.gallery : [product.image];
   const savedReviews = JSON.parse(localStorage.getItem(`zelviqo_rev_${product.id}`) || "[]");
   const allReviews = [...(product.reviews || []), ...savedReviews];
+
+  // Pair companion product for Frequently Bought Together
+  const companion = all.find((p) => p.id !== product.id && p.category !== product.category) || all[1];
+  const bundlePrice = Math.round((product.salePrice + companion.salePrice) * 0.9);
 
   document.getElementById("fullProductDetailContainer").innerHTML = `
     <div class="full-product-card">
@@ -513,6 +736,18 @@ function renderFullProductPage(productId) {
             <button type="button" class="btn-add" style="padding:12px 22px;" onclick="addToCart(${product.id}, 1, false)">Add to Shopping Bag</button>
             <button type="button" class="btn-primary" style="padding:12px 26px;" onclick="addToCart(${product.id}, 1, true)">Order Now</button>
           </div>
+
+          <!-- Frequently Bought Together Box -->
+          <div class="fbt-box">
+            <div style="font-size:11px; font-weight:800; letter-spacing:0.6px; color:var(--emerald-dark); margin-bottom:8px;">FREQUENTLY BOUGHT TOGETHER (SAVE 10%)</div>
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+              <div style="font-size:13px;">
+                <strong>This Item</strong> + <span>${companion.name.split(" ").slice(0, 4).join(" ")}</span>
+                <div style="color:var(--emerald-dark); font-weight:700; margin-top:2px;">Bundle Price: ৳${bundlePrice} <del style="color:var(--text-muted); font-weight:400;">৳${product.salePrice + companion.salePrice}</del></div>
+              </div>
+              <button type="button" class="btn-gold-sm" onclick="addBothToCart(${product.id}, ${companion.id})">Add Both to Bag</button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -533,6 +768,13 @@ function renderFullProductPage(productId) {
       </div>
     </div>
   `;
+}
+
+function addBothToCart(id1, id2) {
+  addToCart(id1, 1, false);
+  addToCart(id2, 1, false);
+  appliedDiscountPercent = 10;
+  openCartDrawer();
 }
 
 function submitProductReview(e, productId) {
@@ -712,7 +954,7 @@ document.getElementById("openCartBtn").addEventListener("click", openCartDrawer)
 document.getElementById("closeCartBtn").addEventListener("click", closeCartDrawer);
 drawerBackdrop.addEventListener("click", closeCartDrawer);
 
-// Checkout & Order Invoice
+// Checkout & Google Sheet Order Sync
 const checkoutModal = document.getElementById("checkoutModal");
 const deliveryAreaSelect = document.getElementById("deliveryArea");
 
@@ -737,6 +979,7 @@ function openCheckoutModal() {
     return;
   }
   closeCartDrawer();
+  trackMetaEvent("InitiateCheckout", { value: getSubtotal(), currency: "BDT" });
   deliveryAreaSelect.value = String(cartDeliveryCharge);
   const user = getCurrentUser();
   if (user) {
@@ -807,32 +1050,23 @@ document.getElementById("codOrderForm").addEventListener("submit", (e) => {
 
   const orderRecord = {
     orderId,
+    date: new Date().toLocaleString("en-GB"),
     name,
     phone,
     address,
-    payment: paymentNote,
-    total,
     itemsSummary,
-    date: new Date().toLocaleDateString("en-GB"),
+    shipping,
+    total,
+    payment: paymentNote,
     status: "Confirmed & Processing"
   };
 
+  // Save locally for Order Tracking & Admin Panel
   const allOrders = JSON.parse(localStorage.getItem("zelviqo_orders") || "[]");
   allOrders.unshift(orderRecord);
   localStorage.setItem("zelviqo_orders", JSON.stringify(allOrders));
 
-  const user = getCurrentUser();
-  if (user) {
-    user.points = (user.points || 50) + Math.floor(total / 10);
-    setCurrentUser(user);
-    const users = getUsers();
-    const uIdx = users.findIndex((u) => u.phone === user.phone);
-    if (uIdx !== -1) {
-      users[uIdx].points = user.points;
-      localStorage.setItem("zelviqo_users", JSON.stringify(users));
-    }
-  }
-
+  // Send directly to Google Sheet
   if (GOOGLE_SHEET_WEBHOOK_URL) {
     fetch(GOOGLE_SHEET_WEBHOOK_URL, {
       method: "POST",
@@ -842,12 +1076,18 @@ document.getElementById("codOrderForm").addEventListener("submit", (e) => {
     }).catch(() => {});
   }
 
+  const user = getCurrentUser();
+  if (user) {
+    user.points = (user.points || 50) + Math.floor(total / 10);
+    setCurrentUser(user);
+  }
+
   trackMetaEvent("Purchase", { value: total, currency: "BDT" });
 
   const waMsg = encodeURIComponent(
     `*NEW ORDER - ZELVIQO LUXURY SKIN CARE*\nOrder ID: #${orderId}\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\nPayment: ${paymentNote}\n\n*Items:*\n${itemsListText}\n\nDelivery: ৳${shipping}\n*Total Payable: ৳${total}*`
   );
-  const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${waMsg}`;
+  const waLink = `[https://wa.me/$](https://wa.me/$){WHATSAPP_NUMBER}?text=${waMsg}`;
 
   document.getElementById("invoiceReceiptBody").innerHTML = `
     <div style="border:1px dashed var(--emerald-main); padding:14px; border-radius:8px; background:var(--bg-page); margin-bottom:14px;">
@@ -936,8 +1176,11 @@ function renderAdminDashboard() {
     .map(
       (p) => `
       <div class="admin-row">
-        <div><strong>${p.name}</strong> &mdash; ৳${p.salePrice} (${p.inStock === false ? "Out of Stock" : "In Stock"})</div>
-        <button type="button" class="btn-add" onclick="toggleAdminStock(${p.id})">Toggle Stock</button>
+        <div><strong>${p.name}</strong> &mdash; ৳${p.salePrice} (${p.inStock === false ? "Out of Stock" : "In Stock"}) &bull; <em>${p.isHit !== false ? "Homepage Hit" : "Category Only"}</em></div>
+        <div style="display:flex; gap:6px;">
+          <button type="button" class="btn-gold-sm" onclick="toggleAdminHit(${p.id})">Toggle Homepage Hit</button>
+          <button type="button" class="btn-add" onclick="toggleAdminStock(${p.id})">Toggle Stock</button>
+        </div>
       </div>
     `
     )
@@ -964,6 +1207,7 @@ function adminAddNewProduct(e) {
   const cat = document.getElementById("admProdCat").value;
   list.unshift({
     id: Date.now(),
+    isHit: document.getElementById("admProdHit").checked,
     name: document.getElementById("admProdName").value.trim(),
     category: cat,
     categoryLabel: cat.toUpperCase(),
@@ -983,6 +1227,14 @@ function adminAddNewProduct(e) {
   e.target.reset();
   renderAdminDashboard();
   alert("New product published!");
+}
+
+function toggleAdminHit(id) {
+  const list = getProducts();
+  const item = list.find((p) => p.id === id);
+  if (item) item.isHit = item.isHit === false ? true : false;
+  saveProducts(list);
+  renderAdminDashboard();
 }
 
 function toggleAdminStock(id) {
@@ -1018,7 +1270,7 @@ function toggleWaBox() {
 }
 
 function sendPresetWa(text) {
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank");
+  window.open(`[https://wa.me/$](https://wa.me/$){WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank");
 }
 
 function sendCustomWa() {
@@ -1026,14 +1278,14 @@ function sendCustomWa() {
   const msg = input.value.trim();
   if (!msg) return;
   input.value = "";
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
+  window.open(`[https://wa.me/$](https://wa.me/$){WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
 }
 
-// Moving Showcase & Live Search
+// Moving Showcase (Top 12 Hits) & Live Search (All 16 Products)
 function renderMovingShowcase() {
   const track = document.getElementById("movingProductTrack");
-  const all = getProducts();
-  track.innerHTML = [...all, ...all]
+  const hits = getHitProducts();
+  track.innerHTML = [...hits, ...hits]
     .map(
       (p) => `
       <div class="marquee-chip" onclick="navigateTo('product', ${p.id})">
@@ -1235,7 +1487,7 @@ setInterval(() => {
 const recentOrdersSample = [
   "Sadia (Dhanmondi) ordered Vitamin C Serum",
   "Nusrat (Uttara) ordered Day-Glow Combo Set",
-  "Rafi (Mirpur 10) ordered SPF 50+ Sunscreen",
+  "Rafi (Mirpur 10) ordered Simple Facial Wash",
   "Mitu (Chattogram) ordered Niacinamide 10% Serum"
 ];
 let toastIdx = 0;
