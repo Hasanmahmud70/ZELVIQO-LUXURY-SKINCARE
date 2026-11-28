@@ -32,8 +32,8 @@ const translations = {
   bn: {
     topNotice: "১০০% অরিজিনাল ইমপোর্টেড স্কিনকেয়ার &bull; <strong>GLOW10</strong> কোডে ১০% অতিরিক্ত ছাড়",
     searchBtn: "খুঁজুন",
-    myCart: "আমার কার্ট",
-    menuMain: "স্টোর মেনু",
+    myCart: "কার্ট",
+    menuMain: "স্মেনু",
     menuCats: "স্কিনকেয়ার ক্যাটাগরি",
     menuSupport: "কাস্টমার সার্ভিস",
     navHome: "হোম পেজ (সেরা ১২টি প্রোডাক্ট)",
