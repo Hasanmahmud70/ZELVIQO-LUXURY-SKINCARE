@@ -968,7 +968,7 @@ const defaultProducts = [
     salePrice: 2950,
     inStock: true,
     image: "product-16.jpg",
-    gallery: ["product-16.jpg", "product-10.jpg", "product-16-2.jpg"],
+    gallery: ["product-16.jpg", "product-16-2.jpg", "product-16-3.jpg"],
     description: "Complete anti-acne & pore-refining kit: COSRX Salicylic Acid Cleanser + The Ordinary Niacinamide 10% Serum + MISSHA Aqua Sun Gel SPF 50+.",
     fullDetails: `
       <p>Conquer excess oil, clogged pores, and recurring breakouts with the <strong>ZELVIQO Acne &amp; Oil Control 3-Step Clear Skin Kit</strong>. Specially curated for oily and acne-prone skin in humid weather, this 3-piece clinical bundle targets blemishes at every step without over-drying.</p>
