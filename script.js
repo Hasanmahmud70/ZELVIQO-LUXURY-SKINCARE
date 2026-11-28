@@ -33,7 +33,7 @@ const translations = {
     topNotice: "১০০% অরিজিনাল ইমপোর্টেড স্কিনকেয়ার &bull; <strong>GLOW10</strong> কোডে ১০% অতিরিক্ত ছাড়",
     searchBtn: "খুঁজুন",
     myCart: "কার্ট",
-    menuMain: "স্মেনু",
+    menuMain: "মেনু",
     menuCats: "স্কিনকেয়ার ক্যাটাগরি",
     menuSupport: "কাস্টমার সার্ভিস",
     navHome: "হোম পেজ (সেরা ১২টি প্রোডাক্ট)",
@@ -66,7 +66,7 @@ const categoryMeta = {
   combo: { title: "Curated Value Combo Sets", desc: "Complete multi-step skincare bundles with extra savings." }
 };
 
-// 16 Products Total: Top 12 have isHit: true (Shown on Homepage), All 16 shown inside Categories
+// 16 Professionally Curated Authentic Skincare Products with Realistic BD Market Pricing (Top 12 isHit: true on Homepage)
 const defaultProducts = [
   {
     id: 1,
@@ -77,33 +77,119 @@ const defaultProducts = [
     concern: "brightening",
     volume: "50ml",
     skinType: "All Skin Types",
-    regularPrice: 850,
-    salePrice: 650,
+    regularPrice: 820,
+    salePrice: 620,
     inStock: true,
     image: "product-1.jpg",
     gallery: ["product-1.jpg", "product-1-2.jpg"],
-    description: "Fast-absorbing daily antioxidant serum infused with pure Vitamin C and Hyaluronic Acid to fade dullness and give a luminous glass-skin glow.",
-    ingredients: "Aqua, Ascorbic Acid (Vitamin C), Hyaluronic Acid, Niacinamide, Glycerin.",
-    howToUse: "Apply 3–4 drops on clean face and neck every morning and night before moisturizer.",
+    description: "Lightweight antioxidant Vitamin C serum that fades dullness, evens skin tone, and boosts natural radiance.",
+    fullDetails: `
+      <p>Reveal a brighter, smoother, and more radiant-looking complexion with <strong>Dr. Rashel Vitamin C Brightening &amp; Anti-Aging Face Serum</strong>. Specially formulated with stabilized Vitamin C and skin-conditioning humectants, this lightweight serum targets dullness, uneven skin tone, and dark spots while delivering lasting hydration.</p>
+      <p>Enriched with antioxidant-rich Vitamin C and Hyaluronic Acid, it helps refine skin texture, soften the appearance of fine lines, and restore a healthy, luminous glow without leaving any greasy or heavy residue.</p>
+
+      <h3>Key Benefits</h3>
+      <ul>
+        <li>Helps brighten dull, fatigued, and uneven-looking skin.</li>
+        <li>Visibly reduces the appearance of dark spots, sun tan, and discoloration.</li>
+        <li>Delivers deep hydration and helps lock in daily skin moisture.</li>
+        <li>Softens the look of fine lines and improves overall skin elasticity.</li>
+        <li>Provides daily antioxidant defense against pollution and UV stressors.</li>
+      </ul>
+
+      <h3>Key Ingredients</h3>
+      <ol>
+        <li><strong>Vitamin C (3-O-Ethyl Ascorbic Acid):</strong> A highly stable Vitamin C derivative that provides potent antioxidant protection, brightens dull skin, and helps fade dark spots.</li>
+        <li><strong>Sodium Hyaluronate (Hyaluronic Acid):</strong> A moisture-binding humectant that draws hydration deep into the skin, leaving it plump and refreshed.</li>
+        <li><strong>Glycerin &amp; Glycereth-26:</strong> Skin-conditioning moisturizing agents that prevent dryness and maintain a smooth, supple barrier.</li>
+        <li><strong>Hydrolyzed Collagen:</strong> Supports skin firmness and helps maintain a smooth, youthful complexion.</li>
+      </ol>
+
+      <h3>How to Use</h3>
+      <ol>
+        <li>Start with a freshly cleansed face and gently pat your skin dry.</li>
+        <li>Apply 3–4 drops of serum evenly onto your face and neck.</li>
+        <li>Gently massage in upward and outward motions until fully absorbed.</li>
+        <li>Follow with your favorite moisturizer to seal in hydration.</li>
+        <li>During the daytime, always finish with a broad-spectrum SPF 50+ sunscreen.</li>
+      </ol>
+
+      <div class="unified-note-box">
+        <strong>Recommended Usage:</strong> Morning and evening.<br>
+        <strong>Important:</strong> Perform a patch test before first use. Avoid direct contact with eyes. Discontinue use if irritation occurs. For external use only.
+      </div>
+
+      <h3>Product Details</h3>
+      <ul>
+        <li><strong>Brand:</strong> Dr. Rashel</li>
+        <li><strong>Product Type:</strong> Brightening Face Serum</li>
+        <li><strong>Skin Concern:</strong> Dullness, uneven skin tone, dark spots, and fine lines</li>
+        <li><strong>Skin Type:</strong> Suitable for all skin types</li>
+        <li><strong>Texture:</strong> Lightweight, fast-absorbing liquid serum</li>
+        <li><strong>Net Volume:</strong> 50ml</li>
+      </ul>
+    `,
     reviews: [{ user: "Nusrat Jahan (Uttara)", text: "100% original product! Within 2 weeks my skin looks noticeably brighter." }]
   },
   {
     id: 2,
     isHit: true,
-    name: "Care & Repair UV Defense Sunscreen SPF 50+ PA+++",
+    name: "Care & Repair UV Defense Matte Sunscreen SPF 50+ PA+++",
     category: "sunscreen",
     categoryLabel: "Sunscreen",
     concern: "darkspot",
     volume: "60ml",
     skinType: "Oily, Combination & Normal",
-    regularPrice: 950,
-    salePrice: 740,
+    regularPrice: 890,
+    salePrice: 680,
     inStock: true,
     image: "product-2.jpg",
     gallery: ["product-2.jpg", "product-2-2.jpg"],
-    description: "Specially formulated for humid Bangladeshi weather. Shields skin from UVA/UVB rays with zero white cast and zero stickiness.",
-    ingredients: "Zinc Oxide, Titanium Dioxide, Centella Asiatica Extract, Panthenol (Vitamin B5).",
-    howToUse: "Apply generously across face and neck 15 minutes before sun exposure.",
+    description: "Broad-spectrum SPF 50+ PA+++ daily sunscreen with zero white cast and oil-free comfort for humid weather.",
+    fullDetails: `
+      <p>Protect your skin from harsh UV rays and humidity with <strong>Care &amp; Repair UV Defense Matte Sunscreen SPF 50+ PA+++</strong>. Engineered specifically for hot and humid tropical climates, this breathable formula shields against both UVA (aging) and UVB (burning) rays without clogging pores.</p>
+      <p>Infused with soothing Centella Asiatica and Pro-Vitamin B5, it calms sun-stressed skin while leaving an invisible, non-greasy finish with zero white cast.</p>
+
+      <h3>Key Benefits</h3>
+      <ul>
+        <li>Provides high broad-spectrum SPF 50+ PA+++ protection against UVA &amp; UVB rays.</li>
+        <li>Zero white cast—blends seamlessly into all South Asian skin tones.</li>
+        <li>Non-greasy, sweat-resistant texture ideal for humid Bangladeshi weather.</li>
+        <li>Helps prevent sun tan, premature aging, and UV-induced dark spots.</li>
+        <li>Soothes and strengthens the skin barrier with Centella and Panthenol.</li>
+      </ul>
+
+      <h3>Key Ingredients</h3>
+      <ol>
+        <li><strong>Broad-Spectrum UV Filters (Zinc Oxide &amp; Titanium Dioxide):</strong> Reflect and absorb harmful UVA/UVB radiation to prevent sunburn and pigmentation.</li>
+        <li><strong>Centella Asiatica Extract:</strong> Calms heat-induced redness and supports skin barrier recovery.</li>
+        <li><strong>Panthenol (Pro-Vitamin B5):</strong> Hydrates and keeps skin soft without adding excess oil.</li>
+        <li><strong>Tocopheryl Acetate (Vitamin E):</strong> Neutralizes free radicals triggered by sun exposure.</li>
+      </ol>
+
+      <h3>How to Use</h3>
+      <ol>
+        <li>Complete your morning skincare routine (cleanser, serum, and light moisturizer).</li>
+        <li>Squeeze two fingers' length of sunscreen onto your index and middle fingers.</li>
+        <li>Dot evenly across face, neck, and ears 15 minutes before stepping outdoors.</li>
+        <li>Gently blend until completely absorbed.</li>
+        <li>Reapply every 2–3 hours when exposed to direct sunlight.</li>
+      </ol>
+
+      <div class="unified-note-box">
+        <strong>Recommended Usage:</strong> Every morning (365 days, indoors &amp; outdoors).<br>
+        <strong>Important:</strong> Perform a patch test before first use. Avoid direct contact with eyes. For external use only.
+      </div>
+
+      <h3>Product Details</h3>
+      <ul>
+        <li><strong>Brand:</strong> Care &amp; Repair</li>
+        <li><strong>Product Type:</strong> Broad-Spectrum Daily Sunscreen</li>
+        <li><strong>Protection Level:</strong> SPF 50+ PA+++</li>
+        <li><strong>Skin Type:</strong> Oily, Combination, and Normal skin</li>
+        <li><strong>Finish:</strong> Invisible, natural soft-matte (Zero white cast)</li>
+        <li><strong>Net Volume:</strong> 60ml</li>
+      </ul>
+    `,
     reviews: [{ user: "Tania Rahman (Dhanmondi)", text: "Zero white cast and never feels oily even in Dhaka heat." }]
   },
   {
@@ -115,272 +201,825 @@ const defaultProducts = [
     concern: "hydration",
     volume: "150ml",
     skinType: "Sensitive & All Skin Types",
-    regularPrice: 720,
-    salePrice: 560,
+    regularPrice: 690,
+    salePrice: 540,
     inStock: true,
     image: "product-3.jpg",
     gallery: ["product-3.jpg", "product-3-2.jpg"],
-    description: "100% soap-free, fragrance-free gentle face wash enriched with Pro-Vitamin B5 and Vitamin E to cleanse impurities without irritation.",
-    ingredients: "Aqua, Cocamidopropyl Betaine, Panthenol (Pro-Vitamin B5), Tocopheryl Acetate (Vitamin E).",
-    howToUse: "Lather a small amount in hands, massage gently onto wet skin, and rinse thoroughly.",
+    description: "100% soap-free, fragrance-free gentle daily gel face wash enriched with Pro-Vitamin B5 and Vitamin E.",
+    fullDetails: `
+      <p>Cleanse away dirt, excess oil, and impurities without stripping your skin's natural moisture with <strong>Simple Kind to Skin Refreshing Facial Wash</strong>. Dermatologist-tested and 100% soap-free, this mild gel cleanser leaves even the most sensitive skin feeling clean, soft, and hydrated.</p>
+      <p>Formulated without artificial perfumes, harsh dyes, or irritating chemicals, it respects your skin's natural pH balance and prevents post-wash tightness.</p>
+
+      <h3>Key Benefits</h3>
+      <ul>
+        <li>Gently removes daily dirt, oil, and light makeup without drying out skin.</li>
+        <li>100% soap-free, alcohol-free, and free from artificial fragrance or color.</li>
+        <li>Maintains the skin's natural moisture barrier for a soft, fresh feel.</li>
+        <li>Dermatologically tested and hypoallergenic—safe for sensitive skin.</li>
+        <li>Ideal for both morning and night daily cleansing.</li>
+      </ul>
+
+      <h3>Key Ingredients</h3>
+      <ol>
+        <li><strong>Panthenol (Pro-Vitamin B5):</strong> Deeply hydrates, softens, and supports skin barrier repair during cleansing.</li>
+        <li><strong>Tocopheryl Acetate (Vitamin E):</strong> Provides gentle antioxidant nourishment and keeps skin supple.</li>
+        <li><strong>Triple Purified Water:</strong> Minimizes potential skin irritation for ultra-clean, gentle washing.</li>
+        <li><strong>Cocamidopropyl Betaine:</strong> A mild coconut-derived cleansing agent that creates a soft, non-stripping lather.</li>
+      </ol>
+
+      <h3>How to Use</h3>
+      <ol>
+        <li>Wet your face thoroughly with lukewarm water.</li>
+        <li>Squeeze a small pea-sized amount into your palms and work into a gentle lather.</li>
+        <li>Massage onto your face and neck in circular motions for 30 seconds.</li>
+        <li>Rinse thoroughly with clean water and pat dry with a soft towel.</li>
+      </ol>
+
+      <div class="unified-note-box">
+        <strong>Recommended Usage:</strong> Twice daily (Morning and Night).<br>
+        <strong>Important:</strong> Avoid direct contact with eyes; rinse immediately with water if contact occurs. For external use only.
+      </div>
+
+      <h3>Product Details</h3>
+      <ul>
+        <li><strong>Brand:</strong> Simple (UK)</li>
+        <li><strong>Product Type:</strong> Gentle Gel Facial Wash</li>
+        <li><strong>Skin Concern:</strong> Sensitivity, dryness, daily oil &amp; dirt buildup</li>
+        <li><strong>Skin Type:</strong> All skin types, including sensitive skin</li>
+        <li><strong>Formula:</strong> 100% Soap-Free, Fragrance-Free &amp; Non-Comedogenic</li>
+        <li><strong>Net Volume:</strong> 150ml</li>
+      </ul>
+    `,
     reviews: [{ user: "Maliha Chowdhury (Mirpur)", text: "Best daily face wash! Leaves skin clean and never feels tight." }]
   },
   {
     id: 4,
     isHit: true,
-    name: "Niacinamide 10% + Zinc Pore Refining Glow Serum",
+    name: "The Ordinary Niacinamide 10% + Zinc 1% Oil Control Serum",
     category: "serum",
     categoryLabel: "Face Serum",
     concern: "acne",
     volume: "30ml",
-    skinType: "Oily & Acne-Prone",
-    regularPrice: 1100,
-    salePrice: 890,
+    skinType: "Oily, Combination & Acne-Prone",
+    regularPrice: 1380,
+    salePrice: 1180,
     inStock: true,
     image: "product-4.jpg",
     gallery: ["product-4.jpg", "product-4-2.jpg"],
-    description: "High-strength 10% Niacinamide balanced with Zinc PCA to control excess sebum, minimize pores, and calm active breakouts.",
-    ingredients: "Niacinamide (10%), Zinc PCA (1%), Tamarindus Indica Seed Gum, Pentylene Glycol.",
-    howToUse: "Dispense 2–3 drops onto fingertips and gently pat into skin after cleansing.",
+    description: "High-strength 10% Niacinamide and 1% Zinc PCA formula to balance excess sebum, minimize pores, and calm blemishes.",
+    fullDetails: `
+      <p>Target excess oil, enlarged pores, and recurring blemishes with <strong>The Ordinary Niacinamide 10% + Zinc 1% Oil Control Serum</strong>. This water-based, high-strength vitamin and mineral formula visibly regulates sebum production and refines uneven skin texture.</p>
+      <p>By pairing 10% pure Niacinamide (Vitamin B3) with 1% Zinc PCA, it strengthens the skin barrier, fades post-acne redness, and promotes a clearer, smoother complexion.</p>
+
+      <h3>Key Benefits</h3>
+      <ul>
+        <li>Controls excess sebum and reduces midday shine on oily T-zones.</li>
+        <li>Visibly minimizes the appearance of enlarged and congested pores.</li>
+        <li>Calms active breakouts and fades red post-acne marks.</li>
+        <li>Strengthens skin barrier resilience and smooths rough skin texture.</li>
+        <li>Lightweight, oil-free water-gel formula that layers easily under sunscreen.</li>
+      </ul>
+
+      <h3>Key Ingredients</h3>
+      <ol>
+        <li><strong>Niacinamide (10% Vitamin B3):</strong> Helps balance oil production, brighten uneven tone, and improve pore appearance.</li>
+        <li><strong>Zinc PCA (1%):</strong> Supports sebum regulation and helps calm blemish-prone skin.</li>
+        <li><strong>Tamarindus Indica Seed Gum:</strong> Provides lightweight hydration and helps improve skin elasticity.</li>
+      </ol>
+
+      <h3>How to Use</h3>
+      <ol>
+        <li>Cleanse your face thoroughly and pat dry.</li>
+        <li>Apply 2–3 drops across your entire face in the morning and evening before heavier creams.</li>
+        <li>Gently pat into skin until absorbed.</li>
+        <li>Follow with an oil-free moisturizer (and SPF 50+ in the morning).</li>
+      </ol>
+
+      <div class="unified-note-box">
+        <strong>Recommended Usage:</strong> Morning and evening.<br>
+        <strong>Important:</strong> Do not layer in the exact same routine with direct high-concentration Vitamin C (L-Ascorbic Acid). Perform a patch test before first use.
+      </div>
+
+      <h3>Product Details</h3>
+      <ul>
+        <li><strong>Brand:</strong> The Ordinary</li>
+        <li><strong>Product Type:</strong> Blemish &amp; Pore Refining Serum</li>
+        <li><strong>Skin Concern:</strong> Excess oil, enlarged pores, acne blemishes, and uneven texture</li>
+        <li><strong>Skin Type:</strong> Oily, Combination, and Acne-Prone skin</li>
+        <li><strong>Key Actives:</strong> 10% Niacinamide + 1% Zinc PCA</li>
+        <li><strong>Net Volume:</strong> 30ml</li>
+      </ul>
+    `,
     reviews: [{ user: "Sadia Islam (Banani)", text: "Controlled my excess oil and minimized pores noticeably." }]
   },
   {
     id: 5,
     isHit: true,
-    name: "Ceramide & Hyaluronic Gentle Hydrating Cleanser",
+    name: "CeraVe Hydrating Facial Cleanser with Ceramides & Hyaluronic Acid",
     category: "cleanser",
     categoryLabel: "Face Wash & Cleanser",
     concern: "hydration",
     volume: "150ml",
-    skinType: "Dry & Sensitive",
-    regularPrice: 780,
-    salePrice: 620,
+    skinType: "Normal, Dry & Sensitive",
+    regularPrice: 1150,
+    salePrice: 960,
     inStock: true,
     image: "product-5.jpg",
     gallery: ["product-5.jpg", "product-5-2.jpg"],
-    description: "Barrier-supporting daily cleanser with 3 essential Ceramides and Hyaluronic Acid to lift away dirt while locking in moisture.",
-    ingredients: "Ceramide NP, Ceramide AP, Ceramide EOP, Sodium Hyaluronate, Glycerin.",
-    howToUse: "Massage onto wet face for 30 seconds, then rinse thoroughly with water.",
+    description: "Dermatologist-developed creamy non-foaming cleanser with 3 essential Ceramides and Hyaluronic Acid to restore skin moisture.",
+    fullDetails: `
+      <p>Cleanse and hydrate simultaneously with <strong>CeraVe Hydrating Facial Cleanser with Ceramides &amp; Hyaluronic Acid</strong>. Developed with dermatologists, this gentle, non-foaming lotion cleanser removes dirt and makeup while preserving your skin's natural protective barrier.</p>
+      <p>Powered by 3 essential Ceramides and Hyaluronic Acid, it attracts and locks moisture into the skin, making it ideal for normal-to-dry and sensitive skin types.</p>
+
+      <h3>Key Benefits</h3>
+      <ul>
+        <li>Gently cleanses impurities without stripping essential natural lipids.</li>
+        <li>Restores and maintains the skin's protective barrier with 3 essential Ceramides.</li>
+        <li>Hydrates dry, flaky skin immediately upon washing via Hyaluronic Acid.</li>
+        <li>Fragrance-free, soap-free, and non-comedogenic (won't clog pores).</li>
+        <li>Accepted by the National Eczema Association for ultra-gentle daily care.</li>
+      </ul>
+
+      <h3>Key Ingredients</h3>
+      <ol>
+        <li><strong>Ceramides NP, AP &amp; EOP:</strong> Essential lipids that replenish and fortify the skin's natural barrier.</li>
+        <li><strong>Hyaluronic Acid (Sodium Hyaluronate):</strong> Attracts moisture to the skin's surface to keep it plump and hydrated.</li>
+        <li><strong>Glycerin:</strong> Softens and conditions dry, rough patches during cleansing.</li>
+      </ol>
+
+      <h3>How to Use</h3>
+      <ol>
+        <li>Wet skin with lukewarm water.</li>
+        <li>Massage a generous amount of cleanser onto your face in a gentle, circular motion.</li>
+        <li>Rinse thoroughly with water and pat dry gently.</li>
+      </ol>
+
+      <div class="unified-note-box">
+        <strong>Recommended Usage:</strong> Morning and night.<br>
+        <strong>Important:</strong> Non-foaming creamy formula—this is normal and designed to protect dry skin. Avoid direct eye contact.
+      </div>
+
+      <h3>Product Details</h3>
+      <ul>
+        <li><strong>Brand:</strong> CeraVe</li>
+        <li><strong>Product Type:</strong> Hydrating Lotion Cleanser</li>
+        <li><strong>Skin Concern:</strong> Dryness, tightness, compromised skin barrier</li>
+        <li><strong>Skin Type:</strong> Normal, Dry, and Sensitive skin</li>
+        <li><strong>Texture:</strong> Creamy, non-foaming emulsion</li>
+        <li><strong>Net Volume:</strong> 150ml</li>
+      </ul>
+    `,
     reviews: []
   },
   {
     id: 6,
     isHit: true,
-    name: "Rosewater & Niacinamide Hydrating Glow Toner",
+    name: "Pixi Rose Tonic Nourishing & pH Balancing Facial Toner",
     category: "toner",
     categoryLabel: "Toner & Essence",
     concern: "brightening",
     volume: "150ml",
     skinType: "All Skin Types",
-    regularPrice: 820,
-    salePrice: 650,
+    regularPrice: 1450,
+    salePrice: 1190,
     inStock: true,
     image: "product-6.jpg",
     gallery: ["product-6.jpg", "product-6-2.jpg"],
-    description: "Alcohol-free soothing toner distilled from Damascus rose petals and Niacinamide to tighten pores and prep skin for serums.",
-    ingredients: "Rosa Damascena Flower Water, Niacinamide, Panthenol, Sodium Hyaluronate.",
-    howToUse: "Apply with a cotton pad or pat directly onto clean face after washing.",
+    description: "Alcohol-free Damascus rosewater and Niacinamide toner that calms redness, balances pH, and preps skin for serums.",
+    fullDetails: `
+      <p>Refresh, soothe, and rebalance your complexion after cleansing with <strong>Pixi Rose Tonic Nourishing &amp; pH Balancing Facial Toner</strong>. Infused with pure Damascus Rosewater, Elderflower, and Niacinamide, this alcohol-free botanical toner replenishes lost hydration and minimizes the look of redness.</p>
+      <p>It restores your skin's optimal pH level right after washing so your serums and moisturizers absorb faster and work more effectively.</p>
+
+      <h3>Key Benefits</h3>
+      <ul>
+        <li>Instantly calms skin redness, irritation, and post-wash tightness.</li>
+        <li>Balances skin pH and gently refines pore appearance.</li>
+        <li>Boosts hydration and preps skin for better serum absorption.</li>
+        <li>100% alcohol-free and paraben-free—gentle enough for daily use.</li>
+        <li>Leaves skin looking dewy, calm, and naturally radiant.</li>
+      </ul>
+
+      <h3>Key Ingredients</h3>
+      <ol>
+        <li><strong>Rosa Damascena (Damascus Rose) Flower Water:</strong> Naturally hydrates, soothes sensitivity, and tones skin.</li>
+        <li><strong>Niacinamide (Vitamin B3):</strong> Brightens dull tone and strengthens the skin barrier.</li>
+        <li><strong>Sodium Hyaluronate &amp; Panthenol:</strong> Deliver lightweight, refreshing moisture.</li>
+      </ol>
+
+      <h3>How to Use</h3>
+      <ol>
+        <li>Use morning and night immediately after cleansing your face.</li>
+        <li>Saturate a cotton pad and sweep gently across face and neck, or pour a few drops into palms and pat directly into skin.</li>
+        <li>Follow immediately with your serum and moisturizer while skin is still slightly damp.</li>
+      </ol>
+
+      <div class="unified-note-box">
+        <strong>Recommended Usage:</strong> Twice daily (AM &amp; PM after cleansing).<br>
+        <strong>Important:</strong> Perform a patch test before first use. Avoid direct contact with eyes. For external use only.
+      </div>
+
+      <h3>Product Details</h3>
+      <ul>
+        <li><strong>Brand:</strong> Pixi</li>
+        <li><strong>Product Type:</strong> Hydrating &amp; Soothing Facial Toner</li>
+        <li><strong>Skin Concern:</strong> Dehydration, redness, dullness, and pH imbalance</li>
+        <li><strong>Skin Type:</strong> All skin types, including sensitive</li>
+        <li><strong>Formula:</strong> Alcohol-Free &amp; Paraben-Free</li>
+        <li><strong>Net Volume:</strong> 150ml</li>
+      </ul>
+    `,
     reviews: []
   },
   {
     id: 7,
     isHit: true,
-    name: "24K Gold & Rosewater Barrier Repair Gel Moisturizer",
+    name: "Bioaqua 24K Gold & Rosewater Barrier Repair Gel Moisturizer",
     category: "moisturizer",
     categoryLabel: "Moisturizer & Night Gel",
     concern: "hydration",
     volume: "100g",
     skinType: "All Skin Types",
-    regularPrice: 1250,
-    salePrice: 980,
+    regularPrice: 680,
+    salePrice: 520,
     inStock: true,
     image: "product-7.jpg",
     gallery: ["product-7.jpg", "product-7-2.jpg"],
-    description: "Cooling water-gel moisturizer infused with Damascus rosewater and micro-gold peptides that locks in 24-hour hydration.",
-    ingredients: "Rosa Damascena Flower Water, Colloidal Gold, Betaine, Allantoin, Sodium Hyaluronate.",
-    howToUse: "Massage gently onto face and neck as the final step of your routine.",
+    description: "Cooling water-gel daily & overnight moisturizer enriched with 24K Gold essence, Rosewater, and Hyaluronic Acid.",
+    fullDetails: `
+      <p>Lock in 24-hour weightless hydration with <strong>Bioaqua 24K Gold &amp; Rosewater Barrier Repair Gel Moisturizer</strong>. Its refreshing, non-sticky aqua-gel texture bursts into moisture upon contact, quenching dehydrated skin without feeling heavy in humid weather.</p>
+      <p>Enriched with micro-gold essence, Damascus Rosewater, and Sodium Hyaluronate, it repairs skin fatigue overnight and leaves a soft, glass-skin bounce.</p>
+
+      <h3>Key Benefits</h3>
+      <ul>
+        <li>Delivers intense, long-lasting hydration without clogging pores or feeling greasy.</li>
+        <li>Helps repair a dull, tired skin barrier overnight for a refreshed morning glow.</li>
+        <li>Soothes dryness and smooths rough skin texture.</li>
+        <li>Fast-absorbing cooling gel suitable for both oily and dry skin types.</li>
+        <li>Doubles as a hydrating sleeping mask when applied in a slightly thicker layer at night.</li>
+      </ul>
+
+      <h3>Key Ingredients</h3>
+      <ol>
+        <li><strong>24K Colloidal Gold Essence:</strong> Helps revitalize dull skin and improve skin radiance and elasticity.</li>
+        <li><strong>Rosa Damascena Flower Water:</strong> Calms, softens, and replenishes moisture balance.</li>
+        <li><strong>Sodium Hyaluronate &amp; Betaine:</strong> Deeply hydrate and lock water into skin cells.</li>
+        <li><strong>Allantoin:</strong> Soothes irritation and promotes smooth skin recovery.</li>
+      </ol>
+
+      <h3>How to Use</h3>
+      <ol>
+        <li>Apply after cleansing, toning, and applying your face serum.</li>
+        <li>Take a coin-sized amount and dot evenly across forehead, cheeks, chin, and neck.</li>
+        <li>Massage gently in upward circular motions until fully absorbed.</li>
+        <li>In the daytime, follow with SPF 50+ sunscreen.</li>
+      </ol>
+
+      <div class="unified-note-box">
+        <strong>Recommended Usage:</strong> Morning and night (or as an overnight sleeping gel).<br>
+        <strong>Important:</strong> Perform a patch test before first use. Store in a cool, dry place away from direct sunlight.
+      </div>
+
+      <h3>Product Details</h3>
+      <ul>
+        <li><strong>Brand:</strong> Bioaqua</li>
+        <li><strong>Product Type:</strong> Hydrating Gel Moisturizer / Night Gel</li>
+        <li><strong>Skin Concern:</strong> Dehydration, dullness, fatigue, and dry patches</li>
+        <li><strong>Skin Type:</strong> All skin types (Oily, Combination, Dry &amp; Normal)</li>
+        <li><strong>Texture:</strong> Lightweight, non-sticky cooling water-gel</li>
+        <li><strong>Net Weight:</strong> 100g</li>
+      </ul>
+    `,
     reviews: []
   },
   {
     id: 8,
     isHit: true,
-    name: "Ultra-Light Invisible Matte Aqua Sun Gel SPF 50+",
+    name: "MISSHA All Around Safe Block Aqua Sun Gel SPF 50+ PA++++",
     category: "sunscreen",
     categoryLabel: "Sunscreen",
     concern: "acne",
     volume: "50ml",
-    skinType: "Oily & Sensitive",
-    regularPrice: 1050,
-    salePrice: 850,
+    skinType: "Oily, Combination & Sensitive",
+    regularPrice: 1350,
+    salePrice: 1120,
     inStock: true,
     image: "product-8.jpg",
     gallery: ["product-8.jpg", "product-8-2.jpg"],
-    description: "Water-light aqua gel sunscreen that melts into skin in seconds with a soft-matte finish.",
-    ingredients: "Ethylhexyl Methoxycinnamate, Niacinamide, Green Tea Leaf Extract, Madecassoside.",
-    howToUse: "Apply two fingers' worth evenly over face every morning.",
+    description: "Korean water-light aqua sun gel with cooling hydration, matte finish, and zero white cast for oily and acne-prone skin.",
+    fullDetails: `
+      <p>Experience weightless Korean sun protection with <strong>MISSHA All Around Safe Block Aqua Sun Gel SPF 50+ PA++++</strong>. Designed specifically for oily and combination skin, this refreshing water-gel sunscreen absorbs within seconds, leaving skin cool, hydrated, and comfortably matte.</p>
+      <p>Infused with Glacial Water, Green Tea Extract, and Madecassoside, it prevents shine and protects against UV damage without clogging pores or causing breakouts.</p>
+
+      <h3>Key Benefits</h3>
+      <ul>
+        <li>High-level SPF 50+ PA++++ protection against UVA &amp; UVB rays.</li>
+        <li>Water-light aqua gel texture absorbs instantly with zero white cast or stickiness.</li>
+        <li>Controls excess oil and keeps skin feeling fresh in hot, humid weather.</li>
+        <li>Calms acne-prone and sensitive skin with Green Tea and Centella derivatives.</li>
+        <li>Works seamlessly under makeup without pilling.</li>
+      </ul>
+
+      <h3>Key Ingredients</h3>
+      <ol>
+        <li><strong>Advanced Photostable UV Filters:</strong> Deliver reliable broad-spectrum protection against sunburn and photoaging.</li>
+        <li><strong>Green Tea Leaf Extract (Camellia Sinensis):</strong> Rich in antioxidants to soothe oily skin and reduce excess sebum.</li>
+        <li><strong>Niacinamide &amp; Madecassoside:</strong> Brighten skin tone and calm heat-induced inflammation.</li>
+      </ol>
+
+      <h3>How to Use</h3>
+      <ol>
+        <li>Use as the final step of your morning skincare routine.</li>
+        <li>Apply two fingers' worth evenly onto face and neck 15 minutes before sun exposure.</li>
+        <li>Pat gently until the watery gel melts smoothly into the skin.</li>
+        <li>Reapply every 2–3 hours when outdoors.</li>
+      </ol>
+
+      <div class="unified-note-box">
+        <strong>Recommended Usage:</strong> Every morning.<br>
+        <strong>Important:</strong> Perform a patch test before first use. Avoid direct contact with eyes. For external use only.
+      </div>
+
+      <h3>Product Details</h3>
+      <ul>
+        <li><strong>Brand:</strong> MISSHA (Korea)</li>
+        <li><strong>Product Type:</strong> Aqua Gel Sunscreen</li>
+        <li><strong>Protection Level:</strong> SPF 50+ PA++++</li>
+        <li><strong>Skin Type:</strong> Oily, Combination, and Acne-Prone skin</li>
+        <li><strong>Finish:</strong> Refreshing soft-matte, zero white cast</li>
+        <li><strong>Net Volume:</strong> 50ml</li>
+      </ul>
+    `,
     reviews: []
   },
   {
     id: 9,
     isHit: true,
-    name: "Alpha Arbutin 2% Dark Spot Corrector Night Serum",
+    name: "The Ordinary Alpha Arbutin 2% + HA Dark Spot Corrector Serum",
     category: "serum",
     categoryLabel: "Face Serum",
     concern: "darkspot",
     volume: "30ml",
     skinType: "All Skin Types",
-    regularPrice: 1150,
-    salePrice: 920,
+    regularPrice: 1580,
+    salePrice: 1360,
     inStock: true,
     image: "product-9.jpg",
     gallery: ["product-9.jpg", "product-9-2.jpg"],
-    description: "Concentrated 2% Alpha Arbutin night treatment designed to target stubborn sunspots, acne marks, and hyperpigmentation.",
-    ingredients: "Alpha-Arbutin (2%), Hydrolyzed Hyaluronic Acid, Lactic Acid, Ferulic Acid.",
-    howToUse: "Apply 3 drops to clean skin at night before moisturizer.",
+    description: "Concentrated 2% purified Alpha Arbutin supported with Hyaluronic Acid to fade stubborn dark spots, acne marks, and sun tan.",
+    fullDetails: `
+      <p>Fade stubborn dark spots, melasma patches, and post-acne hyperpigmentation with <strong>The Ordinary Alpha Arbutin 2% + HA Dark Spot Corrector Serum</strong>. Formulated with a high 2% concentration of purified Alpha Arbutin—a gold-standard brightening active—this serum targets uneven melanin production safely and effectively.</p>
+      <p>Supported by next-generation Hyaluronic Acid for enhanced delivery, it visibly evens out skin tone and restores clarity without irritation.</p>
+
+      <h3>Key Benefits</h3>
+      <ul>
+        <li>Visibly reduces stubborn dark spots, sun spots, and post-pimple marks.</li>
+        <li>Promotes an even, clear, and luminous complexion across all skin tones.</li>
+        <li>Hydrates deeply with multi-molecular Hyaluronic Acid to prevent dryness.</li>
+        <li>Gentle, non-bleaching brightening formula safe for daily AM &amp; PM use.</li>
+        <li>Lightweight water-based texture absorbs cleanly without residue.</li>
+      </ul>
+
+      <h3>Key Ingredients</h3>
+      <ol>
+        <li><strong>Alpha-Arbutin (2%):</strong> A purified biosynthetic brightening ingredient that minimizes the look of dark spots and uneven pigmentation.</li>
+        <li><strong>Hydrolyzed Sodium Hyaluronate (Hyaluronic Acid):</strong> Enhances ingredient absorption while plumping skin with moisture.</li>
+        <li><strong>Lactic Acid:</strong> Gently supports surface renewal for smoother, clearer skin.</li>
+      </ol>
+
+      <h3>How to Use</h3>
+      <ol>
+        <li>Cleanse and tone your face thoroughly.</li>
+        <li>Apply 2–3 drops onto face in the morning and/or evening, focusing on areas with dark spots.</li>
+        <li>Gently pat until absorbed, then follow with moisturizer.</li>
+        <li>Always wear broad-spectrum SPF 50+ sunscreen during the daytime to prevent spots from returning.</li>
+      </ol>
+
+      <div class="unified-note-box">
+        <strong>Recommended Usage:</strong> Morning and/or evening (SPF 50+ mandatory during daytime).<br>
+        <strong>Important:</strong> Perform a patch test before first use. Avoid direct contact with eyes. For external use only.
+      </div>
+
+      <h3>Product Details</h3>
+      <ul>
+        <li><strong>Brand:</strong> The Ordinary</li>
+        <li><strong>Product Type:</strong> Hyperpigmentation &amp; Dark Spot Serum</li>
+        <li><strong>Skin Concern:</strong> Dark spots, acne marks, sun tan, and uneven pigmentation</li>
+        <li><strong>Skin Type:</strong> All skin types</li>
+        <li><strong>Key Actives:</strong> 2% Alpha Arbutin + Hyaluronic Acid</li>
+        <li><strong>Net Volume:</strong> 30ml</li>
+      </ul>
+    `,
     reviews: []
   },
   {
     id: 10,
     isHit: true,
-    name: "Salicylic Acid 2% Anti-Acne Pore Clearing Face Wash",
+    name: "COSRX Salicylic Acid Daily Gentle Anti-Acne Cleanser",
     category: "cleanser",
     categoryLabel: "Face Wash & Cleanser",
     concern: "acne",
     volume: "120ml",
-    skinType: "Oily & Acne-Prone",
-    regularPrice: 790,
-    salePrice: 640,
+    skinType: "Oily, Combination & Acne-Prone",
+    regularPrice: 1150,
+    salePrice: 950,
     inStock: true,
     image: "product-10.jpg",
     gallery: ["product-10.jpg", "product-10-2.jpg"],
-    description: "Deep-cleansing BHA foaming face wash that unclogs blackheads, reduces excess oil, and prevents future acne breakouts.",
-    ingredients: "Salicylic Acid (2%), Tea Tree Leaf Oil, Centella Asiatica, Glycerin.",
-    howToUse: "Use morning and night; massage gently onto damp skin for 30 seconds and rinse.",
+    description: "BHA-infused foaming cleanser with Salicylic Acid and Tea Tree Oil to unclog pores, clear blackheads, and prevent breakouts.",
+    fullDetails: `
+      <p>Keep pores clear and breakouts under control with <strong>COSRX Salicylic Acid Daily Gentle Anti-Acne Cleanser</strong>. Formulated with gentle BHA (Salicylic Acid) and botanical Tea Tree Leaf Oil, this rich micro-foam cleanser dissolves trapped sebum, dead skin cells, and blackheads deep inside pores.</p>
+      <p>Unlike harsh acne washes, it balances oil removal with soothing botanicals so your skin feels purified, smooth, and comfortable after every wash.</p>
+
+      <h3>Key Benefits</h3>
+      <ul>
+        <li>Unclogs congested pores and helps clear stubborn blackheads and whiteheads.</li>
+        <li>Reduces excess oil and prevents recurring acne breakouts.</li>
+        <li>Gently exfoliates dead skin cells for smoother skin texture.</li>
+        <li>Calms active blemish redness with natural Tea Tree and Centella extracts.</li>
+        <li>Creates a rich, creamy lather that rinses clean without residue.</li>
+      </ul>
+
+      <h3>Key Ingredients</h3>
+      <ol>
+        <li><strong>Salicylic Acid (BHA):</strong> Oil-soluble exfoliant that penetrates deep into pores to clear sebum and prevent blemishes.</li>
+        <li><strong>Tea Tree Leaf Oil (Melaleuca Alternifolia):</strong> Naturally purifies and soothes acne-prone skin.</li>
+        <li><strong>Willow Bark Water &amp; Glycerin:</strong> Gently refine skin texture while maintaining essential hydration.</li>
+      </ol>
+
+      <h3>How to Use</h3>
+      <ol>
+        <li>Dispense a moderate amount into wet hands and rub together to create a rich foam.</li>
+        <li>Gently massage onto damp face, focusing on oily T-zone and breakout-prone areas, for 30–40 seconds.</li>
+        <li>Rinse thoroughly with lukewarm water and follow with toner and moisturizer.</li>
+      </ol>
+
+      <div class="unified-note-box">
+        <strong>Recommended Usage:</strong> Morning and evening (or once daily at night for dry-combination skin).<br>
+        <strong>Important:</strong> Avoid eye and lip areas. Always apply SPF 50+ sunscreen during the day when using BHA products.
+      </div>
+
+      <h3>Product Details</h3>
+      <ul>
+        <li><strong>Brand:</strong> COSRX (Korea)</li>
+        <li><strong>Product Type:</strong> BHA Anti-Acne Foaming Face Wash</li>
+        <li><strong>Skin Concern:</strong> Acne, pimples, blackheads, whiteheads, and excess oil</li>
+        <li><strong>Skin Type:</strong> Oily, Combination, and Acne-Prone skin</li>
+        <li><strong>Key Active:</strong> Salicylic Acid (BHA) + Tea Tree Oil</li>
+        <li><strong>Net Volume:</strong> 120ml</li>
+      </ul>
+    `,
     reviews: []
   },
   {
     id: 11,
     isHit: true,
-    name: "ZELVIQO Complete Day-Glow Duo (Vitamin C + SPF 50+)",
+    name: "ZELVIQO Complete Day-Glow Duo (Vitamin C Serum + SPF 50+ Sunscreen)",
     category: "combo",
     categoryLabel: "Combo Set",
     concern: "brightening",
-    volume: "50ml + 60ml Set",
+    volume: "50ml + 60ml Full Set",
     skinType: "All Skin Types",
-    regularPrice: 1800,
-    salePrice: 1320,
+    regularPrice: 1680,
+    salePrice: 1190,
     inStock: true,
     image: "product-11.jpg",
     gallery: ["product-11.jpg", "product-1.jpg", "product-11-2.jpg"],
-    description: "Our bestselling morning protection and glow bundle pairing Dr. Rashel Vitamin C Serum with Care & Repair SPF 50+ Sunscreen.",
-    ingredients: "Full-Size Vitamin C Serum (50ml) + Care & Repair UV Defense Sunscreen (60ml).",
-    howToUse: "Step 1: Apply Vitamin C Serum. Step 2: Lock it in with SPF 50+ Sunscreen.",
+    description: "Our #1 bestselling morning glow & sun shield bundle pairing Dr. Rashel Vitamin C Serum with Care & Repair SPF 50+ Sunscreen.",
+    fullDetails: `
+      <p>Unlock visible brightness and complete daily UV defense with the <strong>ZELVIQO Complete Day-Glow Duo</strong>. Dermatologists agree that pairing an antioxidant Vitamin C serum underneath a broad-spectrum SPF 50+ sunscreen boosts sun protection while accelerating the fading of dark spots and dullness.</p>
+      <p>This curated 2-piece full-size bundle gives you everything needed for a luminous, protected daytime glow at an exclusive bundle savings.</p>
+
+      <h3>What's Inside This Bundle</h3>
+      <ul>
+        <li><strong>1x Dr. Rashel Vitamin C Brightening &amp; Anti-Aging Face Serum (50ml):</strong> Brightens dullness, fades dark spots, and hydrates.</li>
+        <li><strong>1x Care &amp; Repair UV Defense Matte Sunscreen SPF 50+ PA+++ (60ml):</strong> Shields skin with zero white cast and zero stickiness.</li>
+      </ul>
+
+      <h3>Key Benefits</h3>
+      <ul>
+        <li>Double antioxidant + UV shield action to prevent sun tan and pigmentation.</li>
+        <li>Visibly brightens uneven skin tone within 14 days of consistent morning use.</li>
+        <li>Lightweight, non-greasy textures tailored for humid weather.</li>
+        <li>Save ৳490 compared to purchasing both full-size products individually.</li>
+      </ul>
+
+      <h3>How to Use</h3>
+      <ol>
+        <li><strong>Step 1 (Treat):</strong> After washing your face in the morning, apply 3–4 drops of Dr. Rashel Vitamin C Serum and massage until absorbed.</li>
+        <li><strong>Step 2 (Protect):</strong> Apply 2 fingers' length of Care &amp; Repair SPF 50+ Sunscreen evenly over face and neck 15 minutes before going outside.</li>
+      </ol>
+
+      <div class="unified-note-box">
+        <strong>Recommended Usage:</strong> Every morning.<br>
+        <strong>Important:</strong> Perform a patch test before first use. For external use only.
+      </div>
+
+      <h3>Product Details</h3>
+      <ul>
+        <li><strong>Curated By:</strong> ZELVIQO Luxury Skin Care</li>
+        <li><strong>Product Type:</strong> 2-Step Morning Brightening &amp; Sun Care Combo</li>
+        <li><strong>Skin Concern:</strong> Dullness, sun tan, dark spots, and daily UV protection</li>
+        <li><strong>Skin Type:</strong> Suitable for all skin types</li>
+        <li><strong>Package Size:</strong> 2 Full-Size Products (50ml + 60ml)</li>
+      </ul>
+    `,
     reviews: []
   },
   {
     id: 12,
     isHit: true,
-    name: "Glass-Skin 3-Step Routine (Face Wash + Serum + Sunscreen)",
+    name: "ZELVIQO Glass-Skin 3-Step Morning Routine Kit",
     category: "combo",
     categoryLabel: "Combo Set",
     concern: "brightening",
-    volume: "Full 3-Product Kit",
+    volume: "3 Full-Size Products",
     skinType: "All Skin Types",
-    regularPrice: 2520,
-    salePrice: 1890,
+    regularPrice: 2370,
+    salePrice: 1690,
     inStock: true,
     image: "product-12.jpg",
     gallery: ["product-12.jpg", "product-3.jpg", "product-12-2.jpg"],
-    description: "Complete daily morning glow set including Simple Facial Wash, Vitamin C Brightening Serum, and SPF 50+ PA+++ Sunscreen.",
-    ingredients: "Simple Facial Wash (150ml) + Dr. Rashel Vitamin C Serum (50ml) + SPF 50+ Sunscreen (60ml).",
-    howToUse: "Cleanse with Face Wash, apply Vitamin C Serum, and finish with SPF 50+ Sunscreen.",
+    description: "Complete 3-step daily routine: Simple Refreshing Facial Wash + Dr. Rashel Vitamin C Serum + Care & Repair SPF 50+ Sunscreen.",
+    fullDetails: `
+      <p>Start your complete daily skincare ritual with the <strong>ZELVIQO Glass-Skin 3-Step Morning Routine Kit</strong>. Built around the three essential pillars of healthy skin—<strong>Cleanse, Treat, and Protect</strong>—this full-size set removes guesswork and delivers visible radiance.</p>
+      <p>Gentle enough for daily use on all skin types, each product works in harmony to purify, brighten, and shield your complexion from morning to night.</p>
+
+      <h3>What's Inside This 3-Step Kit</h3>
+      <ul>
+        <li><strong>Step 1 — Simple Kind to Skin Refreshing Facial Wash (150ml):</strong> Soap-free, gentle daily cleanser.</li>
+        <li><strong>Step 2 — Dr. Rashel Vitamin C Brightening Face Serum (50ml):</strong> Potent glow and dark-spot serum.</li>
+        <li><strong>Step 3 — Care &amp; Repair UV Defense Sunscreen SPF 50+ PA+++ (60ml):</strong> Lightweight, zero-white-cast sun protection.</li>
+      </ul>
+
+      <h3>Key Benefits</h3>
+      <ul>
+        <li>Complete head-to-toe morning routine in one value-packed box (Save ৳680).</li>
+        <li>Cleanses without dryness, brightens dullness, and prevents UV damage.</li>
+        <li>100% authentic, factory-sealed full-size products.</li>
+        <li>Ideal starter kit for beginners seeking clear, glowing glass skin.</li>
+      </ul>
+
+      <h3>How to Use</h3>
+      <ol>
+        <li><strong>Step 1 (Cleanse):</strong> Wash face morning and night with Simple Refreshing Facial Wash and pat dry.</li>
+        <li><strong>Step 2 (Treat):</strong> Apply 3–4 drops of Vitamin C Serum evenly across face and neck.</li>
+        <li><strong>Step 3 (Protect):</strong> Every morning, apply Care &amp; Repair SPF 50+ Sunscreen 15 minutes before sun exposure.</li>
+      </ol>
+
+      <div class="unified-note-box">
+        <strong>Recommended Usage:</strong> Daily Morning &amp; Night (Sunscreen for daytime only).<br>
+        <strong>Important:</strong> Perform a patch test before first use. For external use only.
+      </div>
+
+      <h3>Product Details</h3>
+      <ul>
+        <li><strong>Curated By:</strong> ZELVIQO Luxury Skin Care</li>
+        <li><strong>Product Type:</strong> Complete 3-Step Skincare Routine Kit</li>
+        <li><strong>Skin Concern:</strong> Dullness, uneven tone, dehydration, and sun protection</li>
+        <li><strong>Skin Type:</strong> All skin types, including sensitive</li>
+        <li><strong>Package Size:</strong> 3 Full-Size Products (150ml + 50ml + 60ml)</li>
+      </ul>
+    `,
     reviews: []
   },
   // Additional 4 Category-Exclusive Products (Shown inside Categories & Search)
   {
     id: 13,
     isHit: false,
-    name: "Centella Asiatica Calming & Soothing Face Toner",
+    name: "SKIN1004 Madagascar Centella Toning & Calming Toner",
     category: "toner",
     categoryLabel: "Toner & Essence",
     concern: "acne",
     volume: "120ml",
-    skinType: "Sensitive & Acne-Prone",
-    regularPrice: 890,
-    salePrice: 710,
+    skinType: "Sensitive, Oily & Acne-Prone",
+    regularPrice: 1490,
+    salePrice: 1240,
     inStock: true,
     image: "product-13.jpg",
     gallery: ["product-13.jpg", "product-13-2.jpg"],
-    description: "Ultra-gentle Centella Cica toner that calms redness, strengthens sensitive skin barrier, and restores optimal pH balance.",
-    ingredients: "Centella Asiatica Extract, Madecassoside, Panthenol, Allantoin.",
-    howToUse: "Pat gently onto skin right after cleansing.",
+    description: "Soothing Korean Centella Asiatica and PHA daily toner that calms acne redness, gently exfoliates, and repairs sensitive skin.",
+    fullDetails: `
+      <p>Calm irritated, breakout-prone skin with <strong>SKIN1004 Madagascar Centella Toning &amp; Calming Toner</strong>. Formulated with pure Centella Asiatica extract from Madagascar and mild PHA (Gluconolactone), it gently sweeps away dead skin cells while soothing redness and strengthening your skin barrier.</p>
+      <p>Its watery, non-irritating texture absorbs immediately, making it safe even for sensitized or acne-inflamed skin.</p>
+
+      <h3>Key Benefits</h3>
+      <ul>
+        <li>Instantly calms active acne redness, heat irritation, and sensitivity.</li>
+        <li>Mild PHA gently exfoliates dead skin buildup without stinging or dryness.</li>
+        <li>Restores healthy skin pH balance and boosts barrier resilience.</li>
+        <li>Fragrance-free, alcohol-free, and non-comedogenic Korean formula.</li>
+      </ul>
+
+      <h3>Key Ingredients</h3>
+      <ol>
+        <li><strong>Madagascar Centella Asiatica Extract (84%):</strong> Renowned for rapid skin soothing, redness relief, and barrier repair.</li>
+        <li><strong>Gluconolactone (PHA):</strong> A gentle, sensitive-skin-friendly exfoliating acid that smooths rough texture.</li>
+        <li><strong>Niacinamide &amp; Hyaluronic Acid:</strong> Brighten post-acne marks and lock in weightless hydration.</li>
+      </ol>
+
+      <h3>How to Use</h3>
+      <ol>
+        <li>After cleansing, apply an appropriate amount onto a cotton pad or directly into your hands.</li>
+        <li>Gently wipe or pat across face and neck following skin texture.</li>
+        <li>Follow with your serum and moisturizer.</li>
+      </ol>
+
+      <div class="unified-note-box">
+        <strong>Recommended Usage:</strong> Morning and night after cleansing.<br>
+        <strong>Important:</strong> Perform a patch test before first use. Avoid direct contact with eyes. For external use only.
+      </div>
+
+      <h3>Product Details</h3>
+      <ul>
+        <li><strong>Brand:</strong> SKIN1004 (Korea)</li>
+        <li><strong>Product Type:</strong> Soothing &amp; Gentle Exfoliating Toner</li>
+        <li><strong>Skin Concern:</strong> Redness, sensitivity, rough texture, and acne-prone skin</li>
+        <li><strong>Skin Type:</strong> Sensitive, Oily, Combination, and Normal skin</li>
+        <li><strong>Net Volume:</strong> 120ml</li>
+      </ul>
+    `,
     reviews: []
   },
   {
     id: 14,
     isHit: false,
-    name: "Hyaluronic Acid Deep Moisture Barrier Night Cream",
+    name: "Neutrogena Hydro Boost Hyaluronic Acid Night Cream",
     category: "moisturizer",
     categoryLabel: "Moisturizer & Night Gel",
     concern: "hydration",
     volume: "50g",
-    skinType: "Dry & Normal",
-    regularPrice: 1180,
-    salePrice: 940,
+    skinType: "Dry, Dehydrated & Normal",
+    regularPrice: 1690,
+    salePrice: 1420,
     inStock: true,
     image: "product-14.jpg",
     gallery: ["product-14.jpg", "product-14-2.jpg"],
-    description: "Rich yet non-comedogenic overnight recovery cream formulated with multi-molecular Hyaluronic Acid and Shea Butter.",
-    ingredients: "Sodium Hyaluronate, Ceramide NP, Squalane, Butyrospermum Parkii Butter.",
-    howToUse: "Apply evenly to face and neck every night before sleep.",
+    description: "Deep overnight moisture-locking cream with Purified Hyaluronic Acid, Ceramides, and Squalane for supple morning skin.",
+    fullDetails: `
+      <p>Wake up to plump, deeply hydrated, and velvety-soft skin with <strong>Neutrogena Hydro Boost Hyaluronic Acid Night Cream</strong>. Designed to replenish moisture lost during the day, this rich yet breathable night cream creates a protective hydration veil while you sleep.</p>
+      <p>Powered by Purified Hyaluronic Acid, Ceramide NP, and plant-derived Squalane, it repairs dry, flaky patches without clogging pores.</p>
+
+      <h3>Key Benefits</h3>
+      <ul>
+        <li>Delivers intense overnight hydration for dry and dehydrated skin.</li>
+        <li>Strengthens the moisture barrier with Ceramides and Squalane.</li>
+        <li>Smooths dryness lines and restores natural skin bounce by morning.</li>
+        <li>Oil-free, non-comedogenic, and dermatologist-tested formula.</li>
+      </ul>
+
+      <h3>Key Ingredients</h3>
+      <ol>
+        <li><strong>Purified Hyaluronic Acid (Sodium Hyaluronate):</strong> Acts like a sponge for dry skin, binding up to 1000x its weight in water.</li>
+        <li><strong>Ceramide NP &amp; Squalane:</strong> Seal in moisture and prevent overnight transepidermal water loss.</li>
+        <li><strong>Shea Butter (Butyrospermum Parkii):</strong> Nourishes and softens rough, tight skin.</li>
+      </ol>
+
+      <h3>How to Use</h3>
+      <ol>
+        <li>Apply every evening as the final step of your nighttime skincare routine.</li>
+        <li>Massage evenly over face and neck after applying your night serum.</li>
+        <li>Leave on overnight to lock in hydration.</li>
+      </ol>
+
+      <div class="unified-note-box">
+        <strong>Recommended Usage:</strong> Every night before sleep.<br>
+        <strong>Important:</strong> Perform a patch test before first use. For external use only.
+      </div>
+
+      <h3>Product Details</h3>
+      <ul>
+        <li><strong>Brand:</strong> Neutrogena</li>
+        <li><strong>Product Type:</strong> Overnight Barrier Repair Moisturizer</li>
+        <li><strong>Skin Concern:</strong> Dryness, dehydration, flakiness, and dull morning skin</li>
+        <li><strong>Skin Type:</strong> Dry, Normal, and Combination skin</li>
+        <li><strong>Net Weight:</strong> 50g</li>
+      </ul>
+    `,
     reviews: []
   },
   {
     id: 15,
     isHit: false,
-    name: "Snail Mucin 96% Power Repair Hydrating Essence",
+    name: "COSRX Advanced Snail 96 Mucin Power Repair Essence",
     category: "toner",
     categoryLabel: "Toner & Essence",
     concern: "darkspot",
     volume: "100ml",
     skinType: "All Skin Types",
-    regularPrice: 1450,
-    salePrice: 1190,
+    regularPrice: 1650,
+    salePrice: 1390,
     inStock: true,
     image: "product-15.jpg",
     gallery: ["product-15.jpg", "product-15-2.jpg"],
-    description: "Lightweight, fast-absorbing essence with 96% Snail Secretion Filtrate to repair damaged skin texture and boost elasticity.",
-    ingredients: "Snail Secretion Filtrate (96%), Betaine, Sodium Hyaluronate, Panthenol.",
-    howToUse: "Apply 2 pumps after toner and pat gently until fully absorbed.",
+    description: "Cult-favorite Korean essence formulated with 96.3% Snail Secretion Filtrate to repair damaged skin, fade acne scars, and boost glass-skin glow.",
+    fullDetails: `
+      <p>Repair, hydrate, and transform dull or damaged skin with the viral Korean icon—<strong>COSRX Advanced Snail 96 Mucin Power Repair Essence</strong>. Formulated with 96.3% nutrient-rich Snail Secretion Filtrate, this lightweight, fast-absorbing essence replenishes deep moisture, fades post-acne marks, and improves skin elasticity.</p>
+      <p>Free from fragrances, parabens, and drying alcohols, it delivers an unmatched, healthy glass-skin glow for every skin type.</p>
+
+      <h3>Key Benefits</h3>
+      <ul>
+        <li>Accelerates skin barrier repair and calms redness or sensitized skin.</li>
+        <li>Helps fade post-acne scars, dark spots, and uneven texture.</li>
+        <li>Provides deep, long-lasting hydration for a plump, dewy glass-skin finish.</li>
+        <li>Cruelty-free collection process; 100% fragrance-free and hypoallergenic.</li>
+      </ul>
+
+      <h3>Key Ingredients</h3>
+      <ol>
+        <li><strong>Snail Secretion Filtrate (96.3%):</strong> Rich in natural glycoproteins, glycolic acid, and peptides that repair and hydrate skin.</li>
+        <li><strong>Sodium Hyaluronate &amp; Betaine:</strong> Boost moisture retention and keep skin supple all day.</li>
+        <li><strong>Panthenol &amp; Allantoin:</strong> Soothe irritation and reinforce the skin barrier.</li>
+      </ol>
+
+      <h3>How to Use</h3>
+      <ol>
+        <li>After cleansing and toning, dispense 1–2 pumps onto your fingertips.</li>
+        <li>Apply evenly across your entire face and neck.</li>
+        <li>Gently pat into skin using your fingertips until fully absorbed, then follow with moisturizer.</li>
+      </ol>
+
+      <div class="unified-note-box">
+        <strong>Recommended Usage:</strong> Morning and night (after toner, before moisturizer).<br>
+        <strong>Important:</strong> Perform a patch test before first use. For external use only.
+      </div>
+
+      <h3>Product Details</h3>
+      <ul>
+        <li><strong>Brand:</strong> COSRX (Korea)</li>
+        <li><strong>Product Type:</strong> Hydrating &amp; Skin-Repairing Essence</li>
+        <li><strong>Skin Concern:</strong> Damaged barrier, acne scars, dehydration, and dullness</li>
+        <li><strong>Skin Type:</strong> All skin types, including sensitive and acne-prone</li>
+        <li><strong>Net Volume:</strong> 100ml</li>
+      </ul>
+    `,
     reviews: []
   },
   {
     id: 16,
     isHit: false,
-    name: "Acne & Oil Control Complete 3-Step Clear Skin Kit",
+    name: "ZELVIQO Acne & Oil Control 3-Step Clear Skin Kit",
     category: "combo",
     categoryLabel: "Combo Set",
     concern: "acne",
-    volume: "3-Product Set",
-    skinType: "Oily & Acne-Prone",
-    regularPrice: 2940,
-    salePrice: 2150,
+    volume: "3 Full-Size Products",
+    skinType: "Oily, Combination & Acne-Prone",
+    regularPrice: 3880,
+    salePrice: 2950,
     inStock: true,
     image: "product-16.jpg",
     gallery: ["product-16.jpg", "product-10.jpg", "product-16-2.jpg"],
-    description: "Targeted anti-acne bundle combining Salicylic Acid Face Wash, Niacinamide 10% Serum, and Matte Aqua Sun Gel SPF 50+.",
-    ingredients: "Salicylic Acid Face Wash + Niacinamide 10% Serum + Aqua Sun Gel SPF 50+.",
-    howToUse: "Cleanse with Salicylic Face Wash, apply Niacinamide Serum, and protect with Aqua Sun Gel.",
+    description: "Complete anti-acne & pore-refining kit: COSRX Salicylic Acid Cleanser + The Ordinary Niacinamide 10% Serum + MISSHA Aqua Sun Gel SPF 50+.",
+    fullDetails: `
+      <p>Conquer excess oil, clogged pores, and recurring breakouts with the <strong>ZELVIQO Acne &amp; Oil Control 3-Step Clear Skin Kit</strong>. Specially curated for oily and acne-prone skin in humid weather, this 3-piece clinical bundle targets blemishes at every step without over-drying.</p>
+      <p>Each full-size product works together to deep-cleanse pores, regulate sebum production, fade acne marks, and provide matte UV protection.</p>
+
+      <h3>What's Inside This Anti-Acne Kit</h3>
+      <ul>
+        <li><strong>Step 1 — COSRX Salicylic Acid Daily Gentle Cleanser (120ml):</strong> Unclogs pores &amp; clears blackheads.</li>
+        <li><strong>Step 2 — The Ordinary Niacinamide 10% + Zinc 1% Serum (30ml):</strong> Controls oil &amp; minimizes pores.</li>
+        <li><strong>Step 3 — MISSHA All Around Safe Block Aqua Sun Gel SPF 50+ PA++++ (50ml):</strong> Weightless, matte zero-white-cast sun shield.</li>
+      </ul>
+
+      <h3>Key Benefits</h3>
+      <ul>
+        <li>Complete targeted solution for oily, shiny, and breakout-prone skin (Save ৳930).</li>
+        <li>Clears blackheads, shrinks pore appearance, and calms active blemishes.</li>
+        <li>Oil-free, non-comedogenic formulas that never feel heavy or sticky.</li>
+        <li>100% authentic, factory-sealed full-size products.</li>
+      </ul>
+
+      <h3>How to Use</h3>
+      <ol>
+        <li><strong>Step 1 (Cleanse):</strong> Wash face morning and night with COSRX Salicylic Acid Cleanser and rinse clean.</li>
+        <li><strong>Step 2 (Treat):</strong> Pat 2–3 drops of Niacinamide 10% + Zinc 1% Serum onto dry skin.</li>
+        <li><strong>Step 3 (Protect):</strong> Every morning, apply MISSHA Aqua Sun Gel SPF 50+ 15 minutes before sun exposure.</li>
+      </ol>
+
+      <div class="unified-note-box">
+        <strong>Recommended Usage:</strong> Daily Morning &amp; Night (Sun Gel for daytime only).<br>
+        <strong>Important:</strong> Perform a patch test before first use. For external use only.
+      </div>
+
+      <h3>Product Details</h3>
+      <ul>
+        <li><strong>Curated By:</strong> ZELVIQO Luxury Skin Care</li>
+        <li><strong>Product Type:</strong> 3-Step Anti-Acne &amp; Oil Control Bundle</li>
+        <li><strong>Skin Concern:</strong> Acne, pimples, blackheads, enlarged pores, and excess oil</li>
+        <li><strong>Skin Type:</strong> Oily, Combination, and Acne-Prone skin</li>
+        <li><strong>Package Size:</strong> 3 Full-Size Products (120ml + 30ml + 50ml)</li>
+      </ul>
+    `,
     reviews: []
   }
 ];
 
 function getProducts() {
-  return JSON.parse(localStorage.getItem("zelviqo_catalog_v2") || "null") || defaultProducts;
+  return JSON.parse(localStorage.getItem("zelviqo_catalog_v4") || "null") || defaultProducts;
 }
 
 function saveProducts(list) {
-  localStorage.setItem("zelviqo_catalog_v2", JSON.stringify(list));
+  localStorage.setItem("zelviqo_catalog_v4", JSON.stringify(list));
 }
 
 function getHitProducts() {
@@ -610,7 +1249,7 @@ function openQuickView(productId) {
           <span class="price-now">৳${product.salePrice}</span>
           <span class="price-old">৳${product.regularPrice}</span>
         </div>
-        <div style="display:flex; gap:8px;">
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
           <button type="button" class="btn-add" onclick="addToCart(${product.id}, 1, false); document.getElementById('quickViewModal').classList.remove('open');">Add to Cart</button>
           <button type="button" class="btn-primary" onclick="addToCart(${product.id}, 1, true); document.getElementById('quickViewModal').classList.remove('open');">Order Now</button>
         </div>
@@ -639,10 +1278,10 @@ function renderRecentlyViewed() {
 // Watch & Shop Reels + Before/After Slider
 function renderWatchAndShopReels() {
   const reelsData = [
-    { id: 1, title: "Morning Vitamin C Glass-Skin Routine", img: "product-1.jpg", price: 650 },
-    { id: 2, title: "Zero White-Cast Sunscreen Outdoor Test", img: "product-2.jpg", price: 740 },
-    { id: 3, title: "Simple Facial Wash Gentle Foaming Demo", img: "product-3.jpg", price: 560 },
-    { id: 11, title: "Complete Day-Glow Duo Unboxing", img: "product-11.jpg", price: 1320 }
+    { id: 1, title: "Morning Vitamin C Glass-Skin Routine", img: "product-1.jpg", price: 620 },
+    { id: 2, title: "Zero White-Cast Sunscreen Outdoor Test", img: "product-2.jpg", price: 680 },
+    { id: 3, title: "Simple Facial Wash Gentle Foaming Demo", img: "product-3.jpg", price: 540 },
+    { id: 11, title: "Complete Day-Glow Duo Unboxing", img: "product-11.jpg", price: 1190 }
   ];
 
   document.getElementById("watchShopGrid").innerHTML = reelsData
@@ -666,7 +1305,7 @@ function updateBeforeAfter(val) {
   document.getElementById("baDivider").style.left = `${val}%`;
 }
 
-// Full Product Detail Page
+// Full Product Detail Page (Unified Single-Page Layout — No Separate Tabs)
 function renderFullProductPage(productId) {
   const all = getProducts();
   const product = all.find((p) => p.id === productId) || all[0];
@@ -688,6 +1327,17 @@ function renderFullProductPage(productId) {
   // Pair companion product for Frequently Bought Together
   const companion = all.find((p) => p.id !== product.id && p.category !== product.category) || all[1];
   const bundlePrice = Math.round((product.salePrice + companion.salePrice) * 0.9);
+
+  // Unified Single-Page Details Block
+  const unifiedHtml =
+    product.fullDetails ||
+    `
+      <p>${product.description || "100% authentic imported skincare product."}</p>
+      <h3>Key Ingredients</h3>
+      <p>${product.ingredients || "Dermatologist-tested skin-safe ingredients."}</p>
+      <h3>How to Use</h3>
+      <p>${product.howToUse || "Apply gently on clean skin daily."}</p>
+    `;
 
   document.getElementById("fullProductDetailContainer").innerHTML = `
     <div class="full-product-card">
@@ -722,15 +1372,7 @@ function renderFullProductPage(productId) {
             ${discount > 0 ? `<span style="background:#b93829; color:#fff; font-size:11px; padding:3px 8px; border-radius:4px; font-weight:700;">SAVE ${discount}%</span>` : ""}
           </div>
 
-          <div class="detail-tabs-bar">
-            <button type="button" class="d-tab-btn active" onclick="switchProductTab('desc', this)">Description</button>
-            <button type="button" class="d-tab-btn" onclick="switchProductTab('ing', this)">Key Ingredients</button>
-            <button type="button" class="d-tab-btn" onclick="switchProductTab('use', this)">How to Use</button>
-          </div>
-
-          <div id="tab-desc" class="detail-tab-panel">${product.description || "100% authentic imported skincare product."}</div>
-          <div id="tab-ing" class="detail-tab-panel" style="display:none;">${product.ingredients || "Dermatologist-tested skin-safe ingredients."}</div>
-          <div id="tab-use" class="detail-tab-panel" style="display:none;">${product.howToUse || "Apply gently on clean skin daily."}</div>
+          <p style="font-size:13.5px; color:var(--text-muted); margin-bottom:16px;">${product.description}</p>
 
           <div style="display:flex; gap:12px; flex-wrap:wrap;">
             <button type="button" class="btn-add" style="padding:12px 22px;" onclick="addToCart(${product.id}, 1, false)">Add to Shopping Bag</button>
@@ -749,6 +1391,12 @@ function renderFullProductPage(productId) {
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- Full Product Description, Key Benefits, Key Ingredients, How to Use & Product Details on Single Page -->
+      <div class="unified-product-details">
+        <h2 style="font-family:'Cormorant Garamond', serif; font-size:28px; color:var(--emerald-dark); margin-bottom:10px;">${product.name}</h2>
+        ${unifiedHtml}
       </div>
 
       <div class="reviews-box">
@@ -785,14 +1433,6 @@ function submitProductReview(e, productId) {
   saved.push({ user, text });
   localStorage.setItem(`zelviqo_rev_${productId}`, JSON.stringify(saved));
   renderFullProductPage(productId);
-}
-
-function switchProductTab(tabKey, btnEl) {
-  document.querySelectorAll(".d-tab-btn").forEach((b) => b.classList.remove("active"));
-  btnEl.classList.add("active");
-  document.getElementById("tab-desc").style.display = tabKey === "desc" ? "block" : "none";
-  document.getElementById("tab-ing").style.display = tabKey === "ing" ? "block" : "none";
-  document.getElementById("tab-use").style.display = tabKey === "use" ? "block" : "none";
 }
 
 // Custom Combo Builder & Quiz
@@ -1087,7 +1727,7 @@ document.getElementById("codOrderForm").addEventListener("submit", (e) => {
   const waMsg = encodeURIComponent(
     `*NEW ORDER - ZELVIQO LUXURY SKIN CARE*\nOrder ID: #${orderId}\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\nPayment: ${paymentNote}\n\n*Items:*\n${itemsListText}\n\nDelivery: ৳${shipping}\n*Total Payable: ৳${total}*`
   );
-  const waLink = `[https://wa.me/$](https://wa.me/$){WHATSAPP_NUMBER}?text=${waMsg}`;
+  const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${waMsg}`;
 
   document.getElementById("invoiceReceiptBody").innerHTML = `
     <div style="border:1px dashed var(--emerald-main); padding:14px; border-radius:8px; background:var(--bg-page); margin-bottom:14px;">
@@ -1205,10 +1845,11 @@ function adminAddNewProduct(e) {
   e.preventDefault();
   const list = getProducts();
   const cat = document.getElementById("admProdCat").value;
+  const title = document.getElementById("admProdName").value.trim();
   list.unshift({
     id: Date.now(),
     isHit: document.getElementById("admProdHit").checked,
-    name: document.getElementById("admProdName").value.trim(),
+    name: title,
     category: cat,
     categoryLabel: cat.toUpperCase(),
     concern: "brightening",
@@ -1219,8 +1860,7 @@ function adminAddNewProduct(e) {
     inStock: true,
     image: document.getElementById("admProdImg").value.trim(),
     description: "100% authentic imported skincare.",
-    ingredients: "Dermatologist-tested ingredients.",
-    howToUse: "Apply daily on clean skin.",
+    fullDetails: `<p><strong>${title}</strong> — 100% authentic imported skincare product.</p><h3>How to Use</h3><p>Apply daily on clean skin.</p>`,
     reviews: []
   });
   saveProducts(list);
@@ -1270,7 +1910,7 @@ function toggleWaBox() {
 }
 
 function sendPresetWa(text) {
-  window.open(`[https://wa.me/$](https://wa.me/$){WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank");
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank");
 }
 
 function sendCustomWa() {
@@ -1278,7 +1918,7 @@ function sendCustomWa() {
   const msg = input.value.trim();
   if (!msg) return;
   input.value = "";
-  window.open(`[https://wa.me/$](https://wa.me/$){WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
 }
 
 // Moving Showcase (Top 12 Hits) & Live Search (All 16 Products)
