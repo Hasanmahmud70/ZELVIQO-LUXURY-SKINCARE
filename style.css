@@ -2393,3 +2393,48 @@ body {
     display: none !important;
   }
 }
+/* Unified Single-Page Product Details (No Tabs) */
+.detail-tabs-bar {
+  display: none !important;
+}
+
+.unified-product-details {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-dark);
+}
+
+.unified-product-details h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  color: var(--emerald-dark);
+  margin: 20px 0 8px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 4px;
+}
+
+.unified-product-details p {
+  margin-bottom: 10px;
+}
+
+.unified-product-details ul,
+.unified-product-details ol {
+  padding-left: 20px;
+  margin-bottom: 14px;
+}
+
+.unified-product-details li {
+  margin-bottom: 6px;
+}
+
+.unified-note-box {
+  background: var(--gold-light);
+  border-left: 3.5px solid var(--gold-accent);
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin: 14px 0;
+}
